@@ -5,7 +5,7 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerTest\Zed\AclEntity\Persistence\Propel\QueryManager;
+namespace SprykerTest\Zed\AclEntity\Persistence\Propel\QueryMerger;
 
 use Codeception\Test\Unit;
 use Propel\Runtime\ActiveQuery\Join;
@@ -26,7 +26,7 @@ use Spryker\Zed\AclEntity\Persistence\Propel\QueryMerger\AclEntityQueryMerger;
  * @group AclEntity
  * @group Persistence
  * @group Propel
- * @group QueryManager
+ * @group QueryMerger
  * @group AclEntityQueryMergerTest
  * Add your own group annotations below this line
  */

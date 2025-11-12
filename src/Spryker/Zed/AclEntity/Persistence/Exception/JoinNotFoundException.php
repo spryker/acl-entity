@@ -22,6 +22,8 @@ class JoinNotFoundException extends AclEntityException
      */
     public function __construct(ModelCriteria $query, string $tableName)
     {
-        parent::__construct(sprintf(static::MESSAGE_TEMPLATE, $tableName, $query->toString()));
+        $params = [];
+
+        parent::__construct(sprintf(static::MESSAGE_TEMPLATE, $tableName, $query->createSelectSql($params)));
     }
 }
