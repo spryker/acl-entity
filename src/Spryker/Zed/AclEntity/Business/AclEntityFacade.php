@@ -148,4 +148,18 @@ class AclEntityFacade extends AbstractFacade implements AclEntityFacadeInterface
     {
         $this->getFactory()->createAclEntityRuleWriter()->saveAclEntityRules($aclEntityRuleTransfers);
     }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @api
+     *
+     * @return void
+     */
+    public function validateAclEntityMetadataConfig(): void
+    {
+        $this->getFactory()
+            ->createAclEntityMetadataConfigConsoleValidator()
+            ->validate();
+    }
 }

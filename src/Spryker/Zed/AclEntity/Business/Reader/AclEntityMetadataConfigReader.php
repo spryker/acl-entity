@@ -10,6 +10,7 @@ namespace Spryker\Zed\AclEntity\Business\Reader;
 use Generated\Shared\Transfer\AclEntityMetadataCollectionTransfer;
 use Generated\Shared\Transfer\AclEntityMetadataConfigRequestTransfer;
 use Generated\Shared\Transfer\AclEntityMetadataConfigTransfer;
+use Spryker\Zed\AclEntity\AclEntityConfig;
 use Spryker\Zed\AclEntity\Business\Filter\AclEntityMetadataConfigFilterInterface;
 use Spryker\Zed\AclEntity\Business\Validator\AclEntityMetadataConfigValidatorInterface;
 
@@ -24,11 +25,13 @@ class AclEntityMetadataConfigReader implements AclEntityMetadataConfigReaderInte
      * @param array<\Spryker\Zed\AclEntityExtension\Dependency\Plugin\AclEntityMetadataConfigExpanderPluginInterface> $aclEntityMetadataCollectionExpandPlugins
      * @param \Spryker\Zed\AclEntity\Business\Validator\AclEntityMetadataConfigValidatorInterface $aclEntityMetadataConfigValidator
      * @param \Spryker\Zed\AclEntity\Business\Filter\AclEntityMetadataConfigFilterInterface $aclEntityMetadataConfigFilter
+     * @param \Spryker\Zed\AclEntity\AclEntityConfig $aclEntityConfig
      */
     public function __construct(
         protected array $aclEntityMetadataCollectionExpandPlugins,
         protected AclEntityMetadataConfigValidatorInterface $aclEntityMetadataConfigValidator,
-        protected AclEntityMetadataConfigFilterInterface $aclEntityMetadataConfigFilter
+        protected AclEntityMetadataConfigFilterInterface $aclEntityMetadataConfigFilter,
+        protected AclEntityConfig $aclEntityConfig
     ) {
     }
 
@@ -75,7 +78,8 @@ class AclEntityMetadataConfigReader implements AclEntityMetadataConfigReaderInte
                 $aclEntityMetadataConfigTransfer,
             );
         }
-        if ($runValidation) {
+        $shouldValidate = $runValidation && $this->aclEntityConfig->isRuntimeValidationEnabled();
+        if ($shouldValidate) {
             $aclEntityMetadataConfigTransfer = $this->aclEntityMetadataConfigFilter->filter(
                 $aclEntityMetadataConfigTransfer,
             );

@@ -76,4 +76,16 @@ interface AclEntityConstants
      * @var string
      */
     public const WHILDCARD_ENTITY = '*';
+
+    /**
+     * Specification:
+     * - Enables or disables ACL entity metadata config validation at runtime.
+     * - When disabled, validation should be performed via console command in CI/deploy pipeline.
+     * - Defaults to false. Set to true only in development environments. In production, disable this and run `acl-entity:metadata:validate` during deployment.
+     *
+     * @api
+     *
+     * @var string
+     */
+    public const ACL_ENTITY_RUNTIME_VALIDATION_ENABLED = 'ACL_ENTITY:ACL_ENTITY_RUNTIME_VALIDATION_ENABLED';
 }

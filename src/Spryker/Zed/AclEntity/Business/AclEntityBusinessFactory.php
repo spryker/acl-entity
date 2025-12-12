@@ -17,6 +17,8 @@ use Spryker\Zed\AclEntity\Business\Reader\AclEntityMetadataConfigReader;
 use Spryker\Zed\AclEntity\Business\Reader\AclEntityMetadataConfigReaderInterface;
 use Spryker\Zed\AclEntity\Business\Reader\AclEntityReader;
 use Spryker\Zed\AclEntity\Business\Reader\AclEntityReaderInterface;
+use Spryker\Zed\AclEntity\Business\Validator\AclEntityMetadataConfigConsoleValidator;
+use Spryker\Zed\AclEntity\Business\Validator\AclEntityMetadataConfigConsoleValidatorInterface;
 use Spryker\Zed\AclEntity\Business\Validator\AclEntityMetadataConfigValidator;
 use Spryker\Zed\AclEntity\Business\Validator\AclEntityMetadataConfigValidatorInterface;
 use Spryker\Zed\AclEntity\Business\Validator\AclEntityRuleValidator;
@@ -78,6 +80,7 @@ class AclEntityBusinessFactory extends AbstractBusinessFactory
             $this->getAclEntityMetadataCollectionExpanderPlugins(),
             $this->createAclEntityMetadataConfigValidator(),
             $this->createAclEntityMetadataConfigFilter(),
+            $this->getConfig(),
         );
     }
 
@@ -161,5 +164,17 @@ class AclEntityBusinessFactory extends AbstractBusinessFactory
     public function createAclEntitySegmentConnectorValidator(): AclEntitySegmentConnectorValidatorInterface
     {
         return new AclEntitySegmentConnectorValidator($this->getAclEntityService());
+    }
+
+    /**
+     * @return \Spryker\Zed\AclEntity\Business\Validator\AclEntityMetadataConfigConsoleValidatorInterface
+     */
+    public function createAclEntityMetadataConfigConsoleValidator(): AclEntityMetadataConfigConsoleValidatorInterface
+    {
+        return new AclEntityMetadataConfigConsoleValidator(
+            $this->createAclEntityMetadataConfigReader(),
+            $this->createAclEntityMetadataConfigFilter(),
+            $this->createAclEntityMetadataConfigValidator(),
+        );
     }
 }

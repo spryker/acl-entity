@@ -141,4 +141,20 @@ interface AclEntityFacadeInterface
      * @return void
      */
     public function saveAclEntityRules(ArrayObject $aclEntityRuleTransfers): void;
+
+    /**
+     * Specification:
+     * - Validates ACL entity metadata configuration.
+     * - Throws exception if configuration is invalid.
+     * - Should be used in CI/deploy pipeline when runtime validation is disabled.
+     *
+     * @api
+     *
+     * @throws \Spryker\Zed\AclEntity\Business\Exception\AclEntityMetadataConfigInvalidKeyException
+     * @throws \Spryker\Zed\AclEntity\Business\Exception\AclEntityMetadataConfigParentEntityNotFoundException
+     * @throws \Spryker\Zed\AclEntity\Business\Exception\AclEntityMetadataConfigParentRequiredException
+     *
+     * @return void
+     */
+    public function validateAclEntityMetadataConfig(): void;
 }

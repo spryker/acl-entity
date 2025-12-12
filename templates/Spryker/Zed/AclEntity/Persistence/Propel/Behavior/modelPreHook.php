@@ -5,7 +5,9 @@
 /** @var \Spryker\Zed\AclEntity\Business\AclEntityFacadeInterface $aclEntityFacade */
 $aclEntityFacade = \Spryker\Zed\Kernel\Locator::getInstance()->aclEntity()->facade();
 if ($aclEntityFacade->isActive()) {
-    $aclEntityMetadataConfigTransfer = $aclEntityFacade->getAclEntityMetadataConfig();
+    $aclEntityMetadataConfigRequestTransfer = new \Generated\Shared\Transfer\AclEntityMetadataConfigRequestTransfer();
+    $aclEntityMetadataConfigRequestTransfer->setModelName(get_class($this));
+    $aclEntityMetadataConfigTransfer = $aclEntityFacade->getAclEntityMetadataConfig(true, $aclEntityMetadataConfigRequestTransfer);
     if (!in_array(get_class($this), $aclEntityMetadataConfigTransfer->getAclEntityAllowList())) {
         $this->getPersistenceFactory()
             ->createAclModelDirector($aclEntityMetadataConfigTransfer)

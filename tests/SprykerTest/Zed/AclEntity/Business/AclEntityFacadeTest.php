@@ -308,10 +308,58 @@ class AclEntityFacadeTest extends Unit
     /**
      * @return void
      */
-    public function testGetAclEntityMetadataConfigThrowsAclEntityMetadataConfigInvalidKeyException(): void
+    public function testGetAclEntityMetadataConfigThrowsInvalidKeyExceptionWhenRuntimeValidationEnabled(): void
     {
         // Arrange
-        $aclEntityFacade = $this->tester->getFacade();
+        $this->tester->setDependency(AclEntityDependencyProvider::PLUGINS_ACL_ENTITY_METADATA_COLLECTION_EXPANDER, [
+            new AclEntityMetadataConfigWithInvalidKeyExpanderPluginMock(),
+        ]);
+        $this->tester->mockConfigMethod('isRuntimeValidationEnabled', true);
+
+        $this->expectException(AclEntityMetadataConfigInvalidKeyException::class);
+
+        // Act
+        $this->tester->getFacade()->getAclEntityMetadataConfig();
+    }
+
+    /**
+     * @return void
+     */
+    public function testGetAclEntityMetadataConfigSkipsValidationWhenRuntimeValidationDisabled(): void
+    {
+        // Arrange
+        $this->tester->setDependency(AclEntityDependencyProvider::PLUGINS_ACL_ENTITY_METADATA_COLLECTION_EXPANDER, [
+            new AclEntityMetadataConfigWithInvalidKeyExpanderPluginMock(),
+        ]);
+        $this->tester->mockConfigMethod('isRuntimeValidationEnabled', false);
+
+        // Act - should NOT throw exception because validation is disabled
+        $result = $this->tester->getFacade()->getAclEntityMetadataConfig();
+
+        // Assert
+        $this->assertInstanceOf(AclEntityMetadataConfigTransfer::class, $result);
+    }
+
+    /**
+     * @return void
+     */
+    public function testValidateAclEntityMetadataConfigSucceedsWithValidConfig(): void
+    {
+        // Arrange
+        $this->tester->setDependency(AclEntityDependencyProvider::PLUGINS_ACL_ENTITY_METADATA_COLLECTION_EXPANDER, [
+            new AclEntityMetadataConfigExpanderPluginMock(),
+        ]);
+
+        // Act & Assert - should not throw exception
+        $this->tester->getFacade()->validateAclEntityMetadataConfig();
+    }
+
+    /**
+     * @return void
+     */
+    public function testValidateAclEntityMetadataConfigThrowsExceptionWithInvalidKey(): void
+    {
+        // Arrange
         $this->tester->setDependency(AclEntityDependencyProvider::PLUGINS_ACL_ENTITY_METADATA_COLLECTION_EXPANDER, [
             new AclEntityMetadataConfigWithInvalidKeyExpanderPluginMock(),
         ]);
@@ -319,16 +367,15 @@ class AclEntityFacadeTest extends Unit
         $this->expectException(AclEntityMetadataConfigInvalidKeyException::class);
 
         // Act
-        $aclEntityFacade->getAclEntityMetadataConfig();
+        $this->tester->getFacade()->validateAclEntityMetadataConfig();
     }
 
     /**
      * @return void
      */
-    public function testGetAclEntityMetadataConfigThrowsAclEntityMetadataConfigParentEntityNotFoundException(): void
+    public function testValidateAclEntityMetadataConfigThrowsExceptionWithWrongParentEntity(): void
     {
         // Arrange
-        $aclEntityFacade = $this->tester->getFacade();
         $this->tester->setDependency(AclEntityDependencyProvider::PLUGINS_ACL_ENTITY_METADATA_COLLECTION_EXPANDER, [
             new AclEntityMetadataConfigWithWrongParentEntityExpanderPluginMock(),
         ]);
@@ -336,6 +383,6 @@ class AclEntityFacadeTest extends Unit
         $this->expectException(AclEntityMetadataConfigParentEntityNotFoundException::class);
 
         // Act
-        $aclEntityFacade->getAclEntityMetadataConfig();
+        $this->tester->getFacade()->validateAclEntityMetadataConfig();
     }
 }
