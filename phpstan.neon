@@ -6,3 +6,4 @@ parameters:
         - '#Call to an undefined method Propel\\Runtime\\ActiveRecord\\ActiveRecordInterface::getPrimaryKey\(\).#'
         - '#Call to an undefined method Propel\\Runtime\\ActiveRecord\\ActiveRecordInterface::getByName\(\).#'
         - '#Call to an undefined method Propel\\Runtime\\ActiveQuery\\ModelCriteria::filterByPrimaryKey\(\).#'
+        - '#Call to an undefined method Spryker\\Zed\\Kernel\\Locator::[a-zA-Z]+\(\).#'
