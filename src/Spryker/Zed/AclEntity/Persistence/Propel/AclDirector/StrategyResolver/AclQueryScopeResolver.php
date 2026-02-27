@@ -33,6 +33,11 @@ class AclQueryScopeResolver implements AclQueryScopeResolverInterface
     protected $aclEntityRuleCollectionTransferSorter;
 
     /**
+     * @var array<\Spryker\Zed\AclEntity\Persistence\Propel\AclDirector\Strategy\Query\AclQueryScopeInterface>
+     */
+    protected static array $cache = [];
+
+    /**
      * @param array<\Spryker\Zed\AclEntity\Persistence\Propel\AclDirector\Strategy\Query\AclQueryScopeInterface> $queryScopes
      * @param \Spryker\Zed\AclEntity\Persistence\Filter\AclEntityRuleCollectionTransferFilterInterface $aclEntityRuleCollectionTransferFilter
      * @param \Spryker\Zed\AclEntity\Persistence\Sorter\AclEntityRuleCollectionTransferSorterInterface $aclEntityRuleCollectionTransferSorter
@@ -55,6 +60,22 @@ class AclQueryScopeResolver implements AclQueryScopeResolverInterface
      * @return \Spryker\Zed\AclEntity\Persistence\Propel\AclDirector\Strategy\Query\AclQueryScopeInterface
      */
     public function resolve(
+        ModelCriteria $query,
+        AclEntityRuleCollectionTransfer $aclEntityRuleCollectionTransfer,
+        int $operationMask
+    ): AclQueryScopeInterface {
+        if (!isset(static::$cache[$query->getModelName() . $operationMask])) {
+            static::$cache[$query->getModelName() . $operationMask] = $this->doResolve(
+                $query,
+                $aclEntityRuleCollectionTransfer,
+                $operationMask,
+            );
+        }
+
+        return static::$cache[$query->getModelName() . $operationMask];
+    }
+
+    protected function doResolve(
         ModelCriteria $query,
         AclEntityRuleCollectionTransfer $aclEntityRuleCollectionTransfer,
         int $operationMask
