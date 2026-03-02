@@ -14,19 +14,12 @@ class AclEntityRuleProvider implements AclEntityRuleProviderInterface
 {
     protected static ?AclEntityRuleCollectionTransfer $aclEntityRuleCollectionTransfer = null;
 
-    /**
-     * @param \Spryker\Zed\AclEntity\Persistence\Propel\Provider\AclRoleProviderInterface $aclRoleProvider
-     * @param \Spryker\Zed\AclEntity\Persistence\AclEntityRepositoryInterface $aclEntityRepository
-     */
     public function __construct(
         protected AclRoleProviderInterface $aclRoleProvider,
         protected AclEntityRepositoryInterface $aclEntityRepository
     ) {
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\AclEntityRuleCollectionTransfer
-     */
     public function getCurrentUserAclEntityRules(): AclEntityRuleCollectionTransfer
     {
         if (static::$aclEntityRuleCollectionTransfer === null) {
@@ -36,9 +29,6 @@ class AclEntityRuleProvider implements AclEntityRuleProviderInterface
         return static::$aclEntityRuleCollectionTransfer;
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\AclEntityRuleCollectionTransfer
-     */
     protected function executeGetCurrentUserAclEntityRules(): AclEntityRuleCollectionTransfer
     {
         return $this->aclEntityRepository->getAclEntityRulesByRoles(

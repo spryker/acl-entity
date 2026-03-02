@@ -13,9 +13,6 @@ use Spryker\Service\Kernel\AbstractServiceFactory;
 
 class AclEntityServiceFactory extends AbstractServiceFactory
 {
-    /**
-     * @return \Spryker\Service\AclEntity\SegmentConnectorGenerator\SegmentConnectorGeneratorInterface
-     */
     public function createSegmentConnectorGenerator(): SegmentConnectorGeneratorInterface
     {
         return new SegmentConnectorGenerator();

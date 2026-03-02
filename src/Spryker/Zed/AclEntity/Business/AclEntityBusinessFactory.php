@@ -38,9 +38,6 @@ use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
  */
 class AclEntityBusinessFactory extends AbstractBusinessFactory
 {
-    /**
-     * @return \Spryker\Zed\AclEntity\Business\Writer\AclEntitySegmentWriterInterface
-     */
     public function createAclEntitySegmentWriter(): AclEntitySegmentWriterInterface
     {
         return new AclEntitySegmentWriter(
@@ -50,9 +47,6 @@ class AclEntityBusinessFactory extends AbstractBusinessFactory
         );
     }
 
-    /**
-     * @return \Spryker\Zed\AclEntity\Business\Writer\AclEntityRuleWriterInterface
-     */
     public function createAclEntityRuleWriter(): AclEntityRuleWriterInterface
     {
         return new AclEntityRuleWriter(
@@ -61,9 +55,6 @@ class AclEntityBusinessFactory extends AbstractBusinessFactory
         );
     }
 
-    /**
-     * @return \Spryker\Zed\AclEntity\Business\Expander\AclRolesExpanderInterface
-     */
     public function createAclRolesExpander(): AclRolesExpanderInterface
     {
         return new AclRolesExpander(
@@ -71,9 +62,6 @@ class AclEntityBusinessFactory extends AbstractBusinessFactory
         );
     }
 
-    /**
-     * @return \Spryker\Zed\AclEntity\Business\Reader\AclEntityMetadataConfigReaderInterface
-     */
     public function createAclEntityMetadataConfigReader(): AclEntityMetadataConfigReaderInterface
     {
         return new AclEntityMetadataConfigReader(
@@ -84,9 +72,6 @@ class AclEntityBusinessFactory extends AbstractBusinessFactory
         );
     }
 
-    /**
-     * @return \Spryker\Zed\AclEntity\Business\Reader\AclEntityReaderInterface
-     */
     public function createAclEntityReader(): AclEntityReaderInterface
     {
         return new AclEntityReader(
@@ -115,25 +100,16 @@ class AclEntityBusinessFactory extends AbstractBusinessFactory
         );
     }
 
-    /**
-     * @return \Spryker\Service\AclEntity\AclEntityServiceInterface
-     */
     public function getAclEntityService(): AclEntityServiceInterface
     {
         return $this->getProvidedDependency(AclEntityDependencyProvider::SERVICE_ACL_ENTITY);
     }
 
-    /**
-     * @return bool
-     */
     public function getIsAclEntityEnabled(): bool
     {
         return $this->getProvidedDependency(AclEntityDependencyProvider::PARAM_IS_ACL_ENTITY_ENABLED);
     }
 
-    /**
-     * @return \Spryker\Zed\AclEntity\Business\Validator\AclEntityRuleValidatorInterface
-     */
     public function createAclEntityRuleValidator(): AclEntityRuleValidatorInterface
     {
         return new AclEntityRuleValidator(
@@ -142,33 +118,21 @@ class AclEntityBusinessFactory extends AbstractBusinessFactory
         );
     }
 
-    /**
-     * @return \Spryker\Zed\AclEntity\Business\Validator\AclEntityMetadataConfigValidatorInterface
-     */
     public function createAclEntityMetadataConfigValidator(): AclEntityMetadataConfigValidatorInterface
     {
         return new AclEntityMetadataConfigValidator();
     }
 
-    /**
-     * @return \Spryker\Zed\AclEntity\Business\Filter\AclEntityMetadataConfigFilterInterface
-     */
     public function createAclEntityMetadataConfigFilter(): AclEntityMetadataConfigFilterInterface
     {
         return new AclEntityMetadataConfigFilter();
     }
 
-    /**
-     * @return \Spryker\Zed\AclEntity\Business\Validator\AclEntitySegmentConnectorValidatorInterface
-     */
     public function createAclEntitySegmentConnectorValidator(): AclEntitySegmentConnectorValidatorInterface
     {
         return new AclEntitySegmentConnectorValidator($this->getAclEntityService());
     }
 
-    /**
-     * @return \Spryker\Zed\AclEntity\Business\Validator\AclEntityMetadataConfigConsoleValidatorInterface
-     */
     public function createAclEntityMetadataConfigConsoleValidator(): AclEntityMetadataConfigConsoleValidatorInterface
     {
         return new AclEntityMetadataConfigConsoleValidator(

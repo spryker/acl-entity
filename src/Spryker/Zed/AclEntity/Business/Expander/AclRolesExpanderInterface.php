@@ -11,10 +11,5 @@ use Generated\Shared\Transfer\RolesTransfer;
 
 interface AclRolesExpanderInterface
 {
-    /**
-     * @param \Generated\Shared\Transfer\RolesTransfer $rolesTransfer
-     *
-     * @return \Generated\Shared\Transfer\RolesTransfer
-     */
     public function expandAclRoles(RolesTransfer $rolesTransfer): RolesTransfer;
 }

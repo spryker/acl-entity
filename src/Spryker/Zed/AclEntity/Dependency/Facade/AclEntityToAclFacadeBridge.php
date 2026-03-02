@@ -24,11 +24,6 @@ class AclEntityToAclFacadeBridge implements AclEntityToAclFacadeBridgeInterface
         $this->aclFacade = $aclFacade;
     }
 
-    /**
-     * @param int $idUser
-     *
-     * @return \Generated\Shared\Transfer\RolesTransfer
-     */
     public function getUserRoles(int $idUser): RolesTransfer
     {
         return $this->aclFacade->getUserRoles($idUser);

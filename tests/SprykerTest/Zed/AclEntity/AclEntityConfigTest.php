@@ -26,9 +26,6 @@ class AclEntityConfigTest extends Unit
      */
     protected const EXPECTED_GLOBAL_OPERATION_MASK = 0;
 
-    /**
-     * @return void
-     */
     public function testGetDefaultGlobalOperationMask(): void
     {
         // Arrange

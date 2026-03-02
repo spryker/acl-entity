@@ -16,9 +16,6 @@ class InvalidScopeException extends AclEntityException
      */
     protected const MESSAGE_TEMPLATE = 'Unsupported AclEntity scope given: %s. Use one of: %s';
 
-    /**
-     * @param string $scope
-     */
     public function __construct(string $scope)
     {
         $supportedScopes = [

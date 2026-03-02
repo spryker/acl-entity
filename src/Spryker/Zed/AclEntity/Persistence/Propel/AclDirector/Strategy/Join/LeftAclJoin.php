@@ -15,11 +15,6 @@ use Spryker\Shared\AclEntity\AclEntityConstants;
 
 class LeftAclJoin extends AbstractAclJoin
 {
-    /**
-     * @param \Propel\Runtime\ActiveQuery\Join $join
-     *
-     * @return bool
-     */
     public function isSupported(Join $join): bool
     {
         return $join->getJoinType() === Criteria::LEFT_JOIN;

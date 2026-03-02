@@ -11,8 +11,5 @@ use Generated\Shared\Transfer\AclEntityRuleCollectionTransfer;
 
 interface AclEntityRuleProviderInterface
 {
-    /**
-     * @return \Generated\Shared\Transfer\AclEntityRuleCollectionTransfer
-     */
     public function getCurrentUserAclEntityRules(): AclEntityRuleCollectionTransfer;
 }

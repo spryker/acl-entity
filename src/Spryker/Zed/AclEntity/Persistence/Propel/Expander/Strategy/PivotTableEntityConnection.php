@@ -25,11 +25,6 @@ class PivotTableEntityConnection extends AbstractAclEntityConnection implements 
      */
     protected const RELATION_TEMPLATE = '%s.%s';
 
-    /**
-     * @param \Generated\Shared\Transfer\AclEntityMetadataTransfer $aclEntityMetadataTransfer
-     *
-     * @return bool
-     */
     public function isSupported(AclEntityMetadataTransfer $aclEntityMetadataTransfer): bool
     {
         $parentConnectionMetadataTransfer = $aclEntityMetadataTransfer->getParentOrFail()->getConnectionOrFail();
@@ -56,9 +51,6 @@ class PivotTableEntityConnection extends AbstractAclEntityConnection implements 
         return $this->addJoinToTargetTable($query, $aclEntityMetadataTransfer, $joinType);
     }
 
-    /**
-     * @return string
-     */
     protected function getDeprecationMessage(): string
     {
         return sprintf(
@@ -110,11 +102,6 @@ class PivotTableEntityConnection extends AbstractAclEntityConnection implements 
         return $query->join($relationName, $joinType);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\AclEntityMetadataTransfer $aclEntityMetadataTransfer
-     *
-     * @return string
-     */
     protected function getPivotTableRelationName(AclEntityMetadataTransfer $aclEntityMetadataTransfer): string
     {
         $pivotTableEntity = $aclEntityMetadataTransfer
@@ -170,11 +157,6 @@ class PivotTableEntityConnection extends AbstractAclEntityConnection implements 
         return $join;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\AclEntityMetadataTransfer $aclEntityMetadataTransfer
-     *
-     * @return string
-     */
     protected function getTargetTableRelationName(AclEntityMetadataTransfer $aclEntityMetadataTransfer): string
     {
         $targetTableEntity = $aclEntityMetadataTransfer

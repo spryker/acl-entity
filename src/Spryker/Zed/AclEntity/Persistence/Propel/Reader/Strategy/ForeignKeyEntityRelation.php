@@ -16,11 +16,6 @@ use Propel\Runtime\Map\TableMap;
 
 class ForeignKeyEntityRelation extends AbstractAclEntityRelation implements AclEntityRelationInterface
 {
-    /**
-     * @param \Generated\Shared\Transfer\AclEntityMetadataTransfer $aclEntityMetadataTransfer
-     *
-     * @return bool
-     */
     public function isSupported(AclEntityMetadataTransfer $aclEntityMetadataTransfer): bool
     {
         return !$aclEntityMetadataTransfer->getParentOrFail()->getConnection();

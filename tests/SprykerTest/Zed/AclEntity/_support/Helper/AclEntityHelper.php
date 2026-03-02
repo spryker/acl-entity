@@ -47,11 +47,6 @@ class AclEntityHelper extends Module
         return $aclEntitySegmentResponseTransfer;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\AclEntitySegmentCriteriaTransfer $aclEntitySegmentSearchCriteriaTransfer
-     *
-     * @return void
-     */
     public function deleteAclEntitySegments(
         AclEntitySegmentCriteriaTransfer $aclEntitySegmentSearchCriteriaTransfer
     ): void {
@@ -87,11 +82,6 @@ class AclEntityHelper extends Module
         return $aclEntityRuleTransfer;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\AclEntityRuleCriteriaTransfer $aclEntityRuleCriteriaTransfer
-     *
-     * @return void
-     */
     public function deleteAclEntityRules(AclEntityRuleCriteriaTransfer $aclEntityRuleCriteriaTransfer): void
     {
         $query = SpyAclEntityRuleQuery::create();
@@ -105,21 +95,11 @@ class AclEntityHelper extends Module
         $query->deleteAll();
     }
 
-    /**
-     * @param int $idAclEntitySegment
-     *
-     * @return void
-     */
     private function cleanupAclEntitySegment(int $idAclEntitySegment): void
     {
         SpyAclEntitySegmentQuery::create()->findByIdAclEntitySegment($idAclEntitySegment)->delete();
     }
 
-    /**
-     * @param int $idAclEntityRule
-     *
-     * @return void
-     */
     private function cleanAclEntityRule(int $idAclEntityRule): void
     {
         SpyAclEntityRuleQuery::create()->findByIdAclEntityRule($idAclEntityRule)->delete();

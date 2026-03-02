@@ -21,20 +21,11 @@ class AclEntityRuleMapper
      */
     protected $aclEntityService;
 
-    /**
-     * @param \Spryker\Service\AclEntity\AclEntityServiceInterface $aclEntityService
-     */
     public function __construct(AclEntityServiceInterface $aclEntityService)
     {
         $this->aclEntityService = $aclEntityService;
     }
 
-    /**
-     * @param \Orm\Zed\AclEntity\Persistence\SpyAclEntityRule $aclEntityRuleEntity
-     * @param \Generated\Shared\Transfer\AclEntityRuleTransfer $aclEntityRuleTransfer
-     *
-     * @return \Generated\Shared\Transfer\AclEntityRuleTransfer
-     */
     public function mapAclEntityRuleEntityToAclEntityRuleTransfer(
         SpyAclEntityRule $aclEntityRuleEntity,
         AclEntityRuleTransfer $aclEntityRuleTransfer
@@ -69,12 +60,6 @@ class AclEntityRuleMapper
         return $aclEntityRuleCollectionTransfer;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\AclEntityRuleRequestTransfer $aclEntityRuleRequestTransfer
-     * @param \Orm\Zed\AclEntity\Persistence\SpyAclEntityRule $aclEntityRuleEntity
-     *
-     * @return \Orm\Zed\AclEntity\Persistence\SpyAclEntityRule
-     */
     public function mapAclEntityRuleRequestTransferToEntity(
         AclEntityRuleRequestTransfer $aclEntityRuleRequestTransfer,
         SpyAclEntityRule $aclEntityRuleEntity

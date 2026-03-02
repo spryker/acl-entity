@@ -85,9 +85,6 @@ class AclEntityServiceTest extends Unit
      */
     protected $tester;
 
-    /**
-     * @return void
-     */
     public function testGenerateConnectorTableNameSuccessful(): void
     {
         // Act
@@ -98,9 +95,6 @@ class AclEntityServiceTest extends Unit
         $this->assertSame(static::EXPECTED_SEGMENT_CONNECTOR_TABLE_NAME, $connectorTableName);
     }
 
-    /**
-     * @return void
-     */
     public function testGenerateConnectorTableIdColumnNameSuccessful(): void
     {
         // Act
@@ -111,9 +105,6 @@ class AclEntityServiceTest extends Unit
         $this->assertSame(static::EXPECTED_SEGMENT_CONNECTOR_PRIMARY_KEY, $connectorTableIdColumnName);
     }
 
-    /**
-     * @return void
-     */
     public function testGenerateConnectorClassNameSuccessful(): void
     {
         // Act
@@ -124,9 +115,6 @@ class AclEntityServiceTest extends Unit
         $this->assertSame(static::EXPECTED_SEGMENT_CONNECTOR_CLASS, $connectorClassName);
     }
 
-    /**
-     * @return void
-     */
     public function testGenerateConnectorRelationNameSuccessful(): void
     {
         // Act
@@ -137,9 +125,6 @@ class AclEntityServiceTest extends Unit
         $this->assertSame(static::EXPECTED_SEGMENT_CONNECTOR_RELATION_NAME, $connectorRelationName);
     }
 
-    /**
-     * @return void
-     */
     public function testGenerateConnectorGetterSuccessful(): void
     {
         // Act
@@ -150,9 +135,6 @@ class AclEntityServiceTest extends Unit
         $this->assertSame(static::EXPECTED_SEGMENT_CONNECTOR_GETTER, $connectorConnectorGetter);
     }
 
-    /**
-     * @return void
-     */
     public function testGenerateConnectorReferenceGetterSuccessful(): void
     {
         // Act
@@ -163,9 +145,6 @@ class AclEntityServiceTest extends Unit
         $this->assertSame(static::EXPECTED_SEGMENT_CONNECTOR_REFERENCE_GETTER, $connectorReferenceGetter);
     }
 
-    /**
-     * @return void
-     */
     public function testGenerateConnectorReferenceSetterSuccessful(): void
     {
         // Act
@@ -176,9 +155,6 @@ class AclEntityServiceTest extends Unit
         $this->assertSame(static::EXPECTED_SEGMENT_CONNECTOR_REFERENCE_SETTER, $connectorReferenceGetter);
     }
 
-    /**
-     * @return void
-     */
     public function testGenerateConnectorReferenceColumnNameSuccessful(): void
     {
         // Act

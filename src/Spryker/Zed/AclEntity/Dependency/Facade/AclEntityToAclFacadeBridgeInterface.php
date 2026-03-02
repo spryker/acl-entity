@@ -11,10 +11,5 @@ use Generated\Shared\Transfer\RolesTransfer;
 
 interface AclEntityToAclFacadeBridgeInterface
 {
-    /**
-     * @param int $idUser
-     *
-     * @return \Generated\Shared\Transfer\RolesTransfer
-     */
     public function getUserRoles(int $idUser): RolesTransfer;
 }

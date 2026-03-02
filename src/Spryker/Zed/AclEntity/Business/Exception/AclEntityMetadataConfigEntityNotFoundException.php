@@ -19,9 +19,6 @@ class AclEntityMetadataConfigEntityNotFoundException extends Exception
      */
     protected const MESSAGE_TEMPLATE = 'Acl entity metadata configuration was not found for %s.';
 
-    /**
-     * @param string $entity
-     */
     public function __construct(string $entity)
     {
         $message = sprintf(

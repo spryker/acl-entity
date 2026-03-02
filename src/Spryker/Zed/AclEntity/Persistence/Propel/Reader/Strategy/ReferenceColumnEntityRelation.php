@@ -20,11 +20,6 @@ class ReferenceColumnEntityRelation extends AbstractAclEntityRelation implements
      */
     protected const COLUMN_GETTER_TEMPLATE = 'get%s';
 
-    /**
-     * @param \Generated\Shared\Transfer\AclEntityMetadataTransfer $aclEntityMetadataTransfer
-     *
-     * @return bool
-     */
     public function isSupported(AclEntityMetadataTransfer $aclEntityMetadataTransfer): bool
     {
         $parentConnectionMetadataTransfer = $aclEntityMetadataTransfer->getParentOrFail()->getConnection();
@@ -79,12 +74,6 @@ class ReferenceColumnEntityRelation extends AbstractAclEntityRelation implements
         return $entityRelations;
     }
 
-    /**
-     * @param string $entityClass
-     * @param string $columnName
-     *
-     * @return string
-     */
     protected function getColumnGetter(string $entityClass, string $columnName): string
     {
         $columnName = $this->getColumnPhpName($entityClass, $columnName);
@@ -92,12 +81,6 @@ class ReferenceColumnEntityRelation extends AbstractAclEntityRelation implements
         return sprintf(static::COLUMN_GETTER_TEMPLATE, $columnName);
     }
 
-    /**
-     * @param string $entityClass
-     * @param string $columnName
-     *
-     * @return string
-     */
     protected function getColumnPhpName(string $entityClass, string $columnName): string
     {
         return $this->propelServiceContainer

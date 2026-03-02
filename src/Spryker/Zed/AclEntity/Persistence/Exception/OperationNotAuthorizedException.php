@@ -14,10 +14,6 @@ class OperationNotAuthorizedException extends AclEntityException
      */
     protected const MESSAGE_TEMPLATE = 'Operation "%s" is restricted for %s';
 
-    /**
-     * @param string $operation
-     * @param string $entity
-     */
     public function __construct(string $operation, string $entity)
     {
         parent::__construct(sprintf(static::MESSAGE_TEMPLATE, $operation, $entity));

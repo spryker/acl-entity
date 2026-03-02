@@ -52,13 +52,6 @@ class AclModelDirector implements AclModelDirectorInterface
      */
     protected $relationCache;
 
-    /**
-     * @param \Spryker\Zed\AclEntity\Persistence\Reader\AclEntityMetadataReaderInterface $aclEntityMetadataReader
-     * @param \Spryker\Zed\AclEntity\Persistence\Propel\Provider\AclEntityRuleProviderInterface $aclEntityRuleProvider
-     * @param \Spryker\Zed\AclEntity\Persistence\Propel\AclDirector\StrategyResolver\AclModelScopeResolverInterface $aclModelScopeResolver
-     * @param \Spryker\Zed\AclEntity\Persistence\Propel\Reader\AclRelationReaderInterface $aclRelationReader
-     * @param \Propel\Runtime\ServiceContainer\ServiceContainerInterface $propelServiceContainer
-     */
     public function __construct(
         AclEntityMetadataReaderInterface $aclEntityMetadataReader,
         AclEntityRuleProviderInterface $aclEntityRuleProvider,
@@ -74,11 +67,6 @@ class AclModelDirector implements AclModelDirectorInterface
         $this->relationCache = new ObjectCollection();
     }
 
-    /**
-     * @param \Propel\Runtime\ActiveRecord\ActiveRecordInterface $entity
-     *
-     * @return void
-     */
     public function inspectCreate(ActiveRecordInterface $entity): void
     {
         $aclEntityRuleCollectionTransfer = $this->aclEntityRuleProvider->getCurrentUserAclEntityRules();
@@ -97,11 +85,6 @@ class AclModelDirector implements AclModelDirectorInterface
         $this->inspectRootEntityCreate($entity, $aclEntityRuleCollectionTransfer);
     }
 
-    /**
-     * @param \Propel\Runtime\ActiveRecord\ActiveRecordInterface $entity
-     *
-     * @return void
-     */
     public function inspectUpdate(ActiveRecordInterface $entity): void
     {
         $aclEntityRuleCollectionTransfer = $this->aclEntityRuleProvider->getCurrentUserAclEntityRules();
@@ -120,11 +103,6 @@ class AclModelDirector implements AclModelDirectorInterface
         $this->inspectRootEntityUpdate($entity, $aclEntityRuleCollectionTransfer);
     }
 
-    /**
-     * @param \Propel\Runtime\ActiveRecord\ActiveRecordInterface $entity
-     *
-     * @return void
-     */
     public function inspectDelete(ActiveRecordInterface $entity): void
     {
         $aclEntityRuleCollectionTransfer = $this->aclEntityRuleProvider->getCurrentUserAclEntityRules();
@@ -301,11 +279,6 @@ class AclModelDirector implements AclModelDirectorInterface
         throw new OperationNotAuthorizedException(AclEntityConstants::OPERATION_DELETE, get_class($subEntity));
     }
 
-    /**
-     * @param \Propel\Runtime\ActiveRecord\ActiveRecordInterface $entity
-     *
-     * @return void
-     */
     protected function inspectRelations(ActiveRecordInterface $entity): void
     {
         $this->relationCache->append($entity);
@@ -316,12 +289,6 @@ class AclModelDirector implements AclModelDirectorInterface
         }
     }
 
-    /**
-     * @param \Propel\Runtime\ActiveRecord\ActiveRecordInterface $entity
-     * @param \Propel\Runtime\Map\RelationMap $relationMap
-     *
-     * @return void
-     */
     protected function inspectRelationMap(ActiveRecordInterface $entity, RelationMap $relationMap): void
     {
         foreach ($this->aclRelationReader->getRelationsByRelationMap($entity, $relationMap) as $relation) {

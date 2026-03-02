@@ -9,10 +9,5 @@ namespace Spryker\Zed\AclEntity\Business\Validator;
 
 interface AclEntitySegmentConnectorValidatorInterface
 {
-    /**
-     * @param string $entity
-     *
-     * @return void
-     */
     public function validate(string $entity): void;
 }

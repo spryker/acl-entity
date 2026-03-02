@@ -26,11 +26,6 @@ use Spryker\Zed\Kernel\Persistence\AbstractRepository;
  */
 class AclEntityRepository extends AbstractRepository implements AclEntityRepositoryInterface
 {
-    /**
-     * @param \Generated\Shared\Transfer\RolesTransfer $rolesTransfer
-     *
-     * @return \Generated\Shared\Transfer\AclEntityRuleCollectionTransfer
-     */
     public function getAclEntityRulesByRoles(RolesTransfer $rolesTransfer): AclEntityRuleCollectionTransfer
     {
         $roleIds = $this->getRoleIdsFromRolesTransfer($rolesTransfer);
@@ -48,11 +43,6 @@ class AclEntityRepository extends AbstractRepository implements AclEntityReposit
             );
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\AclEntityRuleCriteriaTransfer $aclEntityRuleCriteriaTransfer
-     *
-     * @return \Generated\Shared\Transfer\AclEntityRuleCollectionTransfer
-     */
     public function getAclEntityRuleCollection(AclEntityRuleCriteriaTransfer $aclEntityRuleCriteriaTransfer): AclEntityRuleCollectionTransfer
     {
         $aclEntityRuleQuery = $this->getFactory()->createAclEntityRuleQuery();
@@ -162,11 +152,6 @@ class AclEntityRepository extends AbstractRepository implements AclEntityReposit
         );
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\AclEntitySegmentCriteriaTransfer $aclEntitySegmentCriteriaTransfer
-     *
-     * @return \Generated\Shared\Transfer\AclEntitySegmentCollectionTransfer
-     */
     public function getAclEntitySegmentCollection(
         AclEntitySegmentCriteriaTransfer $aclEntitySegmentCriteriaTransfer
     ): AclEntitySegmentCollectionTransfer {
@@ -189,12 +174,6 @@ class AclEntityRepository extends AbstractRepository implements AclEntityReposit
             );
     }
 
-    /**
-     * @param \Orm\Zed\AclEntity\Persistence\SpyAclEntitySegmentQuery $aclEntitySegmentQuery
-     * @param \Generated\Shared\Transfer\AclEntitySegmentCriteriaTransfer $aclEntitySegmentCriteriaTransfer
-     *
-     * @return \Orm\Zed\AclEntity\Persistence\SpyAclEntitySegmentQuery
-     */
     protected function applyAclEntitySegmentFilters(
         SpyAclEntitySegmentQuery $aclEntitySegmentQuery,
         AclEntitySegmentCriteriaTransfer $aclEntitySegmentCriteriaTransfer
@@ -239,12 +218,6 @@ class AclEntityRepository extends AbstractRepository implements AclEntityReposit
         return $modelCriteria;
     }
 
-    /**
-     * @param \Propel\Runtime\ActiveQuery\ModelCriteria $modelCriteria
-     * @param \Generated\Shared\Transfer\PaginationTransfer $paginationTransfer
-     *
-     * @return \Propel\Runtime\ActiveQuery\ModelCriteria
-     */
     protected function applyPagination(
         ModelCriteria $modelCriteria,
         PaginationTransfer $paginationTransfer

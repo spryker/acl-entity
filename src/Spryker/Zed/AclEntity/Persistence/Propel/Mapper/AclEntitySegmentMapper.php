@@ -15,12 +15,6 @@ use Propel\Runtime\Collection\ObjectCollection;
 
 class AclEntitySegmentMapper
 {
-    /**
-     * @param \Generated\Shared\Transfer\AclEntitySegmentRequestTransfer $aclEntitySegmentRequestTransfer
-     * @param \Orm\Zed\AclEntity\Persistence\SpyAclEntitySegment $spyAclEntitySegment
-     *
-     * @return \Orm\Zed\AclEntity\Persistence\SpyAclEntitySegment
-     */
     public function mapAclEntitySegmentRequestTransferToEntity(
         AclEntitySegmentRequestTransfer $aclEntitySegmentRequestTransfer,
         SpyAclEntitySegment $spyAclEntitySegment
@@ -30,12 +24,6 @@ class AclEntitySegmentMapper
         return $spyAclEntitySegment;
     }
 
-    /**
-     * @param \Orm\Zed\AclEntity\Persistence\SpyAclEntitySegment $aclEntitySegmentEntity
-     * @param \Generated\Shared\Transfer\AclEntitySegmentTransfer $aclEntitySegmentTransfer
-     *
-     * @return \Generated\Shared\Transfer\AclEntitySegmentTransfer
-     */
     public function mapAclEntitySegmentEntityToTransfer(
         SpyAclEntitySegment $aclEntitySegmentEntity,
         AclEntitySegmentTransfer $aclEntitySegmentTransfer
@@ -43,12 +31,6 @@ class AclEntitySegmentMapper
         return $aclEntitySegmentTransfer->fromArray($aclEntitySegmentEntity->toArray());
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\AclEntitySegmentTransfer $aclEntitySegmentTransfer
-     * @param \Orm\Zed\AclEntity\Persistence\SpyAclEntitySegment $spyAclEntitySegment
-     *
-     * @return \Orm\Zed\AclEntity\Persistence\SpyAclEntitySegment
-     */
     public function mapAclEntitySegmentTransferToEntity(
         AclEntitySegmentTransfer $aclEntitySegmentTransfer,
         SpyAclEntitySegment $spyAclEntitySegment

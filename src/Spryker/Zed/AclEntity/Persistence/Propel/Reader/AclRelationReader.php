@@ -32,10 +32,6 @@ class AclRelationReader implements AclRelationReaderInterface
      */
     protected $aclEntityMetadataReader;
 
-    /**
-     * @param \Spryker\Zed\AclEntity\Persistence\Propel\Reader\StrategyResolver\AclEntityRelationResolverInterface $aclEntityRelationResolver
-     * @param \Spryker\Zed\AclEntity\Persistence\Reader\AclEntityMetadataReaderInterface $aclEntityMetadataReader
-     */
     public function __construct(
         AclEntityRelationResolverInterface $aclEntityRelationResolver,
         AclEntityMetadataReaderInterface $aclEntityMetadataReader

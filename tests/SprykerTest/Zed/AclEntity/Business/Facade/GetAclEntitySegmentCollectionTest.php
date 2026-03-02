@@ -39,9 +39,6 @@ class GetAclEntitySegmentCollectionTest extends Unit
      */
     protected AclEntityBusinessTester $tester;
 
-    /**
-     * @return void
-     */
     protected function setUp(): void
     {
         parent::setUp();
@@ -49,9 +46,6 @@ class GetAclEntitySegmentCollectionTest extends Unit
         $this->tester->ensureAclEntitySegmentDatabaseIsEmpty();
     }
 
-    /**
-     * @return void
-     */
     public function testReturnsCorrectAclEntitySegmentByIdAclEntitySegment(): void
     {
         // Arrange
@@ -73,9 +67,6 @@ class GetAclEntitySegmentCollectionTest extends Unit
         );
     }
 
-    /**
-     * @return void
-     */
     public function testReturnsCorrectAclEntitySegmentByName(): void
     {
         // Arrange
@@ -97,9 +88,6 @@ class GetAclEntitySegmentCollectionTest extends Unit
         );
     }
 
-    /**
-     * @return void
-     */
     public function testReturnsCorrectAclEntitySegmentByReference(): void
     {
         // Arrange
@@ -121,9 +109,6 @@ class GetAclEntitySegmentCollectionTest extends Unit
         );
     }
 
-    /**
-     * @return void
-     */
     public function testReturnsAclEntitySegmentsPaginatedByLimitAndOffset(): void
     {
         // Arrange
@@ -147,9 +132,6 @@ class GetAclEntitySegmentCollectionTest extends Unit
         $this->assertSame(4, $aclEntitySegmentCollectionTransfer->getPaginationOrFail()->getNbResults());
     }
 
-    /**
-     * @return void
-     */
     public function testReturnsAclEntitySegmentsPaginatedByPageAndMaxPerPage(): void
     {
         // Arrange
@@ -185,9 +167,6 @@ class GetAclEntitySegmentCollectionTest extends Unit
         $this->assertSame(1, $paginationTransfer->getPreviousPageOrFail());
     }
 
-    /**
-     * @return void
-     */
     public function testReturnsAclEntitySegmentsSortedByNameFieldDesc(): void
     {
         // Arrange
@@ -212,9 +191,6 @@ class GetAclEntitySegmentCollectionTest extends Unit
         $this->assertSame('abc', $aclEntitySegmentCollectionIterator->offsetGet(2)->getNameOrFail());
     }
 
-    /**
-     * @return void
-     */
     public function testReturnsAclEntitySegmentsSortedByNameFieldAsc(): void
     {
         // Arrange
@@ -239,12 +215,6 @@ class GetAclEntitySegmentCollectionTest extends Unit
         $this->assertSame('ghi', $aclEntitySegmentCollectionIterator->offsetGet(2)->getNameOrFail());
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\AclEntitySegmentTransfer $expectedAclEntitySegmentTransfer
-     * @param \Generated\Shared\Transfer\AclEntitySegmentTransfer $actualAclEntitySegmentTransfer
-     *
-     * @return void
-     */
     protected function assertSameAclEntitySegmentTransfer(
         AclEntitySegmentTransfer $expectedAclEntitySegmentTransfer,
         AclEntitySegmentTransfer $actualAclEntitySegmentTransfer
@@ -254,11 +224,6 @@ class GetAclEntitySegmentCollectionTest extends Unit
         $this->assertSame($expectedAclEntitySegmentTransfer->getReference(), $actualAclEntitySegmentTransfer->getReference());
     }
 
-    /**
-     * @param string|null $name
-     *
-     * @return \Generated\Shared\Transfer\AclEntitySegmentTransfer
-     */
     protected function haveAclEntitySegmentWithMerchant(
         ?string $name = null
     ): AclEntitySegmentTransfer {

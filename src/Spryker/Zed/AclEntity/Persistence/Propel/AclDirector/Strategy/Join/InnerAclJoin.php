@@ -15,11 +15,6 @@ use Spryker\Zed\PropelOrm\Business\Runtime\ActiveQuery\Criteria;
 
 class InnerAclJoin extends AbstractAclJoin
 {
-    /**
-     * @param \Propel\Runtime\ActiveQuery\Join $join
-     *
-     * @return bool
-     */
     public function isSupported(Join $join): bool
     {
         return !$join->getJoinType()

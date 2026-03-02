@@ -15,25 +15,10 @@ use Generated\Shared\Transfer\RolesTransfer;
 
 interface AclEntityRepositoryInterface
 {
-    /**
-     * @param \Generated\Shared\Transfer\RolesTransfer $rolesTransfer
-     *
-     * @return \Generated\Shared\Transfer\AclEntityRuleCollectionTransfer
-     */
     public function getAclEntityRulesByRoles(RolesTransfer $rolesTransfer): AclEntityRuleCollectionTransfer;
 
-    /**
-     * @param \Generated\Shared\Transfer\AclEntityRuleCriteriaTransfer $aclEntityRuleCriteriaTransfer
-     *
-     * @return \Generated\Shared\Transfer\AclEntityRuleCollectionTransfer
-     */
     public function getAclEntityRuleCollection(AclEntityRuleCriteriaTransfer $aclEntityRuleCriteriaTransfer): AclEntityRuleCollectionTransfer;
 
-    /**
-     * @param \Generated\Shared\Transfer\AclEntitySegmentCriteriaTransfer $aclEntitySegmentCriteriaTransfer
-     *
-     * @return \Generated\Shared\Transfer\AclEntitySegmentCollectionTransfer
-     */
     public function getAclEntitySegmentCollection(
         AclEntitySegmentCriteriaTransfer $aclEntitySegmentCriteriaTransfer
     ): AclEntitySegmentCollectionTransfer;

@@ -16,11 +16,6 @@ use Spryker\Zed\AclEntity\Business\Exception\AclEntityMetadataConfigParentRequir
 
 class AclEntityMetadataConfigValidator implements AclEntityMetadataConfigValidatorInterface
 {
-    /**
-     * @param \Generated\Shared\Transfer\AclEntityMetadataConfigTransfer $aclEntityMetadataConfigTransfer
-     *
-     * @return void
-     */
     public function validate(AclEntityMetadataConfigTransfer $aclEntityMetadataConfigTransfer): void
     {
         $aclEntityMetadataCollectionTransfer = $aclEntityMetadataConfigTransfer->getAclEntityMetadataCollection();

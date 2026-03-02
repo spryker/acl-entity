@@ -15,11 +15,6 @@ use Propel\Runtime\Map\ColumnMap;
 
 class ForeignKeyEntityConnection extends AbstractAclEntityConnection implements AclEntityConnectionInterface
 {
-    /**
-     * @param \Generated\Shared\Transfer\AclEntityMetadataTransfer $aclEntityMetadataTransfer
-     *
-     * @return bool
-     */
     public function isSupported(AclEntityMetadataTransfer $aclEntityMetadataTransfer): bool
     {
         return !$aclEntityMetadataTransfer->getParentOrFail()->getConnection();

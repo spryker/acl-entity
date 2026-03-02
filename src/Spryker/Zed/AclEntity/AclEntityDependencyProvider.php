@@ -57,11 +57,6 @@ class AclEntityDependencyProvider extends AbstractBundleDependencyProvider
      */
     public const PARAM_IS_ACL_ENTITY_ENABLED = 'PARAM_IS_ACL_ENTITY_ENABLED';
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     public function provideBusinessLayerDependencies(Container $container): Container
     {
         $container = parent::provideBusinessLayerDependencies($container);
@@ -73,11 +68,6 @@ class AclEntityDependencyProvider extends AbstractBundleDependencyProvider
         return $container;
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     public function providePersistenceLayerDependencies(Container $container): Container
     {
         $container = parent::providePersistenceLayerDependencies($container);
@@ -89,11 +79,6 @@ class AclEntityDependencyProvider extends AbstractBundleDependencyProvider
         return $container;
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addUserFacade(Container $container): Container
     {
         $container->set(static::FACADE_USER, function (Container $container) {
@@ -103,11 +88,6 @@ class AclEntityDependencyProvider extends AbstractBundleDependencyProvider
         return $container;
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addAclFacade(Container $container): Container
     {
         $container->set(static::FACADE_ACL, function (Container $container) {
@@ -117,11 +97,6 @@ class AclEntityDependencyProvider extends AbstractBundleDependencyProvider
         return $container;
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addAclEntityService(Container $container): Container
     {
         $container->set(static::SERVICE_ACL_ENTITY, function (Container $container) {
@@ -131,11 +106,6 @@ class AclEntityDependencyProvider extends AbstractBundleDependencyProvider
         return $container;
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addAclEntityMetadataCollectionExpanderPlugins(Container $container): Container
     {
         $container->set(static::PLUGINS_ACL_ENTITY_METADATA_COLLECTION_EXPANDER, function () {
@@ -153,11 +123,6 @@ class AclEntityDependencyProvider extends AbstractBundleDependencyProvider
         return [];
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addAclEntityDisablerPlugins(Container $container): Container
     {
         $container->set(static::PLUGINS_ACL_ENTITY_DISABLER, function () {
@@ -175,11 +140,6 @@ class AclEntityDependencyProvider extends AbstractBundleDependencyProvider
         return [];
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addIsAclEntityEnabled(Container $container): Container
     {
         $container->set(static::PARAM_IS_ACL_ENTITY_ENABLED, function (Container $container): bool {

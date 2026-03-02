@@ -16,9 +16,6 @@ class AclEntityRuleReferencedEntityNotFoundException extends Exception
      */
     protected const MESSAGE_TEMPLATE = 'Referenced entity class %s was not found.';
 
-    /**
-     * @param string $entity
-     */
     public function __construct(string $entity)
     {
         $message = sprintf(

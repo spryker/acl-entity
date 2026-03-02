@@ -26,10 +26,6 @@ class AclEntityRuleWriter implements AclEntityRuleWriterInterface
      */
     protected $aclEntityRuleValidator;
 
-    /**
-     * @param \Spryker\Zed\AclEntity\Persistence\AclEntityEntityManagerInterface $aclEntityEntityManager
-     * @param \Spryker\Zed\AclEntity\Business\Validator\AclEntityRuleValidatorInterface $aclEntityRuleValidator
-     */
     public function __construct(
         AclEntityEntityManagerInterface $aclEntityEntityManager,
         AclEntityRuleValidatorInterface $aclEntityRuleValidator
@@ -38,11 +34,6 @@ class AclEntityRuleWriter implements AclEntityRuleWriterInterface
         $this->aclEntityRuleValidator = $aclEntityRuleValidator;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\AclEntityRuleRequestTransfer $aclEntityRuleRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\AclEntityRuleResponseTransfer
-     */
     public function create(AclEntityRuleRequestTransfer $aclEntityRuleRequestTransfer): AclEntityRuleResponseTransfer
     {
         $aclEntityRuleTransfer = $this->getAclEntityRuleTransfer($aclEntityRuleRequestTransfer);
@@ -68,21 +59,11 @@ class AclEntityRuleWriter implements AclEntityRuleWriterInterface
         }
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\AclEntityRuleTransfer $aclEntityRuleTransfer
-     *
-     * @return \Generated\Shared\Transfer\AclEntityRuleRequestTransfer
-     */
     protected function getAclEntityRuleRequestTransfer(AclEntityRuleTransfer $aclEntityRuleTransfer): AclEntityRuleRequestTransfer
     {
         return (new AclEntityRuleRequestTransfer())->fromArray($aclEntityRuleTransfer->toArray());
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\AclEntityRuleRequestTransfer $aclEntityRuleRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\AclEntityRuleTransfer
-     */
     protected function getAclEntityRuleTransfer(AclEntityRuleRequestTransfer $aclEntityRuleRequestTransfer): AclEntityRuleTransfer
     {
         return (new AclEntityRuleTransfer())->fromArray($aclEntityRuleRequestTransfer->toArray());

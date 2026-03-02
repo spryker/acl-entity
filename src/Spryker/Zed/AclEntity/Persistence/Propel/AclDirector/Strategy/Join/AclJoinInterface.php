@@ -26,10 +26,5 @@ interface AclJoinInterface
         AclEntityRuleCollectionTransfer $aclEntityRuleCollectionTransfer
     ): ModelCriteria;
 
-    /**
-     * @param \Propel\Runtime\ActiveQuery\Join $join
-     *
-     * @return bool
-     */
     public function isSupported(Join $join): bool;
 }

@@ -91,11 +91,6 @@ use Spryker\Zed\Kernel\Persistence\AbstractPersistenceFactory;
  */
 class AclEntityPersistenceFactory extends AbstractPersistenceFactory
 {
-    /**
-     * @param \Generated\Shared\Transfer\AclEntityMetadataConfigTransfer $aclEntityMetadataConfigTransfer
-     *
-     * @return \Spryker\Zed\AclEntity\Persistence\Propel\AclDirector\AclQueryDirectorInterface
-     */
     public function createAclQueryDirector(
         AclEntityMetadataConfigTransfer $aclEntityMetadataConfigTransfer
     ): AclQueryDirectorInterface {
@@ -110,11 +105,6 @@ class AclEntityPersistenceFactory extends AbstractPersistenceFactory
         );
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\AclEntityMetadataConfigTransfer $aclEntityMetadataConfigTransfer
-     *
-     * @return \Spryker\Zed\AclEntity\Persistence\Propel\AclDirector\AclModelDirectorInterface
-     */
     public function createAclModelDirector(
         AclEntityMetadataConfigTransfer $aclEntityMetadataConfigTransfer
     ): AclModelDirectorInterface {
@@ -127,11 +117,6 @@ class AclEntityPersistenceFactory extends AbstractPersistenceFactory
         );
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\AclEntityMetadataConfigTransfer $aclEntityMetadataConfigTransfer
-     *
-     * @return \Spryker\Zed\AclEntity\Persistence\Propel\AclDirector\AclJoinDirectorInterface
-     */
     public function createAclJoinDirector(AclEntityMetadataConfigTransfer $aclEntityMetadataConfigTransfer): AclJoinDirectorInterface
     {
         return new AclJoinDirector(
@@ -141,17 +126,11 @@ class AclEntityPersistenceFactory extends AbstractPersistenceFactory
         );
     }
 
-    /**
-     * @return \Spryker\Zed\AclEntity\Persistence\Propel\Provider\AclEntityRuleProviderInterface
-     */
     public function createAclEntityRuleProvider(): AclEntityRuleProviderInterface
     {
         return new AclEntityRuleProvider($this->getAclRoleProvider(), $this->getRepository());
     }
 
-    /**
-     * @return \Spryker\Zed\AclEntity\Persistence\Propel\QueryMerger\AclEntityQueryMergerInterface
-     */
     public function createAclEntityQueryMerger(): AclEntityQueryMergerInterface
     {
         return new AclEntityQueryMerger(
@@ -161,25 +140,16 @@ class AclEntityPersistenceFactory extends AbstractPersistenceFactory
         );
     }
 
-    /**
-     * @return \Spryker\Zed\AclEntity\Persistence\Propel\Generator\AclEntityAliasGeneratorInterface
-     */
     public function createQueryAliasGenerator(): AclEntityAliasGeneratorInterface
     {
         return new AclEntityAliasGenerator();
     }
 
-    /**
-     * @return \Spryker\Zed\AclEntity\Persistence\Propel\Comparator\JoinComparatorInterface
-     */
     public function createJoinComparator(): JoinComparatorInterface
     {
         return new JoinComparator();
     }
 
-    /**
-     * @return \Spryker\Zed\AclEntity\Persistence\Propel\Matcher\JoinMatcherInterface
-     */
     public function createJoinMatcher(): JoinMatcherInterface
     {
         return new JoinMatcher(
@@ -187,11 +157,6 @@ class AclEntityPersistenceFactory extends AbstractPersistenceFactory
         );
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\AclEntityMetadataConfigTransfer $aclEntityMetadataConfigTransfer
-     *
-     * @return \Spryker\Zed\AclEntity\Persistence\Propel\AclDirector\StrategyResolver\AclQueryScopeResolverInterface
-     */
     public function createAclQueryScopeResolver(
         AclEntityMetadataConfigTransfer $aclEntityMetadataConfigTransfer
     ): AclQueryScopeResolverInterface {
@@ -207,11 +172,6 @@ class AclEntityPersistenceFactory extends AbstractPersistenceFactory
         );
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\AclEntityMetadataConfigTransfer $aclEntityMetadataConfigTransfer
-     *
-     * @return \Spryker\Zed\AclEntity\Persistence\Propel\AclDirector\StrategyResolver\AclJoinResolverInterface
-     */
     public function createAclJoinResolver(
         AclEntityMetadataConfigTransfer $aclEntityMetadataConfigTransfer
     ): AclJoinResolverInterface {
@@ -224,11 +184,6 @@ class AclEntityPersistenceFactory extends AbstractPersistenceFactory
         );
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\AclEntityMetadataConfigTransfer $aclEntityMetadataConfigTransfer
-     *
-     * @return \Spryker\Zed\AclEntity\Persistence\Propel\AclDirector\Strategy\Join\AclJoinInterface
-     */
     public function createInnerAclJoin(
         AclEntityMetadataConfigTransfer $aclEntityMetadataConfigTransfer
     ): AclJoinInterface {
@@ -241,11 +196,6 @@ class AclEntityPersistenceFactory extends AbstractPersistenceFactory
         );
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\AclEntityMetadataConfigTransfer $aclEntityMetadataConfigTransfer
-     *
-     * @return \Spryker\Zed\AclEntity\Persistence\Propel\AclDirector\Strategy\Join\AclJoinInterface
-     */
     public function createLeftAclJoin(
         AclEntityMetadataConfigTransfer $aclEntityMetadataConfigTransfer
     ): AclJoinInterface {
@@ -258,11 +208,6 @@ class AclEntityPersistenceFactory extends AbstractPersistenceFactory
         );
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\AclEntityMetadataConfigTransfer $aclEntityMetadataConfigTransfer
-     *
-     * @return \Spryker\Zed\AclEntity\Persistence\Propel\AclDirector\Strategy\Join\AclJoinInterface
-     */
     public function createRightAclJoin(
         AclEntityMetadataConfigTransfer $aclEntityMetadataConfigTransfer
     ): AclJoinInterface {
@@ -275,11 +220,6 @@ class AclEntityPersistenceFactory extends AbstractPersistenceFactory
         );
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\AclEntityMetadataConfigTransfer $aclEntityMetadataConfigTransfer
-     *
-     * @return \Spryker\Zed\AclEntity\Persistence\Propel\AclDirector\StrategyResolver\AclModelScopeResolverInterface
-     */
     public function createAclModelScopeResolver(
         AclEntityMetadataConfigTransfer $aclEntityMetadataConfigTransfer
     ): AclModelScopeResolverInterface {
@@ -295,17 +235,11 @@ class AclEntityPersistenceFactory extends AbstractPersistenceFactory
         );
     }
 
-    /**
-     * @return \Spryker\Zed\AclEntity\Persistence\Propel\AclDirector\Strategy\Model\AclModelScopeInterface
-     */
     public function createGlobalAclModelScope(): AclModelScopeInterface
     {
         return new GlobalAclModelScope();
     }
 
-    /**
-     * @return \Spryker\Zed\AclEntity\Persistence\Propel\AclDirector\Strategy\Model\AclModelScopeInterface
-     */
     public function createSegmentAclModelScope(): AclModelScopeInterface
     {
         return new SegmentAclModelScope(
@@ -314,11 +248,6 @@ class AclEntityPersistenceFactory extends AbstractPersistenceFactory
         );
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\AclEntityMetadataConfigTransfer $aclEntityMetadataConfigTransfer
-     *
-     * @return \Spryker\Zed\AclEntity\Persistence\Propel\AclDirector\Strategy\Model\AclModelScopeInterface
-     */
     public function createDefaultAclModelScope(
         AclEntityMetadataConfigTransfer $aclEntityMetadataConfigTransfer
     ): AclModelScopeInterface {
@@ -327,11 +256,6 @@ class AclEntityPersistenceFactory extends AbstractPersistenceFactory
         );
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\AclEntityMetadataConfigTransfer $aclEntityMetadataConfigTransfer
-     *
-     * @return \Spryker\Zed\AclEntity\Persistence\Propel\AclDirector\Strategy\Model\AclModelScopeInterface
-     */
     public function createInheritedAclModelScope(
         AclEntityMetadataConfigTransfer $aclEntityMetadataConfigTransfer
     ): AclModelScopeInterface {
@@ -343,17 +267,11 @@ class AclEntityPersistenceFactory extends AbstractPersistenceFactory
         );
     }
 
-    /**
-     * @return \Spryker\Zed\AclEntity\Persistence\Propel\Mapper\AclEntitySegmentMapper
-     */
     public function createAclEntitySegmentMapper(): AclEntitySegmentMapper
     {
         return new AclEntitySegmentMapper();
     }
 
-    /**
-     * @return \Spryker\Zed\AclEntity\Persistence\Propel\Mapper\AclEntityRuleMapper
-     */
     public function createAclEntityRuleMapper(): AclEntityRuleMapper
     {
         return new AclEntityRuleMapper($this->getAclEntityService());
@@ -375,17 +293,11 @@ class AclEntityPersistenceFactory extends AbstractPersistenceFactory
         return SpyAclEntityRuleQuery::create();
     }
 
-    /**
-     * @return \Spryker\Zed\AclEntity\Persistence\Propel\AclDirector\Strategy\Query\AclQueryScopeInterface
-     */
     public function createGlobalScopeQueryDirector(): AclQueryScopeInterface
     {
         return new GlobalAclQueryScope();
     }
 
-    /**
-     * @return \Spryker\Zed\AclEntity\Persistence\Propel\AclDirector\Strategy\Query\AclQueryScopeInterface
-     */
     public function createSegmentScopeAclQueryDirector(): AclQueryScopeInterface
     {
         return new SegmentAclQueryScope(
@@ -394,11 +306,6 @@ class AclEntityPersistenceFactory extends AbstractPersistenceFactory
         );
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\AclEntityMetadataConfigTransfer $aclEntityMetadataConfigTransfer
-     *
-     * @return \Spryker\Zed\AclEntity\Persistence\Propel\AclDirector\Strategy\Query\AclQueryScopeInterface
-     */
     public function createInheritedScopeAclQueryDirector(
         AclEntityMetadataConfigTransfer $aclEntityMetadataConfigTransfer
     ): AclQueryScopeInterface {
@@ -416,22 +323,12 @@ class AclEntityPersistenceFactory extends AbstractPersistenceFactory
         );
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\AclEntityMetadataConfigTransfer $aclEntityMetadataConfigTransfer
-     *
-     * @return \Spryker\Zed\AclEntity\Persistence\Propel\AclDirector\Strategy\Query\AclQueryScopeInterface
-     */
     public function createDefaultScopeAclQueryDirector(
         AclEntityMetadataConfigTransfer $aclEntityMetadataConfigTransfer
     ): AclQueryScopeInterface {
         return new DefaultAclQueryScope($this->createAclEntityMetadataReader($aclEntityMetadataConfigTransfer));
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\AclEntityMetadataConfigTransfer $aclEntityMetadataConfigTransfer
-     *
-     * @return \Spryker\Zed\AclEntity\Persistence\Reader\AclEntityMetadataReaderInterface
-     */
     public function createAclEntityMetadataReader(
         AclEntityMetadataConfigTransfer $aclEntityMetadataConfigTransfer
     ): AclEntityMetadataReaderInterface {
@@ -441,11 +338,6 @@ class AclEntityPersistenceFactory extends AbstractPersistenceFactory
         );
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\AclEntityMetadataConfigTransfer $aclEntityMetadataConfigTransfer
-     *
-     * @return \Spryker\Zed\AclEntity\Persistence\Propel\Expander\AclQueryExpanderInterface
-     */
     public function createAclQueryExpander(AclEntityMetadataConfigTransfer $aclEntityMetadataConfigTransfer): AclQueryExpanderInterface
     {
         return new AclQueryExpander(
@@ -454,9 +346,6 @@ class AclEntityPersistenceFactory extends AbstractPersistenceFactory
         );
     }
 
-    /**
-     * @return \Spryker\Zed\AclEntity\Persistence\Propel\Expander\StrategyResolver\AclEntityConnectionResolverInterface
-     */
     public function createAclEntityConnectionResolver(): AclEntityConnectionResolverInterface
     {
         return new AclEntityConnectionResolver(
@@ -468,9 +357,6 @@ class AclEntityPersistenceFactory extends AbstractPersistenceFactory
         );
     }
 
-    /**
-     * @return \Spryker\Zed\AclEntity\Persistence\Propel\Expander\Strategy\AclEntityConnectionInterface
-     */
     public function createForeignKeyAclEntityConnection(): AclEntityConnectionInterface
     {
         return new ForeignKeyEntityConnection(
@@ -480,9 +366,6 @@ class AclEntityPersistenceFactory extends AbstractPersistenceFactory
         );
     }
 
-    /**
-     * @return \Spryker\Zed\AclEntity\Persistence\Propel\Expander\Strategy\AclEntityConnectionInterface
-     */
     public function createReferenceColumnAclEntityConnection(): AclEntityConnectionInterface
     {
         return new ReferenceColumnEntityConnection(
@@ -506,11 +389,6 @@ class AclEntityPersistenceFactory extends AbstractPersistenceFactory
         );
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\AclEntityMetadataConfigTransfer $aclEntityMetadataConfigTransfer
-     *
-     * @return \Spryker\Zed\AclEntity\Persistence\Propel\Reader\AclRelationReaderInterface
-     */
     public function createAclRelationReader(AclEntityMetadataConfigTransfer $aclEntityMetadataConfigTransfer): AclRelationReaderInterface
     {
         return new AclRelationReader(
@@ -519,9 +397,6 @@ class AclEntityPersistenceFactory extends AbstractPersistenceFactory
         );
     }
 
-    /**
-     * @return \Spryker\Zed\AclEntity\Persistence\Propel\Reader\StrategyResolver\AclEntityRelationResolverInterface
-     */
     public function createAclEntityRelationResolver(): AclEntityRelationResolverInterface
     {
         return new AclEntityRelationResolver(
@@ -533,9 +408,6 @@ class AclEntityPersistenceFactory extends AbstractPersistenceFactory
         );
     }
 
-    /**
-     * @return \Spryker\Zed\AclEntity\Persistence\Propel\Reader\Strategy\AclEntityRelationInterface
-     */
     public function createForeignKeyEntityRelation(): AclEntityRelationInterface
     {
         return new ForeignKeyEntityRelation($this->getPropelServiceContainer());
@@ -551,76 +423,46 @@ class AclEntityPersistenceFactory extends AbstractPersistenceFactory
         return new PivotTableEntityRelation($this->getPropelServiceContainer());
     }
 
-    /**
-     * @return \Spryker\Zed\AclEntity\Persistence\Propel\Reader\Strategy\AclEntityRelationInterface
-     */
     public function createReferenceColumnEntityRelation(): AclEntityRelationInterface
     {
         return new ReferenceColumnEntityRelation($this->getPropelServiceContainer());
     }
 
-    /**
-     * @return \Propel\Runtime\ServiceContainer\ServiceContainerInterface
-     */
     public function getPropelServiceContainer(): ServiceContainerInterface
     {
         return Propel::getServiceContainer();
     }
 
-    /**
-     * @return \Spryker\Zed\AclEntity\Persistence\Filter\AclEntityRuleCollectionTransferFilterInterface
-     */
     public function createAclEntityRuleCollectionTransferFilter(): AclEntityRuleCollectionTransferFilterInterface
     {
         return new AclEntityRuleCollectionTransferFilter();
     }
 
-    /**
-     * @return \Spryker\Zed\AclEntity\Persistence\Sorter\AclEntityRuleCollectionTransferSorterInterface
-     */
     public function createAclEntityRuleCollectionTransferSorter(): AclEntityRuleCollectionTransferSorterInterface
     {
         return new AclEntityRuleCollectionTransferTransferSorter($this->getConfig()->getScopePriority());
     }
 
-    /**
-     * @return \Spryker\Service\AclEntity\AclEntityServiceInterface
-     */
     public function getAclEntityService(): AclEntityServiceInterface
     {
         return $this->getProvidedDependency(AclEntityDependencyProvider::SERVICE_ACL_ENTITY);
     }
 
-    /**
-     * @param \Propel\Generator\Model\Table $baseTable
-     * @param \Propel\Generator\Model\Database $database
-     *
-     * @return \Spryker\Zed\AclEntity\Persistence\Propel\Builder\ConnectorTableBuilderInterface
-     */
     public function createConnectorTableBuilder(Table $baseTable, Database $database): ConnectorTableBuilderInterface
     {
         return new ConnectorTableBuilder($baseTable, $database, $this->getAclEntityService());
     }
 
-    /**
-     * @return \Spryker\Zed\AclEntity\Persistence\Propel\Provider\AclRoleProviderInterface
-     */
     public function getAclRoleProvider(): AclRoleProviderInterface
     {
         return AclRoleProvider::getInstance($this->getUserFacade(), $this->getAclFacade());
     }
 
-    /**
-     * @return \Spryker\Zed\AclEntity\Dependency\Facade\AclEntityToUserFacadeBridgeInterface
-     */
     protected function getUserFacade(): AclEntityToUserFacadeBridgeInterface
     {
         return $this->getProvidedDependency(AclEntityDependencyProvider::FACADE_USER);
     }
 
-    /**
-     * @return \Spryker\Zed\AclEntity\Dependency\Facade\AclEntityToAclFacadeBridgeInterface
-     */
     public function getAclFacade(): AclEntityToAclFacadeBridgeInterface
     {
         return $this->getProvidedDependency(AclEntityDependencyProvider::FACADE_ACL);

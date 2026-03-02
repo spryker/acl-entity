@@ -43,10 +43,6 @@ class SegmentAclQueryScope implements AclQueryScopeInterface
      */
     protected $aclEntityRuleCollectionTransferFilter;
 
-    /**
-     * @param \Spryker\Service\AclEntity\AclEntityServiceInterface $aclEntityService
-     * @param \Spryker\Zed\AclEntity\Persistence\Filter\AclEntityRuleCollectionTransferFilterInterface $aclEntityRuleCollectionTransferFilter
-     */
     public function __construct(
         AclEntityServiceInterface $aclEntityService,
         AclEntityRuleCollectionTransferFilterInterface $aclEntityRuleCollectionTransferFilter
@@ -55,11 +51,6 @@ class SegmentAclQueryScope implements AclQueryScopeInterface
         $this->aclEntityRuleCollectionTransferFilter = $aclEntityRuleCollectionTransferFilter;
     }
 
-    /**
-     * @param string $scope
-     *
-     * @return bool
-     */
     public function isSupported(string $scope): bool
     {
         return $scope === AclEntityConstants::SCOPE_SEGMENT;
@@ -203,11 +194,6 @@ class SegmentAclQueryScope implements AclQueryScopeInterface
         );
     }
 
-    /**
-     * @param \Propel\Runtime\Map\TableMap $segmentTableMap
-     *
-     * @return string
-     */
     protected function generateSegmentJoinCondition(TableMap $segmentTableMap): string
     {
         return sprintf(
@@ -216,13 +202,6 @@ class SegmentAclQueryScope implements AclQueryScopeInterface
         );
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\AclEntityRuleCollectionTransfer $aclEntityRuleCollectionTransfer
-     * @param string $entityClass
-     * @param int $operationMask
-     *
-     * @return \Generated\Shared\Transfer\AclEntityRuleCollectionTransfer
-     */
     protected function getFilteredAclEntityRules(
         AclEntityRuleCollectionTransfer $aclEntityRuleCollectionTransfer,
         string $entityClass,

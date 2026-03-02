@@ -13,11 +13,6 @@ use Propel\Runtime\ActiveQuery\ModelCriteria;
 
 interface AclEntityConnectionInterface
 {
-    /**
-     * @param \Generated\Shared\Transfer\AclEntityMetadataTransfer $aclEntityMetadataTransfer
-     *
-     * @return bool
-     */
     public function isSupported(AclEntityMetadataTransfer $aclEntityMetadataTransfer): bool;
 
     /**

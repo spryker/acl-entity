@@ -12,11 +12,6 @@ use Spryker\Zed\AclEntity\Business\Reader\AclEntityMetadataConfigReaderInterface
 
 class AclEntityMetadataConfigConsoleValidator implements AclEntityMetadataConfigConsoleValidatorInterface
 {
-    /**
-     * @param \Spryker\Zed\AclEntity\Business\Reader\AclEntityMetadataConfigReaderInterface $aclEntityMetadataConfigReader
-     * @param \Spryker\Zed\AclEntity\Business\Filter\AclEntityMetadataConfigFilterInterface $aclEntityMetadataConfigFilter
-     * @param \Spryker\Zed\AclEntity\Business\Validator\AclEntityMetadataConfigValidatorInterface $aclEntityMetadataConfigValidator
-     */
     public function __construct(
         protected AclEntityMetadataConfigReaderInterface $aclEntityMetadataConfigReader,
         protected AclEntityMetadataConfigFilterInterface $aclEntityMetadataConfigFilter,
@@ -24,9 +19,6 @@ class AclEntityMetadataConfigConsoleValidator implements AclEntityMetadataConfig
     ) {
     }
 
-    /**
-     * @return void
-     */
     public function validate(): void
     {
         $aclEntityMetadataConfigTransfer = $this->aclEntityMetadataConfigReader->getAclEntityMetadataConfig(false);

@@ -36,12 +36,6 @@ class InheritedAclModelScope implements AclModelScopeInterface
      */
     protected $segmentAclModelScope;
 
-    /**
-     * @param \Spryker\Zed\AclEntity\Persistence\Filter\AclEntityRuleCollectionTransferFilterInterface $aclEntityRuleCollectionTransferFilter
-     * @param \Spryker\Zed\AclEntity\Persistence\Propel\Reader\AclRelationReaderInterface $aclRelationReader
-     * @param \Spryker\Zed\AclEntity\Persistence\Reader\AclEntityMetadataReaderInterface $aclEntityMetadataReader
-     * @param \Spryker\Zed\AclEntity\Persistence\Propel\AclDirector\Strategy\Model\AclModelScopeInterface $segmentAclModelScope
-     */
     public function __construct(
         AclEntityRuleCollectionTransferFilterInterface $aclEntityRuleCollectionTransferFilter,
         AclRelationReaderInterface $aclRelationReader,
@@ -54,22 +48,11 @@ class InheritedAclModelScope implements AclModelScopeInterface
         $this->segmentAclModelScope = $segmentAclModelScope;
     }
 
-    /**
-     * @param string $scope
-     *
-     * @return bool
-     */
     public function isSupported(string $scope): bool
     {
         return $scope === AclEntityConstants::SCOPE_INHERITED;
     }
 
-    /**
-     * @param \Propel\Runtime\ActiveRecord\ActiveRecordInterface $entity
-     * @param \Generated\Shared\Transfer\AclEntityRuleCollectionTransfer $aclEntityRuleCollectionTransfer
-     *
-     * @return bool
-     */
     public function isCreatable(ActiveRecordInterface $entity, AclEntityRuleCollectionTransfer $aclEntityRuleCollectionTransfer): bool
     {
         foreach ($this->getGroupedAclEntityRulesByAclGroupId($aclEntityRuleCollectionTransfer) as $aclEntityRuleCollectionTransfer) {
@@ -87,12 +70,6 @@ class InheritedAclModelScope implements AclModelScopeInterface
         return false;
     }
 
-    /**
-     * @param \Propel\Runtime\ActiveRecord\ActiveRecordInterface $entity
-     * @param \Generated\Shared\Transfer\AclEntityRuleCollectionTransfer $aclEntityRuleCollectionTransfer
-     *
-     * @return bool
-     */
     public function isUpdatable(ActiveRecordInterface $entity, AclEntityRuleCollectionTransfer $aclEntityRuleCollectionTransfer): bool
     {
         foreach ($this->getGroupedAclEntityRulesByAclGroupId($aclEntityRuleCollectionTransfer) as $aclEntityRuleCollectionTransfer) {
@@ -113,12 +90,6 @@ class InheritedAclModelScope implements AclModelScopeInterface
         return false;
     }
 
-    /**
-     * @param \Propel\Runtime\ActiveRecord\ActiveRecordInterface $entity
-     * @param \Generated\Shared\Transfer\AclEntityRuleCollectionTransfer $aclEntityRuleCollectionTransfer
-     *
-     * @return bool
-     */
     public function isDeletable(ActiveRecordInterface $entity, AclEntityRuleCollectionTransfer $aclEntityRuleCollectionTransfer): bool
     {
         foreach ($this->getGroupedAclEntityRulesByAclGroupId($aclEntityRuleCollectionTransfer) as $aclEntityRuleCollectionTransfer) {
@@ -139,12 +110,6 @@ class InheritedAclModelScope implements AclModelScopeInterface
         return false;
     }
 
-    /**
-     * @param \Propel\Runtime\ActiveRecord\ActiveRecordInterface $entity
-     * @param \Generated\Shared\Transfer\AclEntityRuleCollectionTransfer $aclEntityRuleCollectionTransfer
-     *
-     * @return bool
-     */
     public function isReadable(ActiveRecordInterface $entity, AclEntityRuleCollectionTransfer $aclEntityRuleCollectionTransfer): bool
     {
         foreach ($this->getGroupedAclEntityRulesByAclGroupId($aclEntityRuleCollectionTransfer) as $aclEntityRuleCollectionTransfer) {
@@ -184,12 +149,6 @@ class InheritedAclModelScope implements AclModelScopeInterface
         return $result;
     }
 
-    /**
-     * @param \Propel\Runtime\ActiveRecord\ActiveRecordInterface $entity
-     * @param \Generated\Shared\Transfer\AclEntityRuleCollectionTransfer $aclEntityRuleCollectionTransfer
-     *
-     * @return \Propel\Runtime\ActiveRecord\ActiveRecordInterface|null
-     */
     protected function findReadableRoot(
         ActiveRecordInterface $entity,
         AclEntityRuleCollectionTransfer $aclEntityRuleCollectionTransfer
@@ -207,12 +166,6 @@ class InheritedAclModelScope implements AclModelScopeInterface
         return null;
     }
 
-    /**
-     * @param \Propel\Runtime\ActiveRecord\ActiveRecordInterface $relation
-     * @param \Generated\Shared\Transfer\AclEntityRuleCollectionTransfer $aclEntityRuleCollectionTransfer
-     *
-     * @return \Propel\Runtime\ActiveRecord\ActiveRecordInterface|null
-     */
     public function findRelationReadableRoot(
         ActiveRecordInterface $relation,
         AclEntityRuleCollectionTransfer $aclEntityRuleCollectionTransfer

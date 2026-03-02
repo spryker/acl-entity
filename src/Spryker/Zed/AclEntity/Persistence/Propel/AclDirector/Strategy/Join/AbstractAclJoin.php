@@ -53,13 +53,6 @@ abstract class AbstractAclJoin implements AclJoinInterface
      */
     protected $propelServiceContainer;
 
-    /**
-     * @param \Spryker\Zed\AclEntity\Persistence\Reader\AclEntityMetadataReaderInterface $aclEntityMetadataReader
-     * @param \Spryker\Zed\AclEntity\Persistence\Propel\AclDirector\StrategyResolver\AclQueryScopeResolverInterface $aclQueryScopeResolver
-     * @param \Spryker\Zed\AclEntity\Persistence\Propel\Expander\AclQueryExpanderInterface $aclQueryExpander
-     * @param \Spryker\Zed\AclEntity\Persistence\Propel\QueryMerger\AclEntityQueryMergerInterface $aclEntityQueryMerger
-     * @param \Propel\Runtime\ServiceContainer\ServiceContainerInterface $propelServiceContainer
-     */
     public function __construct(
         AclEntityMetadataReaderInterface $aclEntityMetadataReader,
         AclQueryScopeResolverInterface $aclQueryScopeResolver,
@@ -74,11 +67,6 @@ abstract class AbstractAclJoin implements AclJoinInterface
         $this->propelServiceContainer = $propelServiceContainer;
     }
 
-    /**
-     * @param string $tableName
-     *
-     * @return string
-     */
     protected function getModelClass(string $tableName): string
     {
         $class = $this->propelServiceContainer->getDatabaseMap()->getTable($tableName)->getClassNameOrFail();
@@ -96,11 +84,6 @@ abstract class AbstractAclJoin implements AclJoinInterface
         return PropelQuery::from($class);
     }
 
-    /**
-     * @param string $class
-     *
-     * @return bool
-     */
     protected function isSubEntity(string $class): bool
     {
         $aclEntityMetadata = $this->aclEntityMetadataReader->findAclEntityMetadataTransferForEntityClass($class);
@@ -177,11 +160,6 @@ abstract class AbstractAclJoin implements AclJoinInterface
         throw new SegmentTableJoinNotFoundException();
     }
 
-    /**
-     * @param \Propel\Runtime\ActiveQuery\Join $join
-     *
-     * @return bool
-     */
     protected function isAclEntitySegmentTableJoin(Join $join): bool
     {
         /** @var string $rightTableName */

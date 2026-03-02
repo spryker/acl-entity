@@ -16,9 +16,6 @@ class InvalidJoinTypeException extends AclEntityException
      */
     protected const MESSAGE_TEMPLATE = 'Unsupported join type given: %s. Use one of: %s';
 
-    /**
-     * @param string $joinType
-     */
     public function __construct(string $joinType)
     {
         $supportedJoinTypes = [

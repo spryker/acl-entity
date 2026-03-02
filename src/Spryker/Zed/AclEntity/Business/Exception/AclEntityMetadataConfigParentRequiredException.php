@@ -16,9 +16,6 @@ class AclEntityMetadataConfigParentRequiredException extends Exception
      */
     protected const MESSAGE_TEMPLATE = 'Acl entity metadata is invalid for %s. Parent is required for subEntity or Inherited scope rules.';
 
-    /**
-     * @param string $entity
-     */
     public function __construct(string $entity)
     {
         $message = sprintf(

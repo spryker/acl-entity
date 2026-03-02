@@ -18,19 +18,11 @@ class AclEntitySegmentConnectorValidator implements AclEntitySegmentConnectorVal
      */
     protected $aclEntityService;
 
-    /**
-     * @param \Spryker\Service\AclEntity\AclEntityServiceInterface $aclEntityService
-     */
     public function __construct(AclEntityServiceInterface $aclEntityService)
     {
         $this->aclEntityService = $aclEntityService;
     }
 
-    /**
-     * @param string $entity
-     *
-     * @return void
-     */
     public function validate(string $entity): void
     {
         $this->validateEntity($entity);

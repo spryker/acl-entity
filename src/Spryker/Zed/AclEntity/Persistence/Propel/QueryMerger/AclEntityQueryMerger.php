@@ -37,11 +37,6 @@ class AclEntityQueryMerger implements AclEntityQueryMergerInterface
      */
     protected $aclEntityService;
 
-    /**
-     * @param \Spryker\Zed\AclEntity\Persistence\Propel\Matcher\JoinMatcherInterface $joinMatcher
-     * @param \Spryker\Zed\AclEntity\Persistence\Propel\Generator\AclEntityAliasGeneratorInterface $queryAliasGenerator
-     * @param \Spryker\Service\AclEntity\AclEntityServiceInterface $aclEntityService
-     */
     public function __construct(
         JoinMatcherInterface $joinMatcher,
         AclEntityAliasGeneratorInterface $queryAliasGenerator,
@@ -124,11 +119,6 @@ class AclEntityQueryMerger implements AclEntityQueryMergerInterface
         return $this->aclEntityService->generateSegmentConnectorTableName($leftTableName) === $rightTableName;
     }
 
-    /**
-     * @param \Propel\Runtime\ActiveQuery\Join $join
-     *
-     * @return \Propel\Runtime\ActiveQuery\Join
-     */
     protected function rebuildJoinCondition(Join $join): Join
     {
         $clauses = $join->getJoinConditionOrFail()->getClauses();

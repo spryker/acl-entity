@@ -13,11 +13,6 @@ use Propel\Runtime\Collection\Collection;
 
 interface AclEntityRelationInterface
 {
-    /**
-     * @param \Generated\Shared\Transfer\AclEntityMetadataTransfer $aclEntityMetadataTransfer
-     *
-     * @return bool
-     */
     public function isSupported(AclEntityMetadataTransfer $aclEntityMetadataTransfer): bool;
 
     /**

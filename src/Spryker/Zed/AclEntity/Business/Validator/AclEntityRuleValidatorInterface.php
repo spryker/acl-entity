@@ -11,10 +11,5 @@ use Generated\Shared\Transfer\AclEntityRuleTransfer;
 
 interface AclEntityRuleValidatorInterface
 {
-    /**
-     * @param \Generated\Shared\Transfer\AclEntityRuleTransfer $aclEntityRuleTransfer
-     *
-     * @return void
-     */
     public function validate(AclEntityRuleTransfer $aclEntityRuleTransfer): void;
 }

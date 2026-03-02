@@ -42,9 +42,6 @@ class AclEntityQueryMergerTest extends Unit
      */
     protected $modelCriteriaSrcMock;
 
-    /**
-     * @return void
-     */
     protected function _before(): void
     {
         parent::_before();
@@ -81,9 +78,6 @@ class AclEntityQueryMergerTest extends Unit
         $this->modelCriteriaSrcMock->method('getTableMap')->willReturn($tableMap);
     }
 
-    /**
-     * @return void
-     */
     public function testMergeQueriesWithoutJoins(): void
     {
         // Arrange
@@ -97,9 +91,6 @@ class AclEntityQueryMergerTest extends Unit
         $this->merger->mergeQueries($this->modelCriteriaSrcMock, $modelCriteriaDst);
     }
 
-    /**
-     * @return void
-     */
     public function testMergeQueriesWithAddingNewJoin(): void
     {
         // Arrange
@@ -124,9 +115,6 @@ class AclEntityQueryMergerTest extends Unit
         $this->merger->mergeQueries($this->modelCriteriaSrcMock, $modelCriteriaDst);
     }
 
-    /**
-     * @return void
-     */
     public function testMergeQueriesWithMergeDuplicatedJoins(): void
     {
         // Arrange
@@ -154,9 +142,6 @@ class AclEntityQueryMergerTest extends Unit
         $this->merger->mergeQueries($this->modelCriteriaSrcMock, $modelCriteriaDstMock);
     }
 
-    /**
-     * @return void
-     */
     public function testMergeQueriesWithoutMergeDuplicatedJoins(): void
     {
         // Arrange
@@ -184,9 +169,6 @@ class AclEntityQueryMergerTest extends Unit
         $this->merger->mergeQueries($this->modelCriteriaSrcMock, $modelCriteriaDst);
     }
 
-    /**
-     * @return void
-     */
     public function testMergeQueryMalfunctedJoinException(): void
     {
         // Arrange

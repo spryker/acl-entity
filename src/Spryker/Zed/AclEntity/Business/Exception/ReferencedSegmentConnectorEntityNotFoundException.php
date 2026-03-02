@@ -16,9 +16,6 @@ class ReferencedSegmentConnectorEntityNotFoundException extends Exception
      */
     protected const MESSAGE_TEMPLATE = 'Segment connector was not found for %s referenced entity class.';
 
-    /**
-     * @param string $entity
-     */
     public function __construct(string $entity)
     {
         $message = sprintf(

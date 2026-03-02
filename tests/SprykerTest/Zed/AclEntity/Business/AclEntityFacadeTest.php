@@ -68,9 +68,6 @@ class AclEntityFacadeTest extends Unit
      */
     protected $aclEntitySegmentTransfer;
 
-    /**
-     * @return void
-     */
     protected function setUp(): void
     {
         parent::setUp();
@@ -82,9 +79,6 @@ class AclEntityFacadeTest extends Unit
         $this->roleTransfer = $this->tester->haveRole([RoleTransfer::NAME => static::ACL_ROLE_TEST_NAME]);
     }
 
-    /**
-     * @return void
-     */
     public function testGetAclEntityMetadataConfigReturnsAclEntityMetadataConfigTransfer(): void
     {
         // Arrange
@@ -97,9 +91,6 @@ class AclEntityFacadeTest extends Unit
         $this->assertInstanceOf(AclEntityMetadataConfigTransfer::class, $aclEntityMetadataConfigTransfer);
     }
 
-    /**
-     * @return void
-     */
     public function testExpandAclRolesExpandsAclRoleWithAclEntityRule(): void
     {
         // Arrange
@@ -121,9 +112,6 @@ class AclEntityFacadeTest extends Unit
         $this->assertCount(1, $rolesTransfer->getRoles()->getIterator()->current()->getAclEntityRules());
     }
 
-    /**
-     * @return void
-     */
     public function testSaveAclRulesSuccess(): void
     {
         // Arrange
@@ -148,9 +136,6 @@ class AclEntityFacadeTest extends Unit
         $this->assertSame(2, $this->tester->getAclRulesCount($this->roleTransfer->getIdAclRoleOrFail()));
     }
 
-    /**
-     * @return void
-     */
     public function testSaveAclRulesThrowsAclEntityRuleReferencedEntityNotFoundException(): void
     {
         // Arrange
@@ -169,9 +154,6 @@ class AclEntityFacadeTest extends Unit
         $this->tester->getFacade()->saveAclEntityRules($aclEntityRuleTransfers);
     }
 
-    /**
-     * @return void
-     */
     public function testSaveAclRulesThrowsInheritedScopeCanNotBeAssignedException(): void
     {
         // Arrange
@@ -190,9 +172,6 @@ class AclEntityFacadeTest extends Unit
         $this->tester->getFacade()->saveAclEntityRules($aclEntityRuleTransfers);
     }
 
-    /**
-     * @return void
-     */
     public function testSaveAclRulesThrowsDuplicatedAclEntityRuleException(): void
     {
         // Arrange
@@ -220,9 +199,6 @@ class AclEntityFacadeTest extends Unit
         $this->tester->getFacade()->saveAclEntityRules($aclEntityRuleTransfers);
     }
 
-    /**
-     * @return void
-     */
     public function testCreateAclEntitySegmentMerchantSuccess(): void
     {
         $reference = static::TEST_MERCHANT_REFERENCE;
@@ -245,9 +221,6 @@ class AclEntityFacadeTest extends Unit
         $this->assertCount(3, $aclEntitySegmentMerchants);
     }
 
-    /**
-     * @return void
-     */
     public function testCreateAclEntitySegmentMerchantWrongMerchantIdException(): void
     {
         $reference = static::TEST_MERCHANT_REFERENCE;
@@ -265,9 +238,6 @@ class AclEntityFacadeTest extends Unit
         $this->tester->getFacade()->createAclEntitySegment($aclEntitySegmentRequestTransfer);
     }
 
-    /**
-     * @return void
-     */
     public function testCreateAclEntitySegmentThrowsAclEntityReferencedSegmentConnectorEntityException(): void
     {
         $reference = static::TEST_MERCHANT_REFERENCE;
@@ -285,9 +255,6 @@ class AclEntityFacadeTest extends Unit
         $this->tester->getFacade()->createAclEntitySegment($aclEntitySegmentRequestTransfer);
     }
 
-    /**
-     * @return void
-     */
     public function testCreateAclEntitySegmentThrowsAclEntitySegmentConnectorEntityNotFoundException(): void
     {
         $reference = static::TEST_MERCHANT_REFERENCE;
@@ -305,9 +272,6 @@ class AclEntityFacadeTest extends Unit
         $this->tester->getFacade()->createAclEntitySegment($aclEntitySegmentRequestTransfer);
     }
 
-    /**
-     * @return void
-     */
     public function testGetAclEntityMetadataConfigThrowsInvalidKeyExceptionWhenRuntimeValidationEnabled(): void
     {
         // Arrange
@@ -322,9 +286,6 @@ class AclEntityFacadeTest extends Unit
         $this->tester->getFacade()->getAclEntityMetadataConfig();
     }
 
-    /**
-     * @return void
-     */
     public function testGetAclEntityMetadataConfigSkipsValidationWhenRuntimeValidationDisabled(): void
     {
         // Arrange
@@ -340,9 +301,6 @@ class AclEntityFacadeTest extends Unit
         $this->assertInstanceOf(AclEntityMetadataConfigTransfer::class, $result);
     }
 
-    /**
-     * @return void
-     */
     public function testValidateAclEntityMetadataConfigSucceedsWithValidConfig(): void
     {
         // Arrange
@@ -354,9 +312,6 @@ class AclEntityFacadeTest extends Unit
         $this->tester->getFacade()->validateAclEntityMetadataConfig();
     }
 
-    /**
-     * @return void
-     */
     public function testValidateAclEntityMetadataConfigThrowsExceptionWithInvalidKey(): void
     {
         // Arrange
@@ -370,9 +325,6 @@ class AclEntityFacadeTest extends Unit
         $this->tester->getFacade()->validateAclEntityMetadataConfig();
     }
 
-    /**
-     * @return void
-     */
     public function testValidateAclEntityMetadataConfigThrowsExceptionWithWrongParentEntity(): void
     {
         // Arrange

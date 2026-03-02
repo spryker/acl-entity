@@ -12,12 +12,6 @@ use Generated\Shared\Transfer\AclEntityMetadataConfigTransfer;
 
 interface AclEntityMetadataConfigReaderInterface
 {
-    /**
-     * @param bool $runValidation
-     * @param \Generated\Shared\Transfer\AclEntityMetadataConfigRequestTransfer|null $aclEntityMetadataConfigRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\AclEntityMetadataConfigTransfer
-     */
     public function getAclEntityMetadataConfig(
         bool $runValidation = true,
         ?AclEntityMetadataConfigRequestTransfer $aclEntityMetadataConfigRequestTransfer = null

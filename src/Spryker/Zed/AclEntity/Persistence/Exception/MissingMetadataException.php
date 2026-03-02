@@ -11,19 +11,11 @@ use Exception;
 
 class MissingMetadataException extends Exception
 {
-    /**
-     * @param string $entityClass
-     */
     public function __construct(string $entityClass)
     {
         parent::__construct($this->buildMessage($entityClass));
     }
 
-    /**
-     * @param string $entityClass
-     *
-     * @return string
-     */
     protected function buildMessage(string $entityClass): string
     {
         return sprintf(

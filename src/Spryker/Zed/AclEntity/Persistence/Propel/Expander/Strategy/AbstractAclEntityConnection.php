@@ -43,11 +43,6 @@ abstract class AbstractAclEntityConnection
      */
     protected $propelServiceContainer;
 
-    /**
-     * @param \Spryker\Zed\AclEntity\Persistence\Propel\Matcher\JoinMatcherInterface $joinMatcher
-     * @param \Spryker\Zed\AclEntity\Persistence\Propel\Generator\AclEntityAliasGeneratorInterface $queryAliasGenerator
-     * @param \Propel\Runtime\ServiceContainer\ServiceContainerInterface $propelServiceContainer
-     */
     public function __construct(
         JoinMatcherInterface $joinMatcher,
         AclEntityAliasGeneratorInterface $queryAliasGenerator,
@@ -128,11 +123,6 @@ abstract class AbstractAclEntityConnection
         return $query;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\AclEntityMetadataTransfer $aclEntityMetadataTransfer
-     *
-     * @return string
-     */
     protected function getParentRelationName(AclEntityMetadataTransfer $aclEntityMetadataTransfer): string
     {
         $relationName = $this->getShortClassName(
@@ -245,12 +235,6 @@ abstract class AbstractAclEntityConnection
         throw new RelationNotFoundException($entityClass, $parentClass);
     }
 
-    /**
-     * @param string $class
-     * @param string $relationClass
-     *
-     * @return \Propel\Runtime\Map\RelationMap|null
-     */
     protected function findRelation(string $class, string $relationClass): ?RelationMap
     {
         $relations = Propel::getServiceContainer()->getDatabaseMap()->getTableByPhpName($class)->getRelations();
@@ -295,32 +279,16 @@ abstract class AbstractAclEntityConnection
         return $join;
     }
 
-    /**
-     * @param string $relatedClass
-     *
-     * @return string
-     */
     protected function getShortClassName(string $relatedClass): string
     {
         return basename(str_replace('\\', '/', $relatedClass));
     }
 
-    /**
-     * @param string $entityClass
-     *
-     * @return \Propel\Runtime\Map\TableMap
-     */
     protected function getTableMapByEntityClass(string $entityClass): TableMap
     {
         return $this->propelServiceContainer->getDatabaseMap()->getTableByPhpName($entityClass);
     }
 
-    /**
-     * @param \Propel\Runtime\ActiveQuery\ModelCriteria $query
-     * @param string $leftTableName
-     *
-     * @return string|null
-     */
     protected function findLeftTableJoinAlias(ModelCriteria $query, string $leftTableName): ?string
     {
         $tableAliases = array_filter($query->getAliases(), function (string $tableName, string $tableAlias) use ($leftTableName) {
@@ -334,11 +302,6 @@ abstract class AbstractAclEntityConnection
         return array_key_last($tableAliases);
     }
 
-    /**
-     * @param string $tableAlias
-     *
-     * @return bool
-     */
     protected function isAclJoinAlias(string $tableAlias): bool
     {
         return preg_match(static::PATTERN_ACL_TABLE_JOIN_ALIAS, $tableAlias) === 1;

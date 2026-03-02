@@ -20,11 +20,6 @@ class ReferenceColumnEntityConnection extends AbstractAclEntityConnection implem
      */
     protected const JOIN_COLUMN_TEMPLATE = '%s.%s';
 
-    /**
-     * @param \Generated\Shared\Transfer\AclEntityMetadataTransfer $aclEntityMetadataTransfer
-     *
-     * @return bool
-     */
     public function isSupported(AclEntityMetadataTransfer $aclEntityMetadataTransfer): bool
     {
         $parentConnectionMetadataTransfer = $aclEntityMetadataTransfer->getParentOrFail()->getConnection();

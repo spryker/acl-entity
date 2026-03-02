@@ -12,10 +12,5 @@ use Spryker\Zed\AclEntity\Persistence\Propel\Reader\Strategy\AclEntityRelationIn
 
 interface AclEntityRelationResolverInterface
 {
-    /**
-     * @param \Generated\Shared\Transfer\AclEntityMetadataTransfer $aclEntityMetadataTransfer
-     *
-     * @return \Spryker\Zed\AclEntity\Persistence\Propel\Reader\Strategy\AclEntityRelationInterface
-     */
     public function resolve(AclEntityMetadataTransfer $aclEntityMetadataTransfer): AclEntityRelationInterface;
 }

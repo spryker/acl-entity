@@ -13,11 +13,6 @@ use Spryker\Shared\AclEntity\AclEntityConstants;
 
 class GlobalAclQueryScope implements AclQueryScopeInterface
 {
-    /**
-     * @param string $scope
-     *
-     * @return bool
-     */
     public function isSupported(string $scope): bool
     {
         return $scope === AclEntityConstants::SCOPE_GLOBAL;

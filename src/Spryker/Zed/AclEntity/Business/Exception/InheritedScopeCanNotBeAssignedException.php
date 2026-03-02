@@ -16,9 +16,6 @@ class InheritedScopeCanNotBeAssignedException extends Exception
      */
     protected const MESSAGE_TEMPLATE = 'Scope inherited rule can not be assigned to %s entity.';
 
-    /**
-     * @param string $entity
-     */
     public function __construct(string $entity)
     {
         $message = sprintf(

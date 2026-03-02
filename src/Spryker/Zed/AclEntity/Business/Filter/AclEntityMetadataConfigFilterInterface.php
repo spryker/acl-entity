@@ -11,10 +11,5 @@ use Generated\Shared\Transfer\AclEntityMetadataConfigTransfer;
 
 interface AclEntityMetadataConfigFilterInterface
 {
-    /**
-     * @param \Generated\Shared\Transfer\AclEntityMetadataConfigTransfer $aclEntityMetadataConfigTransfer
-     *
-     * @return \Generated\Shared\Transfer\AclEntityMetadataConfigTransfer
-     */
     public function filter(AclEntityMetadataConfigTransfer $aclEntityMetadataConfigTransfer): AclEntityMetadataConfigTransfer;
 }

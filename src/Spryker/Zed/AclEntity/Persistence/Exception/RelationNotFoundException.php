@@ -14,10 +14,6 @@ class RelationNotFoundException extends AclEntityException
      */
     protected const MESSAGE_TEMPLATE = 'Failed to find relation "%s" for "%s"';
 
-    /**
-     * @param string $relation
-     * @param string $class
-     */
     public function __construct(string $relation, string $class)
     {
         parent::__construct(sprintf(static::MESSAGE_TEMPLATE, $relation, $class));

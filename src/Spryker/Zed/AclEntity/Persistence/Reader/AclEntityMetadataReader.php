@@ -24,10 +24,6 @@ class AclEntityMetadataReader implements AclEntityMetadataReaderInterface
      */
     protected $defaultGlobalOperationMask;
 
-    /**
-     * @param \Generated\Shared\Transfer\AclEntityMetadataConfigTransfer $aclEntityMetadataConfig
-     * @param int $defaultGlobalOperationMask
-     */
     public function __construct(
         AclEntityMetadataConfigTransfer $aclEntityMetadataConfig,
         int $defaultGlobalOperationMask
@@ -36,11 +32,6 @@ class AclEntityMetadataReader implements AclEntityMetadataReaderInterface
         $this->defaultGlobalOperationMask = $defaultGlobalOperationMask;
     }
 
-    /**
-     * @param string $entityClass
-     *
-     * @return \Generated\Shared\Transfer\AclEntityMetadataTransfer|null
-     */
     public function findAclEntityMetadataTransferForEntityClass(string $entityClass): ?AclEntityMetadataTransfer
     {
         $aclEntityMetadataCollection = $this->aclEntityMetadataConfig->getAclEntityMetadataCollectionOrFail()->getCollection();
@@ -48,11 +39,6 @@ class AclEntityMetadataReader implements AclEntityMetadataReaderInterface
         return $aclEntityMetadataCollection[$entityClass] ?? null;
     }
 
-    /**
-     * @param string $entitySubClass
-     *
-     * @return \Generated\Shared\Transfer\AclEntityMetadataTransfer|null
-     */
     public function findRootAclEntityMetadataTransferForEntitySubClass(string $entitySubClass): ?AclEntityMetadataTransfer
     {
         $aclEntityMetadataTransfer = $this->findAclEntityMetadataTransferForEntityClass($entitySubClass);
@@ -69,11 +55,6 @@ class AclEntityMetadataReader implements AclEntityMetadataReaderInterface
         return $aclEntityMetadataTransfer && $aclEntityMetadataTransfer->getIsSubEntity() ? null : $aclEntityMetadataTransfer;
     }
 
-    /**
-     * @param string $entityClass
-     *
-     * @return \Generated\Shared\Transfer\AclEntityMetadataTransfer|null
-     */
     public function findRootAclEntityMetadataTransferForEntityClass(string $entityClass): ?AclEntityMetadataTransfer
     {
         $aclEntityMetadataTransfer = $this->findAclEntityMetadataTransferForEntityClass($entityClass);
@@ -163,11 +144,6 @@ class AclEntityMetadataReader implements AclEntityMetadataReaderInterface
         return $aclEntityMetadataTransfer;
     }
 
-    /**
-     * @param string $entityClass
-     *
-     * @return int
-     */
     public function getDefaultOperationMaskForEntityClass(string $entityClass): int
     {
         $aclEntityMetadataCollection = $this->aclEntityMetadataConfig->getAclEntityMetadataCollectionOrFail()->getCollection();
@@ -182,11 +158,6 @@ class AclEntityMetadataReader implements AclEntityMetadataReaderInterface
         return $aclEntityMetadataTransfer->getDefaultGlobalOperationMask() ?? $this->defaultGlobalOperationMask;
     }
 
-    /**
-     * @param string $entityClass
-     *
-     * @return bool
-     */
     public function isAllowListItem(string $entityClass): bool
     {
         return in_array($entityClass, $this->aclEntityMetadataConfig->getAclEntityAllowList());

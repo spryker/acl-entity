@@ -18,11 +18,6 @@ use Propel\Runtime\Collection\Collection;
  */
 class PivotTableEntityRelation extends AbstractAclEntityRelation implements AclEntityRelationInterface
 {
-    /**
-     * @param \Generated\Shared\Transfer\AclEntityMetadataTransfer $aclEntityMetadataTransfer
-     *
-     * @return bool
-     */
     public function isSupported(AclEntityMetadataTransfer $aclEntityMetadataTransfer): bool
     {
         $aclEntityParentConnectionMetadataTransfer = $aclEntityMetadataTransfer->getParentOrFail()->getConnection();
@@ -65,9 +60,6 @@ class PivotTableEntityRelation extends AbstractAclEntityRelation implements AclE
             ->find();
     }
 
-    /**
-     * @return string
-     */
     protected function getDeprecationMessage(): string
     {
         return sprintf(

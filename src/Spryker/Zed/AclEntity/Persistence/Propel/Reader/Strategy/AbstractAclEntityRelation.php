@@ -22,9 +22,6 @@ class AbstractAclEntityRelation
      */
     protected $propelServiceContainer;
 
-    /**
-     * @param \Propel\Runtime\ServiceContainer\ServiceContainerInterface $propelServiceContainer
-     */
     public function __construct(ServiceContainerInterface $propelServiceContainer)
     {
         $this->propelServiceContainer = $propelServiceContainer;
@@ -62,21 +59,11 @@ class AbstractAclEntityRelation
         return PropelQuery::from($entityClass);
     }
 
-    /**
-     * @param string $relatedClass
-     *
-     * @return string
-     */
     protected function getShortClassName(string $relatedClass): string
     {
         return basename(str_replace('\\', '/', $relatedClass));
     }
 
-    /**
-     * @param string $entityClass
-     *
-     * @return \Propel\Runtime\Map\TableMap
-     */
     protected function getTableMapByEntityClass(string $entityClass): TableMap
     {
         return $this->propelServiceContainer->getDatabaseMap()->getTableByPhpName($entityClass);

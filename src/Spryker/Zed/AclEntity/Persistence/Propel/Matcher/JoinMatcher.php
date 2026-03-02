@@ -17,9 +17,6 @@ class JoinMatcher implements JoinMatcherInterface
      */
     protected JoinComparatorInterface $comparator;
 
-    /**
-     * @param \Spryker\Zed\AclEntity\Persistence\Propel\Comparator\JoinComparatorInterface $comparator
-     */
     public function __construct(JoinComparatorInterface $comparator)
     {
         $this->comparator = $comparator;

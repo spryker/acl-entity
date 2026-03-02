@@ -16,9 +16,6 @@ class AclEntityMetadataConfigInvalidKeyException extends Exception
      */
     protected const MESSAGE_TEMPLATE = 'Acl entity metadata config key is not valid for %s entity.';
 
-    /**
-     * @param string $entity
-     */
     public function __construct(string $entity)
     {
         $message = sprintf(

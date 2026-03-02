@@ -56,15 +56,6 @@ class AclQueryDirector implements AclQueryDirectorInterface
      */
     protected $aclModelDirector;
 
-    /**
-     * @param \Spryker\Zed\AclEntity\Persistence\Propel\AclDirector\AclJoinDirectorInterface $aclJoinDirector
-     * @param \Spryker\Zed\AclEntity\Persistence\Propel\Provider\AclEntityRuleProviderInterface $aclEntityRuleProvider
-     * @param \Spryker\Zed\AclEntity\Persistence\Propel\AclDirector\StrategyResolver\AclQueryScopeResolverInterface $aclQueryScopeResolver
-     * @param \Spryker\Zed\AclEntity\Persistence\Reader\AclEntityMetadataReaderInterface $aclEntityMetadataReader
-     * @param \Spryker\Zed\AclEntity\Persistence\Propel\Expander\AclQueryExpanderInterface $aclQueryExpander
-     * @param \Spryker\Zed\AclEntity\Persistence\Propel\QueryMerger\AclEntityQueryMergerInterface $aclQueryMerger
-     * @param \Spryker\Zed\AclEntity\Persistence\Propel\AclDirector\AclModelDirectorInterface $aclModelDirector
-     */
     public function __construct(
         AclJoinDirectorInterface $aclJoinDirector,
         AclEntityRuleProviderInterface $aclEntityRuleProvider,

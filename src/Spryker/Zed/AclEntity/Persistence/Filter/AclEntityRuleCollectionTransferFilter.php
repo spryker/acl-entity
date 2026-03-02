@@ -14,12 +14,6 @@ use Spryker\Shared\AclEntity\AclEntityConstants;
 
 class AclEntityRuleCollectionTransferFilter implements AclEntityRuleCollectionTransferFilterInterface
 {
-    /**
-     * @param \Generated\Shared\Transfer\AclEntityRuleCollectionTransfer $aclEntityRuleCollectionTransfer
-     * @param string $scope
-     *
-     * @return \Generated\Shared\Transfer\AclEntityRuleCollectionTransfer
-     */
     public function filterByScope(
         AclEntityRuleCollectionTransfer $aclEntityRuleCollectionTransfer,
         string $scope
@@ -35,12 +29,6 @@ class AclEntityRuleCollectionTransferFilter implements AclEntityRuleCollectionTr
             ->setAclEntityRules(new ArrayObject($filteredAclEntityRuleTransfers));
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\AclEntityRuleCollectionTransfer $aclEntityRuleCollectionTransfer
-     * @param string $entityClass
-     *
-     * @return \Generated\Shared\Transfer\AclEntityRuleCollectionTransfer
-     */
     public function filterByEntityClass(
         AclEntityRuleCollectionTransfer $aclEntityRuleCollectionTransfer,
         string $entityClass
@@ -59,13 +47,6 @@ class AclEntityRuleCollectionTransferFilter implements AclEntityRuleCollectionTr
             ->setAclEntityRules(new ArrayObject($filteredAclEntityRuleTransfers));
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\AclEntityRuleCollectionTransfer $aclEntityRuleCollectionTransfer
-     * @param string $scope
-     * @param string $entityClass
-     *
-     * @return \Generated\Shared\Transfer\AclEntityRuleCollectionTransfer
-     */
     public function filterByScopeAndEntityClass(
         AclEntityRuleCollectionTransfer $aclEntityRuleCollectionTransfer,
         string $scope,
@@ -83,14 +64,6 @@ class AclEntityRuleCollectionTransferFilter implements AclEntityRuleCollectionTr
             ->setAclEntityRules(new ArrayObject($filteredAclEntityRuleTransfers));
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\AclEntityRuleCollectionTransfer $aclEntityRuleCollectionTransfer
-     * @param string $scope
-     * @param string $entityClass
-     * @param int $permissionMask
-     *
-     * @return \Generated\Shared\Transfer\AclEntityRuleCollectionTransfer
-     */
     public function filterByScopeEntityClassAndPermissionMask(
         AclEntityRuleCollectionTransfer $aclEntityRuleCollectionTransfer,
         string $scope,
@@ -110,13 +83,6 @@ class AclEntityRuleCollectionTransferFilter implements AclEntityRuleCollectionTr
             ->setAclEntityRules(new ArrayObject($filteredAclEntityRuleTransfers));
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\AclEntityRuleCollectionTransfer $aclEntityRuleCollectionTransfer
-     * @param string $entityClass
-     * @param int $permissionMask
-     *
-     * @return \Generated\Shared\Transfer\AclEntityRuleCollectionTransfer
-     */
     public function filterByEntityClassAndPermissionMask(
         AclEntityRuleCollectionTransfer $aclEntityRuleCollectionTransfer,
         string $entityClass,
@@ -134,12 +100,6 @@ class AclEntityRuleCollectionTransferFilter implements AclEntityRuleCollectionTr
             ->setAclEntityRules(new ArrayObject($filteredAclEntityRuleTransfers));
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\AclEntityRuleCollectionTransfer $aclEntityRuleCollectionTransfer
-     * @param int $permissionMask
-     *
-     * @return \Generated\Shared\Transfer\AclEntityRuleCollectionTransfer
-     */
     public function filterByPermissionMask(
         AclEntityRuleCollectionTransfer $aclEntityRuleCollectionTransfer,
         int $permissionMask

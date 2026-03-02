@@ -16,10 +16,6 @@ class DuplicatedAclEntityRuleException extends Exception
      */
     protected const MESSAGE_TEMPLATE = 'Acl entity rule is duplicated for %s entity, %s role id.';
 
-    /**
-     * @param string $entity
-     * @param int $idRole
-     */
     public function __construct(string $entity, int $idRole)
     {
         $message = sprintf(

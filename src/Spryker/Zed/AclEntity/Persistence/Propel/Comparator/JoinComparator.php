@@ -11,12 +11,6 @@ use Propel\Runtime\ActiveQuery\Join;
 
 class JoinComparator implements JoinComparatorInterface
 {
-    /**
-     * @param \Propel\Runtime\ActiveQuery\Join $join1
-     * @param \Propel\Runtime\ActiveQuery\Join $join2
-     *
-     * @return bool
-     */
     public function areEqual(Join $join1, Join $join2): bool
     {
         return $this->areSameJoinTypes($join1, $join2)
@@ -27,12 +21,6 @@ class JoinComparator implements JoinComparatorInterface
             && $this->areSameConditions($join1, $join2);
     }
 
-    /**
-     * @param \Propel\Runtime\ActiveQuery\Join $join1
-     * @param \Propel\Runtime\ActiveQuery\Join $join2
-     *
-     * @return bool
-     */
     protected function areSameJoinTypes(Join $join1, Join $join2): bool
     {
         if ($join1->getJoinType() === $join2->getJoinType()) {
@@ -42,34 +30,16 @@ class JoinComparator implements JoinComparatorInterface
         return $this->isInnerJoin($join1) && $this->isInnerJoin($join2);
     }
 
-    /**
-     * @param \Propel\Runtime\ActiveQuery\Join $join1
-     * @param \Propel\Runtime\ActiveQuery\Join $join2
-     *
-     * @return bool
-     */
     protected function areSameLeftTables(Join $join1, Join $join2): bool
     {
         return $join1->getLeftTableName() === $join2->getLeftTableName();
     }
 
-    /**
-     * @param \Propel\Runtime\ActiveQuery\Join $join1
-     * @param \Propel\Runtime\ActiveQuery\Join $join2
-     *
-     * @return bool
-     */
     protected function areSameRightTables(Join $join1, Join $join2): bool
     {
         return $join1->getRightTableName() === $join2->getRightTableName();
     }
 
-    /**
-     * @param \Propel\Runtime\ActiveQuery\Join $join1
-     * @param \Propel\Runtime\ActiveQuery\Join $join2
-     *
-     * @return bool
-     */
     protected function areSameLeftColumns(Join $join1, Join $join2): bool
     {
         if (count($join1->getLeftColumns()) !== count($join2->getLeftColumns())) {
@@ -84,12 +54,6 @@ class JoinComparator implements JoinComparatorInterface
         return true;
     }
 
-    /**
-     * @param \Propel\Runtime\ActiveQuery\Join $join1
-     * @param \Propel\Runtime\ActiveQuery\Join $join2
-     *
-     * @return bool
-     */
     protected function areSameRightColumns(Join $join1, Join $join2): bool
     {
         if (count($join1->getRightColumns()) !== count($join2->getRightColumns())) {
@@ -104,22 +68,11 @@ class JoinComparator implements JoinComparatorInterface
         return true;
     }
 
-    /**
-     * @param \Propel\Runtime\ActiveQuery\Join $join
-     *
-     * @return bool
-     */
     protected function isInnerJoin(Join $join): bool
     {
         return in_array($join->getJoinType(), [null, Join::INNER_JOIN]);
     }
 
-    /**
-     * @param \Propel\Runtime\ActiveQuery\Join $join1
-     * @param \Propel\Runtime\ActiveQuery\Join $join2
-     *
-     * @return bool
-     */
     protected function areSameConditions(Join $join1, Join $join2): bool
     {
         if (count($join1->getConditions()) !== count($join2->getConditions())) {

@@ -20,11 +20,6 @@ use Spryker\Zed\Kernel\Persistence\AbstractEntityManager;
  */
 class AclEntityEntityManager extends AbstractEntityManager implements AclEntityEntityManagerInterface
 {
-    /**
-     * @param \Generated\Shared\Transfer\AclEntitySegmentRequestTransfer $aclEntitySegmentRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\AclEntitySegmentTransfer
-     */
     public function createAclEntitySegment(AclEntitySegmentRequestTransfer $aclEntitySegmentRequestTransfer): AclEntitySegmentTransfer
     {
         $aclEntitySegmentMapper = $this->getFactory()
@@ -41,11 +36,6 @@ class AclEntityEntityManager extends AbstractEntityManager implements AclEntityE
         return $aclEntitySegmentMapper->mapAclEntitySegmentEntityToTransfer($aclEntitySegmentEntity, new AclEntitySegmentTransfer());
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\AclEntitySegmentTransfer $aclEntitySegmentTransfer
-     *
-     * @return \Generated\Shared\Transfer\AclEntitySegmentTransfer
-     */
     public function updateAclEntitySegment(AclEntitySegmentTransfer $aclEntitySegmentTransfer): AclEntitySegmentTransfer
     {
         /** @var \Orm\Zed\AclEntity\Persistence\SpyAclEntitySegment $aclEntitySegmentEntity */
@@ -66,11 +56,6 @@ class AclEntityEntityManager extends AbstractEntityManager implements AclEntityE
             ->mapAclEntitySegmentEntityToTransfer($aclEntitySegmentEntity, $aclEntitySegmentTransfer);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\AclEntityRuleRequestTransfer $aclEntityRuleRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\AclEntityRuleTransfer
-     */
     public function createAclEntityRule(AclEntityRuleRequestTransfer $aclEntityRuleRequestTransfer): AclEntityRuleTransfer
     {
         $aclEntityRuleMapper = $this->getFactory()
@@ -85,11 +70,6 @@ class AclEntityEntityManager extends AbstractEntityManager implements AclEntityE
             ->mapAclEntityRuleEntityToAclEntityRuleTransfer($aclEntityRuleEntity, new AclEntityRuleTransfer());
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\AclEntitySegmentRequestTransfer $aclEntitySegmentRequestTransfer
-     *
-     * @return void
-     */
     protected function createAclEntitySegmentRelations(AclEntitySegmentRequestTransfer $aclEntitySegmentRequestTransfer): void
     {
         $entityName = $aclEntitySegmentRequestTransfer->getEntity();

@@ -76,11 +76,6 @@ class InheritedAclQueryScope implements AclQueryScopeInterface
         $this->queryScopes = $queryScopes;
     }
 
-    /**
-     * @param string $scope
-     *
-     * @return bool
-     */
     public function isSupported(string $scope): bool
     {
         return $scope === AclEntityConstants::SCOPE_INHERITED;
@@ -126,12 +121,6 @@ class InheritedAclQueryScope implements AclQueryScopeInterface
         return $this->applyParentAclEntityRulesOnSelectQuery($query, $parentAclEntityRules);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\AclEntityMetadataTransfer $aclEntityMetadataTransfer
-     * @param \Generated\Shared\Transfer\AclEntityRuleCollectionTransfer $aclEntityRuleCollectionTransfer
-     *
-     * @return bool
-     */
     protected function hasReadableGlobalScopeParent(
         AclEntityMetadataTransfer $aclEntityMetadataTransfer,
         AclEntityRuleCollectionTransfer $aclEntityRuleCollectionTransfer
@@ -145,12 +134,6 @@ class InheritedAclQueryScope implements AclQueryScopeInterface
         return $readableGlobalScopeParentAclEntityMetadata !== null;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\AclEntityMetadataTransfer $aclEntityMetadataTransfer
-     * @param \Generated\Shared\Transfer\AclEntityRuleCollectionTransfer $aclEntityRuleCollectionTransfer
-     *
-     * @return \Generated\Shared\Transfer\AclEntityMetadataTransfer|null
-     */
     protected function findReadableSegmentScopeParentMetadata(
         AclEntityMetadataTransfer $aclEntityMetadataTransfer,
         AclEntityRuleCollectionTransfer $aclEntityRuleCollectionTransfer
@@ -162,13 +145,6 @@ class InheritedAclQueryScope implements AclQueryScopeInterface
         );
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\AclEntityMetadataTransfer $aclEntityMetadataTransfer
-     * @param \Generated\Shared\Transfer\AclEntityRuleCollectionTransfer $aclEntityRuleCollectionTransfer
-     * @param string $scope
-     *
-     * @return \Generated\Shared\Transfer\AclEntityMetadataTransfer|null
-     */
     protected function findReadableParentMetadataByScope(
         AclEntityMetadataTransfer $aclEntityMetadataTransfer,
         AclEntityRuleCollectionTransfer $aclEntityRuleCollectionTransfer,
@@ -211,13 +187,6 @@ class InheritedAclQueryScope implements AclQueryScopeInterface
         return null;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\AclEntityRuleCollectionTransfer|null $currentAclEntityRuleCollectionTransfer
-     * @param \Generated\Shared\Transfer\AclEntityRuleCollectionTransfer $aclEntityRuleCollectionTransfer
-     * @param \Generated\Shared\Transfer\AclEntityMetadataTransfer $parentAclEntityMetadataTransfer
-     *
-     * @return \Generated\Shared\Transfer\AclEntityRuleCollectionTransfer
-     */
     protected function extendAclEntityRuleCollection(
         ?AclEntityRuleCollectionTransfer $currentAclEntityRuleCollectionTransfer,
         AclEntityRuleCollectionTransfer $aclEntityRuleCollectionTransfer,
@@ -307,13 +276,6 @@ class InheritedAclQueryScope implements AclQueryScopeInterface
         );
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\AclEntityRuleCollectionTransfer $aclEntityRuleCollectionTransfer
-     * @param \Generated\Shared\Transfer\AclEntityMetadataTransfer $aclEntityMetadataTransfer
-     * @param int $permissionMask
-     *
-     * @return \Spryker\Zed\AclEntity\Persistence\Propel\AclDirector\Strategy\Query\AclQueryScopeInterface
-     */
     protected function getAclQueryScope(
         AclEntityRuleCollectionTransfer $aclEntityRuleCollectionTransfer,
         AclEntityMetadataTransfer $aclEntityMetadataTransfer,
@@ -384,17 +346,11 @@ class InheritedAclQueryScope implements AclQueryScopeInterface
         return $result;
     }
 
-    /**
-     * @return \Spryker\Zed\AclEntity\Persistence\Propel\AclDirector\Strategy\Query\AclQueryScopeInterface
-     */
     protected function getDefaultAclQueryScope(): AclQueryScopeInterface
     {
         return $this->getAclQueryScopeByName(AclEntityConstants::SCOPE_DEFAULT);
     }
 
-    /**
-     * @return \Spryker\Zed\AclEntity\Persistence\Propel\AclDirector\Strategy\Query\AclQueryScopeInterface
-     */
     protected function getSegmentAclQueryScope(): AclQueryScopeInterface
     {
         return $this->getAclQueryScopeByName(AclEntityConstants::SCOPE_SEGMENT);

@@ -27,19 +27,11 @@ class DefaultAclQueryScope implements AclQueryScopeInterface
      */
     protected $aclEntityMetadataReader;
 
-    /**
-     * @param \Spryker\Zed\AclEntity\Persistence\Reader\AclEntityMetadataReaderInterface $aclEntityMetadataReader
-     */
     public function __construct(AclEntityMetadataReaderInterface $aclEntityMetadataReader)
     {
         $this->aclEntityMetadataReader = $aclEntityMetadataReader;
     }
 
-    /**
-     * @param string $scope
-     *
-     * @return bool
-     */
     public function isSupported(string $scope): bool
     {
         return $scope === AclEntityConstants::SCOPE_DEFAULT;

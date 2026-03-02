@@ -33,10 +33,6 @@ class AclRoleProvider implements AclRoleProviderInterface
      */
     protected static $cache;
 
-    /**
-     * @param \Spryker\Zed\AclEntity\Dependency\Facade\AclEntityToUserFacadeBridgeInterface $userFacade
-     * @param \Spryker\Zed\AclEntity\Dependency\Facade\AclEntityToAclFacadeBridgeInterface $aclFacade
-     */
     final protected function __construct(
         AclEntityToUserFacadeBridgeInterface $userFacade,
         AclEntityToAclFacadeBridgeInterface $aclFacade
@@ -45,12 +41,6 @@ class AclRoleProvider implements AclRoleProviderInterface
         static::$aclFacade = $aclFacade;
     }
 
-    /**
-     * @param \Spryker\Zed\AclEntity\Dependency\Facade\AclEntityToUserFacadeBridgeInterface $userFacade
-     * @param \Spryker\Zed\AclEntity\Dependency\Facade\AclEntityToAclFacadeBridgeInterface $aclFacade
-     *
-     * @return \Spryker\Zed\AclEntity\Persistence\Propel\Provider\AclRoleProviderInterface
-     */
     public static function getInstance(
         AclEntityToUserFacadeBridgeInterface $userFacade,
         AclEntityToAclFacadeBridgeInterface $aclFacade
@@ -62,9 +52,6 @@ class AclRoleProvider implements AclRoleProviderInterface
         return static::$instance;
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\RolesTransfer
-     */
     public function getCurrentUserAclRoles(): RolesTransfer
     {
         if (!static::$cache) {

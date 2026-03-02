@@ -19,9 +19,6 @@ use Spryker\Zed\Kernel\Communication\AbstractCommunicationFactory;
  */
 class AclEntityCommunicationFactory extends AbstractCommunicationFactory
 {
-    /**
-     * @return \Spryker\Zed\AclEntity\Communication\Mapper\AclEntityMapperInterface
-     */
     public function createAclEntityMapper(): AclEntityMapperInterface
     {
         return new AclEntityMapper();

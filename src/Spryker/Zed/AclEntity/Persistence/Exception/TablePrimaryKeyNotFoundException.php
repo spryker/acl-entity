@@ -14,9 +14,6 @@ class TablePrimaryKeyNotFoundException extends AclEntityException
      */
     protected const MESSAGE_TEMPLATE = 'Failed to find table primary key: %s';
 
-    /**
-     * @param string $table
-     */
     public function __construct(string $table)
     {
         parent::__construct(sprintf(static::MESSAGE_TEMPLATE, $table));

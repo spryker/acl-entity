@@ -11,11 +11,6 @@ use Generated\Shared\Transfer\AclEntityRuleCollectionTransfer;
 
 interface AclEntityRuleCollectionTransferSorterInterface
 {
-    /**
-     * @param \Generated\Shared\Transfer\AclEntityRuleCollectionTransfer $aclEntityRuleCollectionTransfer
-     *
-     * @return \Generated\Shared\Transfer\AclEntityRuleCollectionTransfer
-     */
     public function sortByScopePriority(
         AclEntityRuleCollectionTransfer $aclEntityRuleCollectionTransfer
     ): AclEntityRuleCollectionTransfer;

@@ -30,9 +30,6 @@ class AclEntityServiceTester extends Actor
 {
     use _generated\AclEntityServiceTesterActions;
 
-    /**
-     * @return \Spryker\Service\AclEntity\AclEntityServiceInterface
-     */
     public function getAclEntityService(): AclEntityServiceInterface
     {
         return $this->getLocator()->aclEntity()->service();

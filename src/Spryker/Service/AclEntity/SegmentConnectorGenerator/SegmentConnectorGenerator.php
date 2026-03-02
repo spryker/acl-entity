@@ -69,11 +69,6 @@ class SegmentConnectorGenerator implements SegmentConnectorGeneratorInterface
      */
     protected const TABLE_PREFIX_DEFAULT = 'spy_';
 
-    /**
-     * @param string $baseTableName
-     *
-     * @return string
-     */
     public function generateConnectorTableName(string $baseTableName): string
     {
         return sprintf(
@@ -83,21 +78,11 @@ class SegmentConnectorGenerator implements SegmentConnectorGeneratorInterface
         );
     }
 
-    /**
-     * @param string $connectorTableName
-     *
-     * @return string
-     */
     public function generateConnectorTableIdColumnName(string $connectorTableName): string
     {
         return sprintf(static::CONNECTOR_TABLE_ID_COLUMN_NAME_TEMPLATE, $this->purifyTableName($connectorTableName));
     }
 
-    /**
-     * @param string $baseClass
-     *
-     * @return string
-     */
     public function generateConnectorClassName(string $baseClass): string
     {
         $baseClassShort = basename(str_replace('\\', '/', $baseClass));
@@ -110,11 +95,6 @@ class SegmentConnectorGenerator implements SegmentConnectorGeneratorInterface
         );
     }
 
-    /**
-     * @param string $baseClassName
-     *
-     * @return string
-     */
     public function generateConnectorRelationName(string $baseClassName): string
     {
         return sprintf(
@@ -124,11 +104,6 @@ class SegmentConnectorGenerator implements SegmentConnectorGeneratorInterface
         );
     }
 
-    /**
-     * @param string $baseClass
-     *
-     * @return string
-     */
     public function generateConnectorGetter(string $baseClass): string
     {
         return sprintf(
@@ -138,11 +113,6 @@ class SegmentConnectorGenerator implements SegmentConnectorGeneratorInterface
         );
     }
 
-    /**
-     * @param string $baseClass
-     *
-     * @return string
-     */
     public function generateConnectorReferenceGetter(string $baseClass): string
     {
         $propertyName = $this->generateShortClassName($this->purifyClassName($baseClass));
@@ -153,11 +123,6 @@ class SegmentConnectorGenerator implements SegmentConnectorGeneratorInterface
         return sprintf(static::CONNECTOR_REFERENCE_GETTER_TEMPLATE, $propertyName);
     }
 
-    /**
-     * @param string $baseClass
-     *
-     * @return string
-     */
     public function generateConnectorReferenceSetter(string $baseClass): string
     {
         $propertyName = $this->generateShortClassName($this->purifyClassName($baseClass));
@@ -168,12 +133,6 @@ class SegmentConnectorGenerator implements SegmentConnectorGeneratorInterface
         return sprintf(static::CONNECTOR_REFERENCE_SETTER_TEMPLATE, $propertyName);
     }
 
-    /**
-     * @param string $referencedTableName
-     * @param string $referencedColumnName
-     *
-     * @return string
-     */
     public function generateSegmentConnectorTableUniqueConstraintName(string $referencedTableName, string $referencedColumnName): string
     {
         $referencedTableName = $this->purifyTableName($referencedTableName);
@@ -185,11 +144,6 @@ class SegmentConnectorGenerator implements SegmentConnectorGeneratorInterface
         );
     }
 
-    /**
-     * @param string $referencedTableName
-     *
-     * @return string
-     */
     public function generateConnectorReferenceColumnName(string $referencedTableName): string
     {
         $referencedTableName = $this->purifyTableName($referencedTableName);
@@ -197,21 +151,11 @@ class SegmentConnectorGenerator implements SegmentConnectorGeneratorInterface
         return sprintf(static::CONNECTOR_REFERENCE_COLUMN_TEMPLATE, $referencedTableName);
     }
 
-    /**
-     * @param string $baseClass
-     *
-     * @return string
-     */
     protected function generateShortClassName(string $baseClass): string
     {
         return basename(str_replace('\\', '/', $baseClass));
     }
 
-    /**
-     * @param string $baseClass
-     *
-     * @return string
-     */
     protected function purifyClassName(string $baseClass): string
     {
         if (strpos($baseClass, static::ENTITY_PREFIX_DEFAULT) === 0) {
@@ -221,11 +165,6 @@ class SegmentConnectorGenerator implements SegmentConnectorGeneratorInterface
         return $baseClass;
     }
 
-    /**
-     * @param string $tableName
-     *
-     * @return string
-     */
     protected function purifyTableName(string $tableName): string
     {
         if (strpos($tableName, static::TABLE_PREFIX_DEFAULT) === 0) {

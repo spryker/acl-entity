@@ -11,11 +11,5 @@ use Propel\Runtime\ActiveQuery\Join;
 
 interface JoinComparatorInterface
 {
-    /**
-     * @param \Propel\Runtime\ActiveQuery\Join $join1
-     * @param \Propel\Runtime\ActiveQuery\Join $join2
-     *
-     * @return bool
-     */
     public function areEqual(Join $join1, Join $join2): bool;
 }

@@ -14,11 +14,6 @@ use Spryker\Zed\AclEntityExtension\Dependency\Plugin\AclEntityMetadataConfigExpa
 
 class AclEntityMetadataConfigWithWrongEntityExpanderPluginMock implements AclEntityMetadataConfigExpanderPluginInterface
 {
-    /**
-     * @param \Generated\Shared\Transfer\AclEntityMetadataConfigTransfer $aclEntityMetadataConfigTransfer
-     *
-     * @return \Generated\Shared\Transfer\AclEntityMetadataConfigTransfer
-     */
     public function expand(
         AclEntityMetadataConfigTransfer $aclEntityMetadataConfigTransfer
     ): AclEntityMetadataConfigTransfer {

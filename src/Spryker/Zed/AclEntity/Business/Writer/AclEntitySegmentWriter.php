@@ -31,11 +31,6 @@ class AclEntitySegmentWriter implements AclEntitySegmentWriterInterface
      */
     protected $aclEntitySegmentConnectorValidator;
 
-    /**
-     * @param \Spryker\Zed\AclEntity\Persistence\AclEntityEntityManagerInterface $aclEntityEntityManager
-     * @param \Spryker\Service\AclEntity\AclEntityServiceInterface $aclEntityService
-     * @param \Spryker\Zed\AclEntity\Business\Validator\AclEntitySegmentConnectorValidatorInterface $aclEntitySegmentConnectorValidator
-     */
     public function __construct(
         AclEntityEntityManagerInterface $aclEntityEntityManager,
         AclEntityServiceInterface $aclEntityService,
@@ -46,11 +41,6 @@ class AclEntitySegmentWriter implements AclEntitySegmentWriterInterface
         $this->aclEntitySegmentConnectorValidator = $aclEntitySegmentConnectorValidator;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\AclEntitySegmentRequestTransfer $aclEntitySegmentRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\AclEntitySegmentResponseTransfer
-     */
     public function create(AclEntitySegmentRequestTransfer $aclEntitySegmentRequestTransfer): AclEntitySegmentResponseTransfer
     {
         /** @var string $entity */

@@ -36,27 +36,16 @@ class AclEntityBusinessTester extends Actor
 {
     use _generated\AclEntityBusinessTesterActions;
 
-    /**
-     * @return void
-     */
     public function ensureAclEntityRuleDatabaseIsEmpty(): void
     {
         $this->ensureDatabaseTableIsEmpty($this->getAclEntityRuleQuery());
     }
 
-    /**
-     * @return void
-     */
     public function ensureAclRoleDatabaseIsEmpty(): void
     {
         $this->ensureDatabaseTableIsEmpty($this->getAclRoleQuery());
     }
 
-    /**
-     * @param int $idAclRole
-     *
-     * @return int
-     */
     public function getAclRulesCount(int $idAclRole): int
     {
         return $this->getAclEntityRuleQuery()->findByFkAclRole($idAclRole)->count();
@@ -72,41 +61,26 @@ class AclEntityBusinessTester extends Actor
         return $this->getAclEntitySegmentMerchantQuery()->findByFkAclEntitySegment($idEntitySegment);
     }
 
-    /**
-     * @return void
-     */
     public function ensureAclEntitySegmentDatabaseIsEmpty(): void
     {
         $this->ensureDatabaseTableIsEmpty($this->getAclEntitySegmentQuery());
     }
 
-    /**
-     * @return \Orm\Zed\AclEntity\Persistence\SpyAclEntityRuleQuery
-     */
     protected function getAclEntityRuleQuery(): SpyAclEntityRuleQuery
     {
         return SpyAclEntityRuleQuery::create();
     }
 
-    /**
-     * @return \Orm\Zed\Merchant\Persistence\SpyAclEntitySegmentMerchantQuery
-     */
     protected function getAclEntitySegmentMerchantQuery(): SpyAclEntitySegmentMerchantQuery
     {
         return SpyAclEntitySegmentMerchantQuery::create();
     }
 
-    /**
-     * @return \Orm\Zed\AclEntity\Persistence\SpyAclEntitySegmentQuery
-     */
     protected function getAclEntitySegmentQuery(): SpyAclEntitySegmentQuery
     {
         return SpyAclEntitySegmentQuery::create();
     }
 
-    /**
-     * @return \Orm\Zed\Acl\Persistence\SpyAclRoleQuery
-     */
     protected function getAclRoleQuery(): SpyAclRoleQuery
     {
         return SpyAclRoleQuery::create();

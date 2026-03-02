@@ -31,11 +31,6 @@ class AclJoinDirector implements AclJoinDirectorInterface
      */
     protected $propelServiceContainer;
 
-    /**
-     * @param \Spryker\Zed\AclEntity\Persistence\Propel\AclDirector\StrategyResolver\AclJoinResolverInterface $aclJoinResolver
-     * @param \Spryker\Zed\AclEntity\Persistence\Reader\AclEntityMetadataReaderInterface $aclEntityMetadataReader
-     * @param \Propel\Runtime\ServiceContainer\ServiceContainerInterface $propelServiceContainer
-     */
     public function __construct(
         AclJoinResolverInterface $aclJoinResolver,
         AclEntityMetadataReaderInterface $aclEntityMetadataReader,
@@ -78,11 +73,6 @@ class AclJoinDirector implements AclJoinDirectorInterface
         return $query;
     }
 
-    /**
-     * @param string $table
-     *
-     * @return string
-     */
     protected function getModelClass(string $table): string
     {
         $class = $this->propelServiceContainer->getDatabaseMap()->getTable($table)->getClassNameOrFail();

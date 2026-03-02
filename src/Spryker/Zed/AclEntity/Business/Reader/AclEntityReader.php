@@ -29,9 +29,6 @@ class AclEntityReader implements AclEntityReaderInterface
         $this->aclEntityDisablerPlugins = $aclEntityDisablerPlugins;
     }
 
-    /**
-     * @return bool
-     */
     public function isActive(): bool
     {
         $isActive = $this->isAclEntityActive;

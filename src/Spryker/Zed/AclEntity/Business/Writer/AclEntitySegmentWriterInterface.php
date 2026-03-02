@@ -12,10 +12,5 @@ use Generated\Shared\Transfer\AclEntitySegmentResponseTransfer;
 
 interface AclEntitySegmentWriterInterface
 {
-    /**
-     * @param \Generated\Shared\Transfer\AclEntitySegmentRequestTransfer $aclEntitySegmentRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\AclEntitySegmentResponseTransfer
-     */
     public function create(AclEntitySegmentRequestTransfer $aclEntitySegmentRequestTransfer): AclEntitySegmentResponseTransfer;
 }

@@ -25,11 +25,6 @@ class AclEntityRuleCollectionTransferTransferSorter implements AclEntityRuleColl
         $this->scopePriority = $scopePriority;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\AclEntityRuleCollectionTransfer $aclEntityRuleCollectionTransfer
-     *
-     * @return \Generated\Shared\Transfer\AclEntityRuleCollectionTransfer
-     */
     public function sortByScopePriority(
         AclEntityRuleCollectionTransfer $aclEntityRuleCollectionTransfer
     ): AclEntityRuleCollectionTransfer {

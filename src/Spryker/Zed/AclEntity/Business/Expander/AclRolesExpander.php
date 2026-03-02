@@ -20,19 +20,11 @@ class AclRolesExpander implements AclRolesExpanderInterface
      */
     protected $aclEntityRepository;
 
-    /**
-     * @param \Spryker\Zed\AclEntity\Persistence\AclEntityRepositoryInterface $aclEntityRepository
-     */
     public function __construct(AclEntityRepositoryInterface $aclEntityRepository)
     {
         $this->aclEntityRepository = $aclEntityRepository;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\RolesTransfer $rolesTransfer
-     *
-     * @return \Generated\Shared\Transfer\RolesTransfer
-     */
     public function expandAclRoles(RolesTransfer $rolesTransfer): RolesTransfer
     {
         $aclEntityRuleCollection = $this->aclEntityRepository->getAclEntityRulesByRoles($rolesTransfer);
@@ -48,12 +40,6 @@ class AclRolesExpander implements AclRolesExpanderInterface
         return $rolesTransfer->setRoles($expandedRoleTransfers);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\AclEntityRuleCollectionTransfer $aclEntityRuleCollection
-     * @param \Generated\Shared\Transfer\RoleTransfer $roleTransfer
-     *
-     * @return \Generated\Shared\Transfer\RoleTransfer
-     */
     protected function expandRoleTransferWithAclEntityRules(
         AclEntityRuleCollectionTransfer $aclEntityRuleCollection,
         RoleTransfer $roleTransfer

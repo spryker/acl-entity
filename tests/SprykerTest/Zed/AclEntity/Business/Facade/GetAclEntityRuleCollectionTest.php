@@ -56,9 +56,6 @@ class GetAclEntityRuleCollectionTest extends Unit
      */
     protected $roleTransfer;
 
-    /**
-     * @return void
-     */
     protected function setUp(): void
     {
         parent::setUp();
@@ -69,9 +66,6 @@ class GetAclEntityRuleCollectionTest extends Unit
         $this->roleTransfer = $this->tester->haveRole([RoleTransfer::NAME => static::ACL_ROLE_TEST_NAME]);
     }
 
-    /**
-     * @return void
-     */
     public function testReturnsCorrectAclEntityRuleByIdAclEntityRule(): void
     {
         // Arrange
@@ -96,9 +90,6 @@ class GetAclEntityRuleCollectionTest extends Unit
         $this->assertSameAclEntityRuleTransfer($aclEntityRuleTransfer, $aclEntityRuleCollectionTransfer->getAclEntityRules()->getIterator()->current());
     }
 
-    /**
-     * @return void
-     */
     public function testReturnsCorrectAclEntityRuleByIdAclEntitySegment(): void
     {
         // Arrange
@@ -131,9 +122,6 @@ class GetAclEntityRuleCollectionTest extends Unit
         $this->assertSameAclEntityRuleTransfer($aclEntityRuleTransfer, $aclEntityRuleCollectionTransfer->getAclEntityRules()->getIterator()->current());
     }
 
-    /**
-     * @return void
-     */
     public function testReturnsCorrectAclEntityRuleByIdAclRole(): void
     {
         // Arrange
@@ -157,9 +145,6 @@ class GetAclEntityRuleCollectionTest extends Unit
         $this->assertSameAclEntityRuleTransfer($aclEntityRuleTransfer, $aclEntityRuleCollectionTransfer->getAclEntityRules()->getIterator()->current());
     }
 
-    /**
-     * @return void
-     */
     public function testReturnsCorrectAclEntityRuleByEntity(): void
     {
         // Arrange
@@ -184,9 +169,6 @@ class GetAclEntityRuleCollectionTest extends Unit
         $this->assertSameAclEntityRuleTransfer($aclEntityRuleTransfer, $aclEntityRuleCollectionTransfer->getAclEntityRules()->getIterator()->current());
     }
 
-    /**
-     * @return void
-     */
     public function testReturnsCorrectAclEntityRuleByPermissionMask(): void
     {
         // Arrange
@@ -211,9 +193,6 @@ class GetAclEntityRuleCollectionTest extends Unit
         $this->assertSameAclEntityRuleTransfer($aclEntityRuleTransfer, $aclEntityRuleCollectionTransfer->getAclEntityRules()->getIterator()->current());
     }
 
-    /**
-     * @return void
-     */
     public function testReturnsCorrectAclEntityRuleByScope(): void
     {
         // Arrange
@@ -236,9 +215,6 @@ class GetAclEntityRuleCollectionTest extends Unit
         $this->assertSameAclEntityRuleTransfer($aclEntityRuleTransfer, $aclEntityRuleCollectionTransfer->getAclEntityRules()->getIterator()->current());
     }
 
-    /**
-     * @return void
-     */
     public function testReturnsAclEntityRulesPaginatedByLimitAndOffset(): void
     {
         // Arrange
@@ -273,9 +249,6 @@ class GetAclEntityRuleCollectionTest extends Unit
         $this->assertSameAclEntityRuleTransfer($aclEntityRuleTransfer2, $aclEntityRuleCollectionTransfer->getAclEntityRules()->getIterator()->current());
     }
 
-    /**
-     * @return void
-     */
     public function testReturnsAclEntityRulesPaginatedByPageAndMaxPerPage(): void
     {
         // Arrange
@@ -324,9 +297,6 @@ class GetAclEntityRuleCollectionTest extends Unit
         $this->assertSame(1, $paginationTransfer->getPreviousPageOrFail());
     }
 
-    /**
-     * @return void
-     */
     public function testReturnsAclEntityRulesSortedByEntityFieldDesc(): void
     {
         // Arrange
@@ -361,9 +331,6 @@ class GetAclEntityRuleCollectionTest extends Unit
         $this->assertSameAclEntityRuleTransfer($aclEntityRuleTransfer1, $aclEntityRuleCollectionTransfer->getAclEntityRules()->getIterator()->current());
     }
 
-    /**
-     * @return void
-     */
     public function testReturnsAclEntityRulesSortedByEntityFieldAsc(): void
     {
         // Arrange

@@ -31,9 +31,6 @@ use Spryker\Zed\AclEntity\Business\Validator\AclEntityMetadataConfigValidator;
  */
 class AclEntityMetadataConfigConsoleValidatorTest extends Unit
 {
-    /**
-     * @return void
-     */
     public function testValidateSucceedsWithValidConfig(): void
     {
         // Arrange
@@ -53,9 +50,6 @@ class AclEntityMetadataConfigConsoleValidatorTest extends Unit
         $consoleValidator->validate();
     }
 
-    /**
-     * @return void
-     */
     public function testValidateThrowsExceptionWithInvalidKey(): void
     {
         // Arrange
@@ -93,9 +87,6 @@ class AclEntityMetadataConfigConsoleValidatorTest extends Unit
         return $readerMock;
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\AclEntityMetadataConfigTransfer
-     */
     protected function createValidAclEntityMetadataConfigTransfer(): AclEntityMetadataConfigTransfer
     {
         return (new AclEntityMetadataConfigTransfer())
@@ -109,9 +100,6 @@ class AclEntityMetadataConfigConsoleValidatorTest extends Unit
             );
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\AclEntityMetadataConfigTransfer
-     */
     protected function createInvalidKeyAclEntityMetadataConfigTransfer(): AclEntityMetadataConfigTransfer
     {
         return (new AclEntityMetadataConfigTransfer())

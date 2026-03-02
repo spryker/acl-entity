@@ -41,9 +41,6 @@ class AclEntityBehavior extends Behavior
      */
     protected const ACTION_DELETE = 'Delete';
 
-    /**
-     * @return string
-     */
     public function objectMethods(): string
     {
         $script = '';
@@ -52,9 +49,6 @@ class AclEntityBehavior extends Behavior
         return $script;
     }
 
-    /**
-     * @return string
-     */
     public function queryMethods(): string
     {
         $script = '';
@@ -64,49 +58,31 @@ class AclEntityBehavior extends Behavior
         return $script;
     }
 
-    /**
-     * @return string
-     */
     public function preUpdate(): string
     {
         return $this->renderTemplate('modelPreHook', ['action' => static::ACTION_UPDATE]);
     }
 
-    /**
-     * @return string
-     */
     public function preInsert(): string
     {
         return $this->renderTemplate('modelPreHook', ['action' => static::ACTION_CREATE]);
     }
 
-    /**
-     * @return string
-     */
     public function preSelectQuery(): string
     {
         return $this->renderTemplate('queryPreHook', ['action' => static::ACTION_SELECT]);
     }
 
-    /**
-     * @return string
-     */
     public function preUpdateQuery(): string
     {
         return $this->renderTemplate('queryPreHook', ['action' => static::ACTION_UPDATE]);
     }
 
-    /**
-     * @return string
-     */
     public function preDeleteQuery(): string
     {
         return $this->renderTemplate('queryPreHook', ['action' => static::ACTION_DELETE]);
     }
 
-    /**
-     * @return void
-     */
     public function modifyTable(): void
     {
         $aclEntityMetadataConfigTransfer = $this->getAclEntityFacade()->getAclEntityMetadataConfig(false);
@@ -136,41 +112,26 @@ class AclEntityBehavior extends Behavior
         }
     }
 
-    /**
-     * @return string
-     */
     protected function addGetPersistenceFactoryMethod(): string
     {
         return $this->renderTemplate('objectGetAclPersistenceFactory');
     }
 
-    /**
-     * @return string
-     */
     protected function addIsSegmentQueryMethod(): string
     {
         return $this->renderTemplate('queryIsSegmentQuery');
     }
 
-    /**
-     * @return string
-     */
     protected function getEntityName(): string
     {
         return sprintf('%s\%s', $this->getTableOrFail()->getNamespace(), $this->getTableOrFail()->getPhpName());
     }
 
-    /**
-     * @return \Spryker\Zed\AclEntity\Business\AclEntityFacadeInterface
-     */
     protected function getAclEntityFacade(): AclEntityFacadeInterface
     {
         return Locator::getInstance()->aclEntity()->facade();
     }
 
-    /**
-     * @return \Spryker\Zed\AclEntity\Persistence\AclEntityPersistenceFactory
-     */
     protected function getAclEntityPersistenceFactory(): AclEntityPersistenceFactory
     {
         /** @var \Spryker\Zed\AclEntity\Persistence\AclEntityPersistenceFactory $aclEntityPersistenceFactory */

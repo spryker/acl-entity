@@ -9,8 +9,5 @@ namespace Spryker\Zed\AclEntity\Business\Reader;
 
 interface AclEntityReaderInterface
 {
-    /**
-     * @return bool
-     */
     public function isActive(): bool;
 }

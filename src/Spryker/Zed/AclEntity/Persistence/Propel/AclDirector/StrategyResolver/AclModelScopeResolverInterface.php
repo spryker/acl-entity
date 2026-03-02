@@ -13,13 +13,6 @@ use Spryker\Zed\AclEntity\Persistence\Propel\AclDirector\Strategy\Model\AclModel
 
 interface AclModelScopeResolverInterface
 {
-    /**
-     * @param \Propel\Runtime\ActiveRecord\ActiveRecordInterface $entity
-     * @param \Generated\Shared\Transfer\AclEntityRuleCollectionTransfer $aclEntityRuleCollectionTransfer
-     * @param int $operationMask
-     *
-     * @return \Spryker\Zed\AclEntity\Persistence\Propel\AclDirector\Strategy\Model\AclModelScopeInterface
-     */
     public function resolve(
         ActiveRecordInterface $entity,
         AclEntityRuleCollectionTransfer $aclEntityRuleCollectionTransfer,

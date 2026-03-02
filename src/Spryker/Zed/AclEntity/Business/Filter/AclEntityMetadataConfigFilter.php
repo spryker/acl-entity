@@ -12,11 +12,6 @@ use Generated\Shared\Transfer\AclEntityMetadataConfigTransfer;
 
 class AclEntityMetadataConfigFilter implements AclEntityMetadataConfigFilterInterface
 {
-    /**
-     * @param \Generated\Shared\Transfer\AclEntityMetadataConfigTransfer $aclEntityMetadataConfigTransfer
-     *
-     * @return \Generated\Shared\Transfer\AclEntityMetadataConfigTransfer
-     */
     public function filter(AclEntityMetadataConfigTransfer $aclEntityMetadataConfigTransfer): AclEntityMetadataConfigTransfer
     {
         if (!$aclEntityMetadataConfigTransfer->getAclEntityMetadataCollection()) {
@@ -28,11 +23,6 @@ class AclEntityMetadataConfigFilter implements AclEntityMetadataConfigFilterInte
         return $this->filterAllowList($aclEntityMetadataConfigTransfer);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\AclEntityMetadataConfigTransfer $aclEntityMetadataConfigTransfer
-     *
-     * @return \Generated\Shared\Transfer\AclEntityMetadataConfigTransfer
-     */
     protected function filterAclEntityMetadataCollection(
         AclEntityMetadataConfigTransfer $aclEntityMetadataConfigTransfer
     ): AclEntityMetadataConfigTransfer {
@@ -51,11 +41,6 @@ class AclEntityMetadataConfigFilter implements AclEntityMetadataConfigFilterInte
         return $aclEntityMetadataConfigTransfer->setAclEntityMetadataCollection($aclEntityMetadataCollectionTransfer);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\AclEntityMetadataConfigTransfer $aclEntityMetadataConfigTransfer
-     *
-     * @return \Generated\Shared\Transfer\AclEntityMetadataConfigTransfer
-     */
     protected function filterAllowList(
         AclEntityMetadataConfigTransfer $aclEntityMetadataConfigTransfer
     ): AclEntityMetadataConfigTransfer {

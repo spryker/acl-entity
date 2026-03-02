@@ -11,8 +11,5 @@ use Propel\Generator\Model\Table;
 
 interface ConnectorTableBuilderInterface
 {
-    /**
-     * @return \Propel\Generator\Model\Table
-     */
     public function build(): Table;
 }

@@ -13,11 +13,6 @@ use Generated\Shared\Transfer\AclEntityRuleResponseTransfer;
 
 interface AclEntityRuleWriterInterface
 {
-    /**
-     * @param \Generated\Shared\Transfer\AclEntityRuleRequestTransfer $aclEntityRuleRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\AclEntityRuleResponseTransfer
-     */
     public function create(AclEntityRuleRequestTransfer $aclEntityRuleRequestTransfer): AclEntityRuleResponseTransfer;
 
     /**

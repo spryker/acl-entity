@@ -12,11 +12,6 @@ use Propel\Runtime\ActiveQuery\ModelCriteria;
 
 interface AclQueryScopeInterface
 {
-    /**
-     * @param string $scope
-     *
-     * @return bool
-     */
     public function isSupported(string $scope): bool;
 
     /**

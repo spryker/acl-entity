@@ -25,10 +25,6 @@ class AclQueryExpander implements AclQueryExpanderInterface
      */
     protected $aclEntityConnectionResolver;
 
-    /**
-     * @param \Spryker\Zed\AclEntity\Persistence\Reader\AclEntityMetadataReaderInterface $aclEntityMetadataReader
-     * @param \Spryker\Zed\AclEntity\Persistence\Propel\Expander\StrategyResolver\AclEntityConnectionResolverInterface $aclEntityConnectionResolver
-     */
     public function __construct(
         AclEntityMetadataReaderInterface $aclEntityMetadataReader,
         AclEntityConnectionResolverInterface $aclEntityConnectionResolver

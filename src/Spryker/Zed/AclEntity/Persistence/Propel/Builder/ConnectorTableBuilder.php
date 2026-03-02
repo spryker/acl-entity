@@ -58,11 +58,6 @@ class ConnectorTableBuilder implements ConnectorTableBuilderInterface
      */
     protected $baseTable;
 
-    /**
-     * @param \Propel\Generator\Model\Table $baseTable
-     * @param \Propel\Generator\Model\Database $database
-     * @param \Spryker\Service\AclEntity\AclEntityServiceInterface $aclEntityService
-     */
     public function __construct(
         Table $baseTable,
         Database $database,
@@ -73,11 +68,6 @@ class ConnectorTableBuilder implements ConnectorTableBuilderInterface
         $this->aclEntityService = $aclEntityService;
     }
 
-    /**
-     * @param \Propel\Generator\Model\Table $table
-     *
-     * @return \Spryker\Zed\AclEntity\Persistence\Propel\Builder\ConnectorTableBuilderInterface
-     */
     public function setBaseTable(Table $table): ConnectorTableBuilderInterface
     {
         $this->baseTable = $table;
@@ -85,9 +75,6 @@ class ConnectorTableBuilder implements ConnectorTableBuilderInterface
         return $this;
     }
 
-    /**
-     * @return \Propel\Generator\Model\Table
-     */
     public function build(): Table
     {
         $connectorTableName = $this->aclEntityService->generateSegmentConnectorTableName($this->baseTable->getName());
@@ -117,11 +104,6 @@ class ConnectorTableBuilder implements ConnectorTableBuilderInterface
         return $table;
     }
 
-    /**
-     * @param string $connectorTableName
-     *
-     * @return \Propel\Generator\Model\Column
-     */
     protected function buildIdColumn(string $connectorTableName): Column
     {
         $idColumn = new Column(
@@ -136,11 +118,6 @@ class ConnectorTableBuilder implements ConnectorTableBuilderInterface
         return $idColumn;
     }
 
-    /**
-     * @param \Propel\Generator\Model\Table $table
-     *
-     * @return \Propel\Generator\Model\Table
-     */
     protected function addTargetTableForeignKey(Table $table): Table
     {
         $columnName = $this->aclEntityService->generateSegmentConnectorReferenceColumnName(
@@ -157,11 +134,6 @@ class ConnectorTableBuilder implements ConnectorTableBuilderInterface
         return $table;
     }
 
-    /**
-     * @param \Propel\Generator\Model\Table $table
-     *
-     * @return \Propel\Generator\Model\Table
-     */
     protected function addAclEntitySegmentTableForeignKey(Table $table): Table
     {
         /** @var \Propel\Generator\Model\Table $aclEntitySegmentTable */
@@ -180,11 +152,6 @@ class ConnectorTableBuilder implements ConnectorTableBuilderInterface
         return $table;
     }
 
-    /**
-     * @param \Propel\Generator\Model\Table $table
-     *
-     * @return \Propel\Generator\Model\Table
-     */
     protected function addUniqueForeignKeysConstraint(Table $table): Table
     {
         $fkTargetEntityColumnName = $this->aclEntityService->generateSegmentConnectorReferenceColumnName(
@@ -215,11 +182,6 @@ class ConnectorTableBuilder implements ConnectorTableBuilderInterface
         return $table;
     }
 
-    /**
-     * @param string $columnName
-     *
-     * @return \Propel\Generator\Model\Column
-     */
     protected function addTargetTableColumn(string $columnName): Column
     {
         $column = new Column($columnName);
@@ -234,12 +196,6 @@ class ConnectorTableBuilder implements ConnectorTableBuilderInterface
         return $column;
     }
 
-    /**
-     * @param string $tableName
-     * @param string $columnName
-     *
-     * @return \Propel\Generator\Model\ForeignKey
-     */
     protected function addTargetTableConstraint(string $tableName, string $columnName): ForeignKey
     {
         $constraint = new ForeignKey(sprintf(static::FOREIGN_KEY_TEMPLATE, $tableName, $columnName));
@@ -252,12 +208,6 @@ class ConnectorTableBuilder implements ConnectorTableBuilderInterface
         return $constraint;
     }
 
-    /**
-     * @param string $columnName
-     * @param \Propel\Generator\Model\Table $aclEntitySegmentTable
-     *
-     * @return \Propel\Generator\Model\Column
-     */
     protected function addAclEntityColumn(string $columnName, Table $aclEntitySegmentTable): Column
     {
         /** @var \Propel\Generator\Model\Column $autoIncrementPrimaryKey */
@@ -271,13 +221,6 @@ class ConnectorTableBuilder implements ConnectorTableBuilderInterface
         return $column;
     }
 
-    /**
-     * @param string $tableName
-     * @param string $columnName
-     * @param \Propel\Generator\Model\Table $aclEntitySegmentTable
-     *
-     * @return \Propel\Generator\Model\ForeignKey
-     */
     protected function addAclEntityConstraint(
         string $tableName,
         string $columnName,
@@ -293,12 +236,6 @@ class ConnectorTableBuilder implements ConnectorTableBuilderInterface
         return $constraint;
     }
 
-    /**
-     * @param \Propel\Generator\Model\Table $table
-     * @param string $connectorTableName
-     *
-     * @return \Propel\Generator\Model\Table
-     */
     protected function addIdMethodParameter(Table $table, string $connectorTableName): Table
     {
         $idMethodParameter = new IdMethodParameter();

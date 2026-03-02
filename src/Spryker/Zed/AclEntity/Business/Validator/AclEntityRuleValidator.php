@@ -28,10 +28,6 @@ class AclEntityRuleValidator implements AclEntityRuleValidatorInterface
      */
     protected $aclEntityMetadataConfigReader;
 
-    /**
-     * @param \Spryker\Zed\AclEntity\Persistence\AclEntityRepositoryInterface $aclEntityRepository
-     * @param \Spryker\Zed\AclEntity\Business\Reader\AclEntityMetadataConfigReaderInterface $aclEntityMetadataConfigReader
-     */
     public function __construct(
         AclEntityRepositoryInterface $aclEntityRepository,
         AclEntityMetadataConfigReaderInterface $aclEntityMetadataConfigReader
@@ -40,11 +36,6 @@ class AclEntityRuleValidator implements AclEntityRuleValidatorInterface
         $this->aclEntityMetadataConfigReader = $aclEntityMetadataConfigReader;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\AclEntityRuleTransfer $aclEntityRuleTransfer
-     *
-     * @return void
-     */
     public function validate(AclEntityRuleTransfer $aclEntityRuleTransfer): void
     {
         $this->validateEntity($aclEntityRuleTransfer->getEntityOrFail());

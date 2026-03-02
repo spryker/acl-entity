@@ -12,10 +12,5 @@ use Spryker\Zed\AclEntity\Persistence\Propel\AclDirector\Strategy\Join\AclJoinIn
 
 interface AclJoinResolverInterface
 {
-    /**
-     * @param \Propel\Runtime\ActiveQuery\Join $join
-     *
-     * @return \Spryker\Zed\AclEntity\Persistence\Propel\AclDirector\Strategy\Join\AclJoinInterface
-     */
     public function resolve(Join $join): AclJoinInterface;
 }

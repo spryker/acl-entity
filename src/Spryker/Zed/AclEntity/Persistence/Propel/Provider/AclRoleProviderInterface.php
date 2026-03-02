@@ -11,8 +11,5 @@ use Generated\Shared\Transfer\RolesTransfer;
 
 interface AclRoleProviderInterface
 {
-    /**
-     * @return \Generated\Shared\Transfer\RolesTransfer
-     */
     public function getCurrentUserAclRoles(): RolesTransfer;
 }

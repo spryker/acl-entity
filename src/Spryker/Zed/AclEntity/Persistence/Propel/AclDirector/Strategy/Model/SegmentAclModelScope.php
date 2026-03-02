@@ -36,10 +36,6 @@ class SegmentAclModelScope implements AclModelScopeInterface
      */
     protected $aclEntityRuleCollectionTransferFilter;
 
-    /**
-     * @param \Spryker\Service\AclEntity\AclEntityServiceInterface $aclEntityService
-     * @param \Spryker\Zed\AclEntity\Persistence\Filter\AclEntityRuleCollectionTransferFilterInterface $aclEntityRuleCollectionTransferFilter
-     */
     public function __construct(
         AclEntityServiceInterface $aclEntityService,
         AclEntityRuleCollectionTransferFilterInterface $aclEntityRuleCollectionTransferFilter
@@ -48,11 +44,6 @@ class SegmentAclModelScope implements AclModelScopeInterface
         $this->aclEntityRuleCollectionTransferFilter = $aclEntityRuleCollectionTransferFilter;
     }
 
-    /**
-     * @param string $scope
-     *
-     * @return bool
-     */
     public function isSupported(string $scope): bool
     {
         return $scope === AclEntityConstants::SCOPE_SEGMENT;
@@ -100,12 +91,6 @@ class SegmentAclModelScope implements AclModelScopeInterface
         return false;
     }
 
-    /**
-     * @param \Propel\Runtime\ActiveRecord\ActiveRecordInterface $entity
-     * @param \Generated\Shared\Transfer\AclEntityRuleCollectionTransfer $aclEntityRuleCollectionTransfer
-     *
-     * @return bool
-     */
     public function isUpdatable(
         ActiveRecordInterface $entity,
         AclEntityRuleCollectionTransfer $aclEntityRuleCollectionTransfer
@@ -119,12 +104,6 @@ class SegmentAclModelScope implements AclModelScopeInterface
         return $this->inSegment($entity, $this->getAclEntitySegmentIds($aclEntityRuleCollectionTransfer));
     }
 
-    /**
-     * @param \Propel\Runtime\ActiveRecord\ActiveRecordInterface $entity
-     * @param \Generated\Shared\Transfer\AclEntityRuleCollectionTransfer $aclEntityRuleCollectionTransfer
-     *
-     * @return bool
-     */
     public function isDeletable(
         ActiveRecordInterface $entity,
         AclEntityRuleCollectionTransfer $aclEntityRuleCollectionTransfer
@@ -138,12 +117,6 @@ class SegmentAclModelScope implements AclModelScopeInterface
         return $this->inSegment($entity, $this->getAclEntitySegmentIds($aclEntityRuleCollectionTransfer));
     }
 
-    /**
-     * @param \Propel\Runtime\ActiveRecord\ActiveRecordInterface $entity
-     * @param \Generated\Shared\Transfer\AclEntityRuleCollectionTransfer $aclEntityRuleCollectionTransfer
-     *
-     * @return bool
-     */
     public function isReadable(
         ActiveRecordInterface $entity,
         AclEntityRuleCollectionTransfer $aclEntityRuleCollectionTransfer
@@ -186,13 +159,6 @@ class SegmentAclModelScope implements AclModelScopeInterface
         return $segmentQuery->count() > 0;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\AclEntityRuleCollectionTransfer $aclEntityRuleCollectionTransfer
-     * @param string $entityClass
-     * @param int $operationMask
-     *
-     * @return \Generated\Shared\Transfer\AclEntityRuleCollectionTransfer
-     */
     protected function getFilteredAclEntityRules(
         AclEntityRuleCollectionTransfer $aclEntityRuleCollectionTransfer,
         string $entityClass,

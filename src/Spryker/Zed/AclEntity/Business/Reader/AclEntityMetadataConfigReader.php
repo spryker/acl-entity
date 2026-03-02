@@ -35,12 +35,6 @@ class AclEntityMetadataConfigReader implements AclEntityMetadataConfigReaderInte
     ) {
     }
 
-    /**
-     * @param bool $runValidation
-     * @param \Generated\Shared\Transfer\AclEntityMetadataConfigRequestTransfer|null $aclEntityMetadataConfigRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\AclEntityMetadataConfigTransfer
-     */
     public function getAclEntityMetadataConfig(
         bool $runValidation = true,
         ?AclEntityMetadataConfigRequestTransfer $aclEntityMetadataConfigRequestTransfer = null
@@ -56,12 +50,6 @@ class AclEntityMetadataConfigReader implements AclEntityMetadataConfigReaderInte
         return static::$cache[$aclEntityMetadataConfigRequestTransfer->getModelName()];
     }
 
-    /**
-     * @param bool $runValidation
-     * @param \Generated\Shared\Transfer\AclEntityMetadataConfigRequestTransfer|null $aclEntityMetadataConfigRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\AclEntityMetadataConfigTransfer
-     */
     protected function executeAclEntityMetadataConfig(
         bool $runValidation = true,
         ?AclEntityMetadataConfigRequestTransfer $aclEntityMetadataConfigRequestTransfer = null

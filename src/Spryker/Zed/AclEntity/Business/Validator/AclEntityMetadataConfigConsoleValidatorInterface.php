@@ -9,8 +9,5 @@ namespace Spryker\Zed\AclEntity\Business\Validator;
 
 interface AclEntityMetadataConfigConsoleValidatorInterface
 {
-    /**
-     * @return void
-     */
     public function validate(): void;
 }
