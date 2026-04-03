@@ -109,6 +109,8 @@ class AclEntityFacade extends AbstractFacade implements AclEntityFacadeInterface
             ->getAclEntityMetadataConfig($runValidation, $aclEntityMetadataConfigRequestTransfer);
     }
 
+    protected static ?bool $isActive = null;
+
     /**
      * {@inheritDoc}
      *
@@ -118,7 +120,11 @@ class AclEntityFacade extends AbstractFacade implements AclEntityFacadeInterface
      */
     public function isActive(): bool
     {
-        return $this->getFactory()->createAclEntityReader()->isActive();
+        if (static::$isActive === null) {
+            static::$isActive = $this->getFactory()->createAclEntityReader()->isActive();
+        }
+
+        return static::$isActive;
     }
 
     /**

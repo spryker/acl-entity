@@ -12,5 +12,19 @@
         "rule": "BridgeFacadeMethodsRule",
         "ruleset": "Spryker",
         "priority": "2"
+    },
+    {
+        "fileName": "src/Spryker/Zed/AclEntity/Business/AclEntityFacade.php",
+        "description": "Zed Business Layer - Facade: There are properties in class `Spryker\\Zed\\AclEntity\\Business\\AclEntityFacade` which violates rule \"A facade must not have properties. It must also not contain any instantiations, only delegation.\"",
+        "rule": "FacadeRule",
+        "ruleset": "Spryker Zed",
+        "priority": "1"
+    },
+    {
+        "fileName": "src/Spryker/Zed/AclEntity/Business/AclEntityFacade.php",
+        "description": "Zed Business Layer - Facade: The method `Spryker\\Zed\\AclEntity\\Business\\AclEntityFacade::isActive()()` contains a `if` statement which violates the rule \"A Facade must not contain logic and only delegate.\"",
+        "rule": "FacadeRule",
+        "ruleset": "Spryker Zed",
+        "priority": "1"
     }
 ]
