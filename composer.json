@@ -18,6 +18,7 @@
         "spryker/user": "^3.0.0"
     },
     "require-dev": {
+        "spryker/api-platform": "*",
         "spryker/code-sniffer": "*",
         "spryker/container": "*",
         "spryker/locale": "*",
@@ -26,6 +27,7 @@
         "spryker/testify": "*"
     },
     "suggest": {
+        "spryker/api-platform": "Use this package when you want to use the API Platform code.",
         "spryker/container": "If you want to use AclEntityApplicationPlugin."
     },
     "autoload": {

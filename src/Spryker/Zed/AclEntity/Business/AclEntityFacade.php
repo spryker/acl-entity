@@ -121,10 +121,23 @@ class AclEntityFacade extends AbstractFacade implements AclEntityFacadeInterface
     public function isActive(): bool
     {
         if (static::$isActive === null) {
+            static::$isActive = false;
             static::$isActive = $this->getFactory()->createAclEntityReader()->isActive();
         }
 
         return static::$isActive;
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @api
+     *
+     * @return void
+     */
+    public function resetIsActive(): void
+    {
+        static::$isActive = null;
     }
 
     /**

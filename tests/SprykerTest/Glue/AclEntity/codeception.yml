@@ -1,0 +1,17 @@
+namespace: SprykerTest\Glue\AclEntity
+paths:
+    tests: .
+    data: ../../../_data
+    support: _support
+    output: ../../../_output
+coverage:
+    enabled: true
+    remote: false
+    whitelist: { include: ['../../../../src/*'] }
+suites:
+    BackendApi:
+        path: BackendApi
+        actor: AclEntityBackendApiTester
+        modules:
+            enabled:
+                - Asserts

@@ -1,5 +1,6 @@
 namespace: AclEntity
 include:
+    - tests/SprykerTest/Glue/AclEntity
     - tests/SprykerTest/Zed/AclEntity
     - tests/SprykerTest/Service/AclEntity
 paths:

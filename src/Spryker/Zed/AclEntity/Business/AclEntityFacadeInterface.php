@@ -111,12 +111,24 @@ interface AclEntityFacadeInterface
     /**
      * Specification:
      * - Returns whether `AclEntity` behavior is enabled.
+     * - Nested calls made while the answer is being computed, for example by queries a disabler plugin issues, return false.
      *
      * @api
      *
      * @return bool
      */
     public function isActive(): bool;
+
+    /**
+     * Specification:
+     * - Discards the memoized result of {@link isActive()}.
+     * - Required after the acting user changes within a PHP process, since `isActive()` depends on it.
+     *
+     * @api
+     *
+     * @return void
+     */
+    public function resetIsActive(): void;
 
     /**
      * Specification:
