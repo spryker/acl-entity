@@ -120,6 +120,24 @@ class IsActiveTest extends Unit
         $this->assertSame(1, $queryingAclEntityDisablerPluginMock->queryCount);
     }
 
+    public function testIsActiveDoesNotAskTheDisablerPluginsWhenAclEntityIsNotEnabledForTheApplication(): void
+    {
+        // Arrange
+        $this->tester->setDependency(AclEntityDependencyProvider::PARAM_IS_ACL_ENTITY_ENABLED, false);
+        $queryingAclEntityDisablerPluginMock = new QueryingAclEntityDisablerPluginMock();
+        $this->tester->setDependency(
+            AclEntityDependencyProvider::PLUGINS_ACL_ENTITY_DISABLER,
+            [$queryingAclEntityDisablerPluginMock],
+        );
+
+        // Act
+        $isActive = $this->tester->getFacade()->isActive();
+
+        // Assert
+        $this->assertFalse($isActive);
+        $this->assertSame(0, $queryingAclEntityDisablerPluginMock->queryCount);
+    }
+
     protected function resetIsActiveCache(): void
     {
         (new ReflectionProperty(AclEntityFacade::class, 'isActive'))->setValue(null, null);

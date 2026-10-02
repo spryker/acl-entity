@@ -33,6 +33,10 @@ class AclEntityReader implements AclEntityReaderInterface
     {
         $isActive = $this->isAclEntityActive;
 
+        if (!$isActive) {
+            return false;
+        }
+
         foreach ($this->aclEntityDisablerPlugins as $aclEntityDisablerPlugin) {
             if ($aclEntityDisablerPlugin->isDisabled()) {
                 return false;
