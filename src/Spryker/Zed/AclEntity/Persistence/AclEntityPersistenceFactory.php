@@ -91,10 +91,15 @@ use Spryker\Zed\Kernel\Persistence\AbstractPersistenceFactory;
  */
 class AclEntityPersistenceFactory extends AbstractPersistenceFactory
 {
+    /**
+     * @var array<string, \Spryker\Zed\AclEntity\Persistence\Propel\AclDirector\AclQueryDirectorInterface>
+     */
+    protected static array $aclQueryDirectorCache = [];
+
     public function createAclQueryDirector(
         AclEntityMetadataConfigTransfer $aclEntityMetadataConfigTransfer
     ): AclQueryDirectorInterface {
-        return new AclQueryDirector(
+        return static::$aclQueryDirectorCache[$aclEntityMetadataConfigTransfer->getModelNameOrFail()] ??= new AclQueryDirector(
             $this->createAclJoinDirector($aclEntityMetadataConfigTransfer),
             $this->createAclEntityRuleProvider(),
             $this->createAclQueryScopeResolver($aclEntityMetadataConfigTransfer),
