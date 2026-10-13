@@ -54,21 +54,16 @@ class RightAclJoin extends AbstractAclJoin
 
         $relationQuery = $aclQueryScope->applyAclRuleOnSelectQuery($relationQuery, $aclEntityRuleCollectionTransfer);
         if ($this->hasSegmentJoin($relationQuery)) {
-            $relationQuery = $this->extendQueryWithSegmentConditions($relationQuery);
+            $relationQuery = $this->extendQueryWithSegmentConditions($relationQuery, $join);
         }
 
         return $this->aclEntityQueryMerger->mergeQueries($query, $relationQuery);
     }
 
-    /**
-     * @param \Propel\Runtime\ActiveQuery\ModelCriteria<\Propel\Runtime\ActiveRecord\ActiveRecordInterface> $query
-     *
-     * @return \Propel\Runtime\ActiveQuery\ModelCriteria<\Propel\Runtime\ActiveRecord\ActiveRecordInterface>
-     */
-    protected function extendQueryWithSegmentConditions(ModelCriteria $query): ModelCriteria
+    protected function extendQueryWithSegmentConditions(ModelCriteria $query, Join $join): ModelCriteria
     {
         /** @var \Propel\Runtime\Map\ColumnMap $queryPrimaryKey */
-        $queryPrimaryKey = current($this->getPrimaryKeys($query->getTableMapOrFail()->getNameOrFail()));
+        $queryPrimaryKey = current($this->getPrimaryKeys($join->getRightTableName() ?: ''));
         $aclEntitySegmentJoin = $this->getAclEntitySegmentJoin($query);
 
         /** @var string $rightTableName */
@@ -80,7 +75,7 @@ class RightAclJoin extends AbstractAclJoin
         /** @var literal-string $where */
         $where = sprintf(
             '%s IS NULL OR %s IS NOT NULL',
-            $query->getModelAliasOrName() . '.' . $queryPrimaryKey->getName(),
+            $join->getRightTableAliasOrName() . '.' . $queryPrimaryKey->getName(),
             $aclEntitySegmentJoin->getRightTableAliasOrName() . '.' . $aclEntitySegmentPrimaryKey->getName(),
         );
 

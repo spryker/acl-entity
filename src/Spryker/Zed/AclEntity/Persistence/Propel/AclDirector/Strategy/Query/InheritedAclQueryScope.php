@@ -9,10 +9,10 @@ namespace Spryker\Zed\AclEntity\Persistence\Propel\AclDirector\Strategy\Query;
 
 use Generated\Shared\Transfer\AclEntityMetadataTransfer;
 use Generated\Shared\Transfer\AclEntityRuleCollectionTransfer;
+use Propel\Runtime\ActiveQuery\Criteria;
 use Propel\Runtime\ActiveQuery\ModelCriteria;
 use Propel\Runtime\ActiveQuery\PropelQuery;
 use Spryker\Shared\AclEntity\AclEntityConstants;
-use Spryker\Zed\AclEntity\Persistence\Exception\FunctionalityNotSupportedException;
 use Spryker\Zed\AclEntity\Persistence\Exception\InvalidScopeException;
 use Spryker\Zed\AclEntity\Persistence\Filter\AclEntityRuleCollectionTransferFilterInterface;
 use Spryker\Zed\AclEntity\Persistence\Propel\Expander\AclQueryExpanderInterface;
@@ -242,46 +242,102 @@ class InheritedAclQueryScope implements AclQueryScopeInterface
      */
     public function applyAclRuleOnUpdateQuery(ModelCriteria $query, AclEntityRuleCollectionTransfer $aclEntityRuleCollectionTransfer): ModelCriteria
     {
+        return $this->restrictQueryToAccessibleEntityIds($query, $aclEntityRuleCollectionTransfer, AclEntityConstants::OPERATION_MASK_UPDATE);
+    }
+
+    public function applyAclRuleOnDeleteQuery(ModelCriteria $query, AclEntityRuleCollectionTransfer $aclEntityRuleCollectionTransfer): ModelCriteria
+    {
+        return $this->restrictQueryToAccessibleEntityIds($query, $aclEntityRuleCollectionTransfer, AclEntityConstants::OPERATION_MASK_DELETE);
+    }
+
+    protected function restrictQueryToAccessibleEntityIds(
+        ModelCriteria $query,
+        AclEntityRuleCollectionTransfer $aclEntityRuleCollectionTransfer,
+        int $permissionMask
+    ): ModelCriteria {
         $aclEntityMetadataTransfer = $this->aclEntityMetadataReader->getRootAclEntityMetadataTransferForEntitySubClass(
             $query->getModelNameOrFail(),
         );
 
-        $queryScope = $this->getAclQueryScope(
-            $aclEntityRuleCollectionTransfer,
-            $aclEntityMetadataTransfer,
-            AclEntityConstants::OPERATION_MASK_UPDATE,
-        );
+        $accessibleEntityIds = $this->findAccessibleEntityIds($aclEntityMetadataTransfer, $aclEntityRuleCollectionTransfer, $permissionMask);
 
-        return $this->queryMerger->mergeQueries(
-            $query,
-            $queryScope->applyAclRuleOnUpdateQuery(
-                PropelQuery::from($aclEntityMetadataTransfer->getEntityNameOrFail()),
-                $aclEntityRuleCollectionTransfer,
-            ),
-        );
+        /** @var \Propel\Runtime\Map\ColumnMap $primaryKey */
+        $primaryKey = current($query->getTableMapOrFail()->getPrimaryKeys());
+        $accessibleEntityIdsCriterion = $accessibleEntityIds
+            ? $query->getNewCriterion($primaryKey->getFullyQualifiedName(), $accessibleEntityIds, Criteria::IN)
+            : $query->getNewCriterion($primaryKey->getFullyQualifiedName(), null, Criteria::ISNULL);
+
+        if ($query->containsKey($primaryKey->getFullyQualifiedName())) {
+            $query->getCriterion($primaryKey->getFullyQualifiedName())->addAnd($accessibleEntityIdsCriterion);
+
+            return $query;
+        }
+
+        return $query->add($accessibleEntityIdsCriterion);
     }
 
     /**
-     * @param \Propel\Runtime\ActiveQuery\ModelCriteria<\Propel\Runtime\ActiveRecord\ActiveRecordInterface> $query
-     * @param \Generated\Shared\Transfer\AclEntityRuleCollectionTransfer $aclEntityRuleCollectionTransfer
-     *
-     * @throws \Spryker\Zed\AclEntity\Persistence\Exception\FunctionalityNotSupportedException
-     *
-     * @return \Propel\Runtime\ActiveQuery\ModelCriteria<\Propel\Runtime\ActiveRecord\ActiveRecordInterface>
+     * @return array<int>
      */
-    public function applyAclRuleOnDeleteQuery(ModelCriteria $query, AclEntityRuleCollectionTransfer $aclEntityRuleCollectionTransfer): ModelCriteria
-    {
-        throw new FunctionalityNotSupportedException(
-            FunctionalityNotSupportedException::INHERITED_SCOPE_NOT_SUPPORTED_MESSAGE,
+    protected function findAccessibleEntityIds(
+        AclEntityMetadataTransfer $aclEntityMetadataTransfer,
+        AclEntityRuleCollectionTransfer $aclEntityRuleCollectionTransfer,
+        int $permissionMask
+    ): array {
+        [$queryScope, $resolvedAclEntityMetadataTransfer] = $this->resolveAclQueryScope(
+            $aclEntityRuleCollectionTransfer,
+            $aclEntityMetadataTransfer,
+            $permissionMask,
+        );
+
+        $accessibleEntityQuery = $this->aclQueryExpander->joinEntityParent(
+            PropelQuery::from($aclEntityMetadataTransfer->getEntityNameOrFail()),
+            $resolvedAclEntityMetadataTransfer,
+        );
+        $accessibleEntityQuery = $this->queryMerger->mergeQueries(
+            $accessibleEntityQuery,
+            $this->applyAclRuleOnPermissionMaskQuery(
+                $queryScope,
+                PropelQuery::from($resolvedAclEntityMetadataTransfer->getEntityNameOrFail()),
+                $aclEntityRuleCollectionTransfer,
+                $permissionMask,
+            ),
+        );
+
+        /** @var \Propel\Runtime\Map\ColumnMap $primaryKey */
+        $primaryKey = current($accessibleEntityQuery->getTableMapOrFail()->getPrimaryKeys());
+        $primaryKeyGetter = sprintf('get%s', $primaryKey->getPhpName());
+
+        return array_map(
+            function ($entity) use ($primaryKeyGetter) {
+                return $entity->{$primaryKeyGetter}();
+            },
+            $accessibleEntityQuery->find()->getArrayCopy(),
         );
     }
 
-    protected function getAclQueryScope(
+    protected function applyAclRuleOnPermissionMaskQuery(
+        AclQueryScopeInterface $queryScope,
+        ModelCriteria $query,
+        AclEntityRuleCollectionTransfer $aclEntityRuleCollectionTransfer,
+        int $permissionMask
+    ): ModelCriteria {
+        if ($permissionMask === AclEntityConstants::OPERATION_MASK_UPDATE) {
+            return $queryScope->applyAclRuleOnUpdateQuery($query, $aclEntityRuleCollectionTransfer);
+        }
+
+        return $queryScope->applyAclRuleOnDeleteQuery($query, $aclEntityRuleCollectionTransfer);
+    }
+
+    /**
+     * @return array{0: \Spryker\Zed\AclEntity\Persistence\Propel\AclDirector\Strategy\Query\AclQueryScopeInterface, 1: \Generated\Shared\Transfer\AclEntityMetadataTransfer}
+     */
+    protected function resolveAclQueryScope(
         AclEntityRuleCollectionTransfer $aclEntityRuleCollectionTransfer,
         AclEntityMetadataTransfer $aclEntityMetadataTransfer,
         int $permissionMask
-    ): AclQueryScopeInterface {
-        $aclEntityRuleCollectionTransfer = $this->aclEntityRuleCollectionTransferSorter->sortByScopePriority(
+    ): array {
+        $filteredAclEntityRuleCollectionTransfer = $this->aclEntityRuleCollectionTransferSorter->sortByScopePriority(
             $this->aclEntityRuleCollectionTransferFilter->filterByEntityClassAndPermissionMask(
                 $aclEntityRuleCollectionTransfer,
                 $aclEntityMetadataTransfer->getEntityNameOrFail(),
@@ -289,24 +345,24 @@ class InheritedAclQueryScope implements AclQueryScopeInterface
             ),
         );
 
-        foreach ($aclEntityRuleCollectionTransfer->getAclEntityRules() as $aclEntityRuleTransfer) {
+        foreach ($filteredAclEntityRuleCollectionTransfer->getAclEntityRules() as $aclEntityRuleTransfer) {
             if ($aclEntityRuleTransfer->getScopeOrFail() === AclEntityConstants::SCOPE_INHERITED) {
                 $parentAclEntityMetadataTransfer = $this->aclEntityMetadataReader
                     ->getAclEntityMetadataTransferForEntityClass(
                         $aclEntityMetadataTransfer->getParentOrFail()->getEntityNameOrFail(),
                     );
 
-                return $this->getAclQueryScope(
+                return $this->resolveAclQueryScope(
                     $aclEntityRuleCollectionTransfer,
                     $parentAclEntityMetadataTransfer,
                     $permissionMask,
                 );
             }
 
-            return $this->getAclQueryScopeByName($aclEntityRuleTransfer->getScopeOrFail());
+            return [$this->getAclQueryScopeByName($aclEntityRuleTransfer->getScopeOrFail()), $aclEntityMetadataTransfer];
         }
 
-        return $this->getDefaultAclQueryScope();
+        return [$this->getDefaultAclQueryScope(), $aclEntityMetadataTransfer];
     }
 
     /**

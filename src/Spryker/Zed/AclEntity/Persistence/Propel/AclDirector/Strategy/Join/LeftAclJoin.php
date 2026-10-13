@@ -54,21 +54,15 @@ class LeftAclJoin extends AbstractAclJoin
 
         $relationQuery = $aclQueryScope->applyAclRuleOnSelectQuery($relationQuery, $aclEntityRuleCollectionTransfer);
         $relationQuery = $this->updateJoinTypes($relationQuery, Criteria::LEFT_JOIN);
+
+        $aclEntitySegmentJoin = $this->hasSegmentJoin($relationQuery) ? $this->getAclEntitySegmentJoin($relationQuery) : null;
         $query = $this->aclEntityQueryMerger->mergeQueries($query, $relationQuery);
 
-        return $this->hasSegmentJoin($relationQuery) ? $this->extendQueryWithSegmentConditions($query, $join) : $query;
+        return $aclEntitySegmentJoin ? $this->extendQueryWithSegmentConditions($query, $join, $aclEntitySegmentJoin) : $query;
     }
 
-    /**
-     * @param \Propel\Runtime\ActiveQuery\ModelCriteria<\Propel\Runtime\ActiveRecord\ActiveRecordInterface> $query
-     * @param \Propel\Runtime\ActiveQuery\Join $join
-     *
-     * @return \Propel\Runtime\ActiveQuery\ModelCriteria<\Propel\Runtime\ActiveRecord\ActiveRecordInterface>
-     */
-    protected function extendQueryWithSegmentConditions(ModelCriteria $query, Join $join): ModelCriteria
+    protected function extendQueryWithSegmentConditions(ModelCriteria $query, Join $join, Join $aclEntitySegmentJoin): ModelCriteria
     {
-        $aclEntitySegmentJoin = $this->getAclEntitySegmentJoin($query);
-
         $aclEntitySegmentPrimaryKeyColumn = sprintf(
             '%s.%s',
             $aclEntitySegmentJoin->getRightTableAliasOrName(),

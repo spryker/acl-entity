@@ -16,9 +16,15 @@ class JoinComparator implements JoinComparatorInterface
         return $this->areSameJoinTypes($join1, $join2)
             && $this->areSameLeftTables($join1, $join2)
             && $this->areSameRightTables($join1, $join2)
+            && $this->areSameRightTableAliases($join1, $join2)
             && $this->areSameLeftColumns($join1, $join2)
             && $this->areSameRightColumns($join1, $join2)
             && $this->areSameConditions($join1, $join2);
+    }
+
+    protected function areSameRightTableAliases(Join $join1, Join $join2): bool
+    {
+        return $join1->getRightTableAliasOrName() === $join2->getRightTableAliasOrName();
     }
 
     protected function areSameJoinTypes(Join $join1, Join $join2): bool

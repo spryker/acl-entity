@@ -56,10 +56,11 @@ class AclEntityQueryMergerTest extends Unit
 
         $this->modelCriteriaSrcMock = $this->createMock(ModelCriteria::class);
         $joinSrc1Mock = $this->getMockBuilder(Join::class)
-            ->onlyMethods(['getLeftTableName', 'getRightTableName', 'getRightColumn', 'getLeftColumn', 'getJoinType'])
+            ->onlyMethods(['getLeftTableName', 'getRightTableName', 'getRightTableAliasOrName', 'getRightColumn', 'getLeftColumn', 'getJoinType'])
             ->getMock();
         $joinSrc1Mock->method('getLeftTableName')->willReturn('Table2');
         $joinSrc1Mock->method('getRightTableName')->willReturn('Table1');
+        $joinSrc1Mock->method('getRightTableAliasOrName')->willReturn('Table1');
         $joinSrc1Mock->method('getRightColumn')->willReturn('table1.rightColumn');
         $joinSrc1Mock->method('getLeftColumn')->willReturn('table2.leftColumn');
         $joinSrc1Mock->method('getJoinType')->willReturn(Join::INNER_JOIN);
@@ -185,5 +186,47 @@ class AclEntityQueryMergerTest extends Unit
 
         // Act
         $this->merger->mergeQueries($this->modelCriteriaSrcMock, $modelCriteriaDst);
+    }
+
+    public function testMergeQueriesKeepsRestrictionForSameTableJoinedUnderADifferentAlias(): void
+    {
+        // Arrange
+        $existingAclRestrictionJoin = $this->getMockBuilder(Join::class)
+            ->onlyMethods(['getLeftTableName', 'getRightTableName', 'getRightTableAliasOrName', 'getRightColumn', 'getLeftColumn', 'getJoinType'])
+            ->getMock();
+        $existingAclRestrictionJoin->method('getLeftTableName')->willReturn('SpyMerchantStore');
+        $existingAclRestrictionJoin->method('getRightTableName')->willReturn('SpyStore');
+        $existingAclRestrictionJoin->method('getRightTableAliasOrName')->willReturn('SpyStore');
+        $existingAclRestrictionJoin->method('getRightColumn')->willReturn('spy_store.id_store');
+        $existingAclRestrictionJoin->method('getLeftColumn')->willReturn('spy_merchant_store.fk_store');
+        $existingAclRestrictionJoin->method('getJoinType')->willReturn(Join::INNER_JOIN);
+
+        $rootTableMap = $this->createMock(TableMap::class);
+        $rootTableMap->method('getName')->willReturn('SpyMerchantRelationship');
+
+        $dstQuery = $this->createMock(ModelCriteria::class);
+        $dstQuery->method('getJoins')->willReturn(['SpyStore' => $existingAclRestrictionJoin]);
+        $dstQuery->method('getTableMapOrFail')->willReturn($rootTableMap);
+
+        $secondOccurrenceAclRestrictionJoin = $this->getMockBuilder(Join::class)
+            ->onlyMethods(['getLeftTableName', 'getRightTableName', 'getRightTableAliasOrName', 'getRightColumn', 'getLeftColumn', 'getJoinType'])
+            ->getMock();
+        $secondOccurrenceAclRestrictionJoin->method('getLeftTableName')->willReturn('SpyMerchantStore');
+        $secondOccurrenceAclRestrictionJoin->method('getRightTableName')->willReturn('SpyStore');
+        $secondOccurrenceAclRestrictionJoin->method('getRightTableAliasOrName')->willReturn('store2');
+        $secondOccurrenceAclRestrictionJoin->method('getRightColumn')->willReturn('spy_store.id_store');
+        $secondOccurrenceAclRestrictionJoin->method('getLeftColumn')->willReturn('spy_merchant_store.fk_store');
+        $secondOccurrenceAclRestrictionJoin->method('getJoinType')->willReturn(Join::INNER_JOIN);
+
+        $srcQuery = $this->createMock(ModelCriteria::class);
+        $srcQuery->method('getJoins')->willReturn(['store2' => $secondOccurrenceAclRestrictionJoin]);
+
+        // Assert
+        $dstQuery->expects($this->once())
+            ->method('addJoinObject')
+            ->with($secondOccurrenceAclRestrictionJoin, 'store2_acl');
+
+        // Act
+        $this->merger->mergeQueries($dstQuery, $srcQuery);
     }
 }

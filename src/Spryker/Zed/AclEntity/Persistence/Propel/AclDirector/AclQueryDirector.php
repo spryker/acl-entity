@@ -9,12 +9,13 @@ namespace Spryker\Zed\AclEntity\Persistence\Propel\AclDirector;
 
 use Generated\Shared\Transfer\AclEntityMetadataTransfer;
 use Generated\Shared\Transfer\AclEntityRuleCollectionTransfer;
+use Propel\Runtime\ActiveQuery\Criteria;
 use Propel\Runtime\ActiveQuery\ModelCriteria;
 use Propel\Runtime\ActiveQuery\PropelQuery;
 use Spryker\Shared\AclEntity\AclEntityConstants;
-use Spryker\Zed\AclEntity\Persistence\Exception\FunctionalityNotSupportedException;
 use Spryker\Zed\AclEntity\Persistence\Propel\AclDirector\StrategyResolver\AclQueryScopeResolverInterface;
 use Spryker\Zed\AclEntity\Persistence\Propel\Expander\AclQueryExpanderInterface;
+use Spryker\Zed\AclEntity\Persistence\Propel\Guard\AclEntityAmbiguousSelectColumnGuardInterface;
 use Spryker\Zed\AclEntity\Persistence\Propel\Provider\AclEntityRuleProviderInterface;
 use Spryker\Zed\AclEntity\Persistence\Propel\QueryMerger\AclEntityQueryMergerInterface;
 use Spryker\Zed\AclEntity\Persistence\Reader\AclEntityMetadataReaderInterface;
@@ -56,6 +57,8 @@ class AclQueryDirector implements AclQueryDirectorInterface
      */
     protected $aclModelDirector;
 
+    protected AclEntityAmbiguousSelectColumnGuardInterface $aclEntityAmbiguousSelectColumnGuard;
+
     public function __construct(
         AclJoinDirectorInterface $aclJoinDirector,
         AclEntityRuleProviderInterface $aclEntityRuleProvider,
@@ -63,7 +66,8 @@ class AclQueryDirector implements AclQueryDirectorInterface
         AclEntityMetadataReaderInterface $aclEntityMetadataReader,
         AclQueryExpanderInterface $aclQueryExpander,
         AclEntityQueryMergerInterface $aclQueryMerger,
-        AclModelDirectorInterface $aclModelDirector
+        AclModelDirectorInterface $aclModelDirector,
+        AclEntityAmbiguousSelectColumnGuardInterface $aclEntityAmbiguousSelectColumnGuard
     ) {
         $this->aclJoinDirector = $aclJoinDirector;
         $this->aclEntityRuleProvider = $aclEntityRuleProvider;
@@ -72,6 +76,7 @@ class AclQueryDirector implements AclQueryDirectorInterface
         $this->aclQueryExpander = $aclQueryExpander;
         $this->aclQueryMerger = $aclQueryMerger;
         $this->aclModelDirector = $aclModelDirector;
+        $this->aclEntityAmbiguousSelectColumnGuard = $aclEntityAmbiguousSelectColumnGuard;
     }
 
     /**
@@ -81,6 +86,7 @@ class AclQueryDirector implements AclQueryDirectorInterface
      */
     public function applyAclRuleOnSelectQuery(ModelCriteria $query): ModelCriteria
     {
+        $preAclJoins = $query->getJoins();
         $aclEntityRuleCollectionTransfer = $this->aclEntityRuleProvider->getCurrentUserAclEntityRules();
         $aclEntityMetadataTransfer = $this->aclEntityMetadataReader->findAclEntityMetadataTransferForEntityClass(
             $query->getModelNameOrFail(),
@@ -88,15 +94,26 @@ class AclQueryDirector implements AclQueryDirectorInterface
         if ($aclEntityMetadataTransfer && $aclEntityMetadataTransfer->getIsSubEntity()) {
             $query = $this->applyAclRuleToSubEntityQuery($query, $aclEntityRuleCollectionTransfer, $aclEntityMetadataTransfer);
 
-            return $this->aclJoinDirector->applyAclRuleOnSelectQueryRelations(
-                $query,
-                $aclEntityRuleCollectionTransfer,
-            );
+            return $this->finalizeSelectQuery($query, $aclEntityRuleCollectionTransfer, $preAclJoins);
         }
 
         $query = $this->applyAclRulesToRootEntityQuery($query, $aclEntityRuleCollectionTransfer);
 
-        return $this->aclJoinDirector->applyAclRuleOnSelectQueryRelations($query, $aclEntityRuleCollectionTransfer);
+        return $this->finalizeSelectQuery($query, $aclEntityRuleCollectionTransfer, $preAclJoins);
+    }
+
+    /**
+     * @param array<\Propel\Runtime\ActiveQuery\Join> $preAclJoins
+     */
+    protected function finalizeSelectQuery(
+        ModelCriteria $query,
+        AclEntityRuleCollectionTransfer $aclEntityRuleCollectionTransfer,
+        array $preAclJoins
+    ): ModelCriteria {
+        $query = $this->aclJoinDirector->applyAclRuleOnSelectQueryRelations($query, $aclEntityRuleCollectionTransfer);
+        $this->aclEntityAmbiguousSelectColumnGuard->guardAgainstAmbiguousSelectColumns($query, $preAclJoins);
+
+        return $query;
     }
 
     /**
@@ -107,6 +124,20 @@ class AclQueryDirector implements AclQueryDirectorInterface
     public function applyAclRuleOnUpdateQuery(ModelCriteria $query): ModelCriteria
     {
         $aclEntityRuleCollectionTransfer = $this->aclEntityRuleProvider->getCurrentUserAclEntityRules();
+
+        $aclEntityMetadataTransfer = $this->aclEntityMetadataReader->findAclEntityMetadataTransferForEntityClass(
+            $query->getModelNameOrFail(),
+        );
+
+        if ($aclEntityMetadataTransfer && $aclEntityMetadataTransfer->getIsSubEntity()) {
+            return $this->restrictSubEntityQueryToAccessibleIds(
+                $query,
+                $aclEntityRuleCollectionTransfer,
+                $aclEntityMetadataTransfer,
+                AclEntityConstants::OPERATION_MASK_UPDATE,
+            );
+        }
+
         $aclQueryScope = $this->aclQueryScopeResolver->resolve(
             $query,
             $aclEntityRuleCollectionTransfer,
@@ -116,13 +147,6 @@ class AclQueryDirector implements AclQueryDirectorInterface
         return $aclQueryScope->applyAclRuleOnUpdateQuery($query, $aclEntityRuleCollectionTransfer);
     }
 
-    /**
-     * @param \Propel\Runtime\ActiveQuery\ModelCriteria<\Propel\Runtime\ActiveRecord\ActiveRecordInterface> $query
-     *
-     * @throws \Spryker\Zed\AclEntity\Persistence\Exception\FunctionalityNotSupportedException
-     *
-     * @return \Propel\Runtime\ActiveQuery\ModelCriteria<\Propel\Runtime\ActiveRecord\ActiveRecordInterface>
-     */
     public function applyAclRuleOnDeleteQuery(ModelCriteria $query): ModelCriteria
     {
         $aclEntityRuleCollectionTransfer = $this->aclEntityRuleProvider->getCurrentUserAclEntityRules();
@@ -139,8 +163,11 @@ class AclQueryDirector implements AclQueryDirectorInterface
         );
 
         if ($aclEntityMetadataTransfer && $aclEntityMetadataTransfer->getIsSubEntity()) {
-            throw new FunctionalityNotSupportedException(
-                FunctionalityNotSupportedException::SUB_ENTITY_NOT_SUPPORTED_MESSAGE,
+            return $this->restrictSubEntityQueryToAccessibleIds(
+                $query,
+                $aclEntityRuleCollectionTransfer,
+                $aclEntityMetadataTransfer,
+                AclEntityConstants::OPERATION_MASK_DELETE,
             );
         }
 
@@ -151,6 +178,61 @@ class AclQueryDirector implements AclQueryDirectorInterface
         );
 
         return $aclQueryScope->applyAclRuleOnDeleteQuery($query, $aclEntityRuleCollectionTransfer);
+    }
+
+    protected function restrictSubEntityQueryToAccessibleIds(
+        ModelCriteria $query,
+        AclEntityRuleCollectionTransfer $aclEntityRuleCollectionTransfer,
+        AclEntityMetadataTransfer $aclEntityMetadataTransfer,
+        int $permissionMask
+    ): ModelCriteria {
+        $accessibleSubEntityQuery = $this->aclQueryExpander->joinSubEntityRootRelation(
+            PropelQuery::from($query->getModelNameOrFail()),
+            $aclEntityMetadataTransfer,
+        );
+        $rootAclEntityMetadata = $this->aclEntityMetadataReader->getRootAclEntityMetadataTransferForEntitySubClass(
+            $query->getModelNameOrFail(),
+        );
+
+        $rootEntityQuery = PropelQuery::from($rootAclEntityMetadata->getEntityNameOrFail());
+        $aclQueryScope = $this->aclQueryScopeResolver->resolve($rootEntityQuery, $aclEntityRuleCollectionTransfer, $permissionMask);
+        $restrictedRootEntityQuery = $permissionMask === AclEntityConstants::OPERATION_MASK_UPDATE
+            ? $aclQueryScope->applyAclRuleOnUpdateQuery($rootEntityQuery, $aclEntityRuleCollectionTransfer)
+            : $aclQueryScope->applyAclRuleOnDeleteQuery($rootEntityQuery, $aclEntityRuleCollectionTransfer);
+
+        $accessibleSubEntityQuery = $this->aclQueryMerger->mergeQueries($accessibleSubEntityQuery, $restrictedRootEntityQuery);
+
+        /** @var \Propel\Runtime\Map\ColumnMap $subEntityPrimaryKey */
+        $subEntityPrimaryKey = current($accessibleSubEntityQuery->getTableMapOrFail()->getPrimaryKeys());
+        $subEntityPrimaryKeyGetter = sprintf('get%s', $subEntityPrimaryKey->getPhpName());
+        $accessibleSubEntityIds = array_map(
+            function ($entity) use ($subEntityPrimaryKeyGetter) {
+                return $entity->{$subEntityPrimaryKeyGetter}();
+            },
+            $accessibleSubEntityQuery->find()->getArrayCopy(),
+        );
+
+        return $this->restrictQueryToIds($query, $accessibleSubEntityIds);
+    }
+
+    /**
+     * @param array<int> $accessibleIds
+     */
+    protected function restrictQueryToIds(ModelCriteria $query, array $accessibleIds): ModelCriteria
+    {
+        /** @var \Propel\Runtime\Map\ColumnMap $primaryKey */
+        $primaryKey = current($query->getTableMapOrFail()->getPrimaryKeys());
+        $accessibleIdsCriterion = $accessibleIds
+            ? $query->getNewCriterion($primaryKey->getFullyQualifiedName(), $accessibleIds, Criteria::IN)
+            : $query->getNewCriterion($primaryKey->getFullyQualifiedName(), null, Criteria::ISNULL);
+
+        if ($query->containsKey($primaryKey->getFullyQualifiedName())) {
+            $query->getCriterion($primaryKey->getFullyQualifiedName())->addAnd($accessibleIdsCriterion);
+
+            return $query;
+        }
+
+        return $query->add($accessibleIdsCriterion);
     }
 
     /**

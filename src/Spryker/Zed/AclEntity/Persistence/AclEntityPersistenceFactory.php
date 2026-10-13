@@ -60,6 +60,8 @@ use Spryker\Zed\AclEntity\Persistence\Propel\Expander\StrategyResolver\AclEntity
 use Spryker\Zed\AclEntity\Persistence\Propel\Expander\StrategyResolver\AclEntityConnectionResolverInterface;
 use Spryker\Zed\AclEntity\Persistence\Propel\Generator\AclEntityAliasGenerator;
 use Spryker\Zed\AclEntity\Persistence\Propel\Generator\AclEntityAliasGeneratorInterface;
+use Spryker\Zed\AclEntity\Persistence\Propel\Guard\AclEntityAmbiguousSelectColumnGuard;
+use Spryker\Zed\AclEntity\Persistence\Propel\Guard\AclEntityAmbiguousSelectColumnGuardInterface;
 use Spryker\Zed\AclEntity\Persistence\Propel\Mapper\AclEntityRuleMapper;
 use Spryker\Zed\AclEntity\Persistence\Propel\Mapper\AclEntitySegmentMapper;
 use Spryker\Zed\AclEntity\Persistence\Propel\Matcher\JoinMatcher;
@@ -107,7 +109,13 @@ class AclEntityPersistenceFactory extends AbstractPersistenceFactory
             $this->createAclQueryExpander($aclEntityMetadataConfigTransfer),
             $this->createAclEntityQueryMerger(),
             $this->createAclModelDirector($aclEntityMetadataConfigTransfer),
+            $this->createAclEntityAmbiguousSelectColumnGuard(),
         );
+    }
+
+    public function createAclEntityAmbiguousSelectColumnGuard(): AclEntityAmbiguousSelectColumnGuardInterface
+    {
+        return new AclEntityAmbiguousSelectColumnGuard();
     }
 
     public function createAclModelDirector(
