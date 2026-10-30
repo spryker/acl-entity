@@ -15,3 +15,4 @@ suites:
         modules:
             enabled:
                 - Asserts
+                - \SprykerTest\Service\Container\Helper\ContainerHelper

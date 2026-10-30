@@ -9,8 +9,8 @@ namespace SprykerTest\Glue\AclEntity\BackendApi;
 
 use Codeception\Test\Unit;
 use Spryker\Glue\AclEntity\Plugin\Application\AclEntityApplicationPlugin;
-use Spryker\Service\Container\Container;
 use Spryker\Zed\AclEntity\AclEntityDependencyProvider;
+use SprykerTest\Glue\AclEntity\AclEntityBackendApiTester;
 
 /**
  * Auto-generated group annotations
@@ -24,10 +24,14 @@ use Spryker\Zed\AclEntity\AclEntityDependencyProvider;
  */
 class AclEntityApplicationPluginTest extends Unit
 {
+    protected AclEntityBackendApiTester $tester;
+
     public function testProvideEnablesAclEntityInTheApplicationContainer(): void
     {
         // Arrange
-        $container = new Container();
+        // The plugin makes the flag a global service, which outlives this container; the
+        // helper's container resets it after the test, so later suites run with AclEntity off.
+        $container = $this->tester->getContainer();
 
         // Act
         $container = (new AclEntityApplicationPlugin())->provide($container);
