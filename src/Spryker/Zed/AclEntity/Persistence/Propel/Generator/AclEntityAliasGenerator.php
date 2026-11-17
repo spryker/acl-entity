@@ -33,12 +33,12 @@ class AclEntityAliasGenerator implements AclEntityAliasGeneratorInterface
         if (!$this->hasAlias($query, $tableAlias)) {
             return $tableAlias;
         }
-        $i = 1;
-        while ($this->hasAlias($query, $tableAlias . $i)) {
-            $i++;
+        $counter = 1;
+        while ($this->hasAlias($query, $tableAlias . $counter)) {
+            $counter++;
         }
 
-        return $tableAlias . $i;
+        return $tableAlias . $counter;
     }
 
     /**
@@ -53,12 +53,12 @@ class AclEntityAliasGenerator implements AclEntityAliasGeneratorInterface
         if (!$query->hasJoin($modelAlias)) {
             return $modelAlias;
         }
-        $i = 1;
-        while ($query->hasJoin($modelAlias . $i)) {
-            $i++;
+        $counter = 1;
+        while ($query->hasJoin($modelAlias . $counter)) {
+            $counter++;
         }
 
-        return $modelAlias . $i;
+        return $modelAlias . $counter;
     }
 
     /**
